@@ -378,6 +378,7 @@
 </div>
 
 <script>
+   
 /* ============================================================
    IEUM Admin — 데모용 관리자 페이지
    - 별도 백엔드가 없으므로 모든 데이터는 브라우저 localStorage에 저장됩니다.
@@ -909,4 +910,30 @@ document.querySelectorAll('.modal-overlay').forEach(m=>{
 });
 </script>
 </body>
+   <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. 관리자 페이지가 저장한 서비스 데이터를 가져옴
+    const savedServices = localStorage.getItem('ieum_services');
+    
+    if (savedServices) {
+        const services = JSON.parse(savedServices);
+        // 홈페이지 내에서 서비스 카드가 들어있는 구역의 아이디(예시: service-container)를 찾아 내용을 채워넣습니다.
+        const container = document.getElementById('service-cards-container'); 
+        
+        if (container) {
+            container.innerHTML = '';
+            services.forEach(item => {
+                container.innerHTML += `
+                    <div class="service-card">
+                        <div class="icon">${item.icon || '📌'}</div>
+                        <span class="badge">${item.badge || ''}</span>
+                        <h3>${item.title}</h3>
+                        <p>${item.desc}</p>
+                    </div>
+                `;
+            });
+        }
+    }
+});
+</script>
 </html>
