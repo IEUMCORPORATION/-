@@ -717,53 +717,6 @@
         </div>
     </main>
 
-    <!-- [3-1. 회사 소개 - 팀 소개] -->
-    <main id="page-company-team" class="page-section">
-        <div class="sub-container">
-            <div class="section-header">
-                <h2>팀 소개</h2>
-                <p>외국인 정착을 위해 함께 뛰는 이음의 팀원들을 소개합니다. 사진을 클릭하면 포트폴리오를 확인하실 수 있습니다.</p>
-            </div>
-
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-photo-wrap" onclick="openPortfolio('kim-hojin')">
-                        <img src="team-kim-hojin.jpg" alt="김호진 대표 사진">
-                        <div class="team-photo-overlay"><span>포트폴리오 보기</span></div>
-                    </div>
-                    <div class="team-role">대표</div>
-                    <div class="team-name">김호진</div>
-                </div>
-                <div class="team-card">
-                    <div class="team-photo-wrap" onclick="openPortfolio('son-sumin')">
-                        <img src="https://via.placeholder.com/300x300.png?text=Photo" alt="손수민 사진">
-                        <div class="team-photo-overlay"><span>포트폴리오 보기</span></div>
-                    </div>
-                    <div class="team-role">팀원</div>
-                    <div class="team-name">손수민</div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- [팀원 포트폴리오 모달] -->
-    <div class="portfolio-modal-backdrop" id="portfolio-modal-backdrop" onclick="closePortfolioOnBackdrop(event)">
-        <div class="portfolio-modal">
-            <button class="portfolio-modal-close" onclick="closePortfolio()">✕</button>
-            <div class="portfolio-modal-body">
-                <div class="portfolio-modal-left">
-                    <img class="portfolio-modal-photo" id="portfolio-modal-photo" src="" alt="">
-                </div>
-                <div class="portfolio-modal-right">
-                    <div class="portfolio-modal-name" id="portfolio-modal-name"></div>
-                    <div class="portfolio-modal-role" id="portfolio-modal-role"></div>
-                    <div class="portfolio-modal-bio" id="portfolio-modal-bio"></div>
-                    <ul class="portfolio-timeline" id="portfolio-modal-timeline"></ul>
-                    <a class="portfolio-modal-link" id="portfolio-modal-link" href="#" target="_blank" rel="noopener noreferrer">포트폴리오 전체보기 ↗</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- [4. 서비스 소개] -->
     <main id="page-services" class="page-section">
