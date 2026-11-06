@@ -177,21 +177,23 @@
     }
   }
 
-  /* About title: supplied image banner (same treatment as Our Services) */
+  /* About: fullscreen opening image, then smoothly settles into a compact banner */
   #page-about .about-title-hero {
     position:relative; isolation:isolate; overflow:hidden;
     background-image:linear-gradient(90deg,rgba(5,7,13,.58),rgba(5,7,13,.16)),url("https://github.com/user-attachments/assets/987ad0d3-45b3-484d-95b3-a726097fe490");
-    background-size:100% auto; background-position:center center; background-repeat:no-repeat;
+    background-size:cover; background-position:center center; background-repeat:no-repeat;
     background-color:#0A0A0C;
-    min-height:clamp(320px, 34vw, 500px); display:flex; align-items:center;
+    height:100vh; height:100svh; min-height:0;
+    display:flex; align-items:center; box-sizing:border-box;
+    transition:height 1.35s cubic-bezier(.22,1,.36,1), background-position 1.35s ease;
+    will-change:height;
   }
+  #page-about .about-title-hero.is-compact { height:clamp(320px,36vw,470px); }
   @media (max-width:640px) {
-    #page-about .about-title-hero {
-      min-height:280px;
-      background-size:auto 100%;
-      background-position:center center;
-    }
+    #page-about .about-title-hero { height:100vh; height:100svh; background-size:cover; background-position:center center; }
+    #page-about .about-title-hero.is-compact { height:300px; }
   }
+  @media (prefers-reduced-motion:reduce) { #page-about .about-title-hero { transition:none; } }
 
   /* Q&A (Contact) title: supplied image banner (same treatment as Our Services) */
   #page-contact .contact-title-hero {
@@ -407,7 +409,7 @@
  Inquiry has been successfully received.
  </div><script>
 
- function navigateTo(pageId) {
+ let aboutIntroTimer = null;\n\n function navigateTo(pageId) {
  const pages = document.querySelectorAll('.page-view');
  const navLinks = document.querySelectorAll('.nav-link');
 
@@ -422,6 +424,22 @@
  const targetPage = document.getElementById(`page-${pageId}`);
  if (targetPage) {
  targetPage.classList.add('active');
+ }
+
+ // Replay the About hero animation whenever the page is opened.
+ const aboutHero = document.querySelector('#page-about .about-title-hero');
+ if (aboutIntroTimer) {
+   clearTimeout(aboutIntroTimer);
+   aboutIntroTimer = null;
+ }
+ if (aboutHero) {
+   aboutHero.classList.remove('is-compact');
+   if (pageId === 'about') {
+     aboutIntroTimer = setTimeout(() => {
+       aboutHero.classList.add('is-compact');
+       aboutIntroTimer = null;
+     }, 1000);
+   }
  }
 
  const activeNav = document.getElementById(`nav-${pageId}`);
