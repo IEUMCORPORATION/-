@@ -624,7 +624,12 @@
 
  document.getElementById('svc-hero-go').addEventListener('click', () => {
  const cat = current;
- // External service-page redirects are disabled. Keep navigation within this HTML page.
+
+ // Concierge Service의 View Details는 공식 노벨리움 컨시어지 웹사이트로 이동합니다.
+ if (cat === 'concierge') {
+ window.location.href = 'https://www.nobeliumconcierge.com';
+ return;
+ }
 
  lastFocus = null;
  closeServiceHero();
