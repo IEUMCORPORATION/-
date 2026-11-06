@@ -177,19 +177,19 @@
     }
   }
 
-  /* About title: supplied image banner (same treatment as Our Services) */
+  /* About: original fixed full-screen hero image; no shrinking or movement */
   #page-about .about-title-hero {
     position:relative; isolation:isolate; overflow:hidden;
     background-image:linear-gradient(90deg,rgba(5,7,13,.58),rgba(5,7,13,.16)),url("https://github.com/user-attachments/assets/987ad0d3-45b3-484d-95b3-a726097fe490");
-    background-size:100% auto; background-position:center center; background-repeat:no-repeat;
+    background-size:cover; background-position:center center; background-repeat:no-repeat;
     background-color:#0A0A0C;
-    min-height:clamp(320px, 34vw, 500px); display:flex; align-items:center;
+    min-height:100vh; min-height:100svh;
+    display:flex; align-items:center; box-sizing:border-box;
   }
   @media (max-width:640px) {
     #page-about .about-title-hero {
-      min-height:280px;
-      background-size:auto 100%;
-      background-position:center center;
+      min-height:100vh; min-height:100svh;
+      background-size:cover; background-position:center center;
     }
   }
 
@@ -215,18 +215,24 @@
     border:1px solid rgba(214,181,122,.30);
     box-shadow:0 30px 80px -30px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.05); }
   .ieum-atlas::before { content:""; position:absolute; inset:8px; border-radius:21px; border:1px solid rgba(214,181,122,.12); pointer-events:none; }
-  .ieum-atlas-scroll { position:relative; overflow-x:auto; }
-  .ieum-atlas-stage { position:relative; min-width:680px; aspect-ratio:1774/887; isolation:isolate; overflow:hidden; border-radius:14px;
+  .ieum-atlas-scroll { position:relative; }
+  .ieum-atlas-stage { position:relative; width:100%; aspect-ratio:1774/887; isolation:isolate; overflow:hidden; border-radius:14px;
     background-color:#05070c;
     background-image:linear-gradient(to right,rgba(214,181,122,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(214,181,122,.07) 1px,transparent 1px);
     background-size:8.3333% 16.6667%; }
-  .ieum-atlas-img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; filter:invert(1) brightness(1.9) contrast(1.05); mix-blend-mode:screen; }
+  .ieum-atlas-img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; filter:invert(1) brightness(2.8) contrast(1.05); mix-blend-mode:screen; }
   .ieum-atlas-tint { position:absolute; inset:0; background:linear-gradient(115deg,#e8d5aa 0%,#f1e6cc 45%,#cdd6e6 100%); mix-blend-mode:multiply; pointer-events:none; }
   .ieum-atlas-stage::after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at 50% 50%,transparent 58%,rgba(5,7,12,.9) 100%); }
   .ieum-hub { position:absolute; z-index:2; width:2.6%; aspect-ratio:1; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(232,196,128,.85); box-shadow:0 0 14px rgba(232,196,128,.35); pointer-events:none; }
   .ieum-hub::after { content:""; position:absolute; inset:-1px; border-radius:50%; border:1px solid rgba(232,196,128,.7); animation:ieumHub 3.6s ease-out infinite; animation-delay:var(--d,0s); }
   @keyframes ieumHub { 0% { transform:scale(1); opacity:.9; } 100% { transform:scale(3.2); opacity:0; } }
   @media (prefers-reduced-motion: reduce) { .ieum-hub::after { animation:none; opacity:0; } }
+  @media (max-width:640px) {
+    .ieum-atlas { padding:8px; border-radius:20px; }
+    .ieum-atlas::before { inset:4px; border-radius:16px; }
+    .ieum-atlas-stage { border-radius:10px; }
+    .ieum-hub { width:2.8%; }
+  }
   /* Services: fullscreen category hero */
  .svc-hero { position:fixed; inset:0; z-index:70; display:none; opacity:0; transition:opacity .35s ease; background:#05070d; color:#fff; overflow:hidden; }
  .svc-hero.open { display:block; }
@@ -401,7 +407,18 @@
  Inquiry has been successfully received.
  </div><script>
 
- function navigateTo(pageId) {
+ let isHistoryNavigation = false;
+
+ // Keep SPA page changes in the browser history so Back/Forward restores
+ // the previously viewed IEUM section instead of leaving the site.
+ function navigateTo(pageId, options = {}) {
+   const skipHistory = options && options.skipHistory === true;
+   const currentPage = document.querySelector('.page-view.active');
+   const currentPageId = currentPage ? currentPage.id.replace('page-', '') : 'home';
+   if (!skipHistory && pageId !== currentPageId) {
+     history.pushState({ ieumPage: pageId }, '', `#${pageId}`);
+   }
+
  const pages = document.querySelectorAll('.page-view');
  const navLinks = document.querySelectorAll('.nav-link');
 
@@ -424,6 +441,21 @@
  }
 
  window.scrollTo({ top: 0, behavior: 'smooth' });
+ }
+
+ // Restore the section represented by the history entry on browser Back/Forward.
+ window.addEventListener('popstate', (event) => {
+   const pageId = event.state && event.state.ieumPage
+     ? event.state.ieumPage
+     : (location.hash.replace(/^#/, '') || 'home');
+   navigateTo(pageId, { skipHistory: true });
+ });
+
+ // Establish a stable starting entry for the single-page navigation.
+ const initialPageId = location.hash.replace(/^#/, '') || 'home';
+ history.replaceState({ ieumPage: initialPageId }, '', location.pathname + location.search + (location.hash || ''));
+ if (initialPageId !== 'home') {
+   navigateTo(initialPageId, { skipHistory: true });
  }
 
  const mobileToggle = document.getElementById('mobile-toggle');
