@@ -409,7 +409,19 @@
  Inquiry has been successfully received.
  </div><script>
 
- let aboutIntroTimer = null;\n\n function navigateTo(pageId) {
+ let aboutIntroTimer = null;
+ let isHistoryNavigation = false;
+
+ // Keep SPA page changes in the browser history so Back/Forward restores
+ // the previously viewed IEUM section instead of leaving the site.
+ function navigateTo(pageId, options = {}) {
+   const skipHistory = options && options.skipHistory === true;
+   const currentPage = document.querySelector('.page-view.active');
+   const currentPageId = currentPage ? currentPage.id.replace('page-', '') : 'home';
+   if (!skipHistory && pageId !== currentPageId) {
+     history.pushState({ ieumPage: pageId }, '', `#${pageId}`);
+   }
+
  const pages = document.querySelectorAll('.page-view');
  const navLinks = document.querySelectorAll('.nav-link');
 
@@ -448,6 +460,21 @@
  }
 
  window.scrollTo({ top: 0, behavior: 'smooth' });
+ }
+
+ // Restore the section represented by the history entry on browser Back/Forward.
+ window.addEventListener('popstate', (event) => {
+   const pageId = event.state && event.state.ieumPage
+     ? event.state.ieumPage
+     : (location.hash.replace(/^#/, '') || 'home');
+   navigateTo(pageId, { skipHistory: true });
+ });
+
+ // Establish a stable starting entry for the single-page navigation.
+ const initialPageId = location.hash.replace(/^#/, '') || 'home';
+ history.replaceState({ ieumPage: initialPageId }, '', location.pathname + location.search + (location.hash || ''));
+ if (initialPageId !== 'home') {
+   navigateTo(initialPageId, { skipHistory: true });
  }
 
  const mobileToggle = document.getElementById('mobile-toggle');
