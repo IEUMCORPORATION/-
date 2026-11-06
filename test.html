@@ -526,8 +526,17 @@
   e.preventDefault();
   if (!contactForm.reportValidity()) return;
 
+  // FormSubmit rejects pages opened directly as file://. Stop immediately instead
+  // of leaving the visitor waiting for a request that cannot be accepted.
+  if (window.location.protocol === 'file:') {
+   alert('This inquiry form cannot send emails while the HTML file is opened directly. Please open the published IEUM website (https://...) or run this page through a local web server, then submit again.');
+   return;
+  }
+
   const submitButton = contactForm.querySelector('button[type="submit"]');
   const originalButtonText = submitButton.innerHTML;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 20000);
   submitButton.disabled = true;
   submitButton.textContent = 'Sending...';
 
@@ -535,31 +544,51 @@
   formData.set('_subject', 'New IEUM Website Inquiry');
   formData.set('_replyto', document.getElementById('contact-email').value.trim());
   formData.set('_template', 'table');
+  formData.set('_url', window.location.href);
 
   try {
    const response = await fetch(FORMSUBMIT_ENDPOINT, {
     method: 'POST',
     body: formData,
-    headers: { 'Accept': 'application/json' }
+    headers: { 'Accept': 'application/json' },
+    signal: controller.signal
    });
-   let result = {};
-   try { result = await response.json(); } catch (_) {}
-   if (!response.ok || result.success === false || result.success === 'false') {
-    throw new Error(result.message || 'FormSubmit rejected the inquiry.');
+
+   const responseText = await response.text();
+   let result;
+   try {
+    result = JSON.parse(responseText);
+   } catch (_) {
+    throw new Error('FormSubmit returned an unreadable response. Please try again from the published website.');
+   }
+
+   // FormSubmit may return HTTP 200 even when the submission was rejected.
+   // Its success field must therefore be checked explicitly.
+   if (!response.ok || String(result.success).toLowerCase() !== 'true') {
+    throw new Error(result.message || 'FormSubmit could not accept this inquiry.');
    }
 
    contactForm.reset();
-   inquirySuccess.classList.add('is-visible');
-   inquirySuccess.setAttribute('aria-hidden', 'false');
-   clearTimeout(inquirySuccessTimer);
-   inquirySuccessTimer = setTimeout(() => {
-    inquirySuccess.classList.remove('is-visible');
-    inquirySuccess.setAttribute('aria-hidden', 'true');
-   }, 3000);
+   if (inquirySuccess) {
+    inquirySuccess.classList.add('is-visible');
+    inquirySuccess.setAttribute('aria-hidden', 'false');
+    clearTimeout(inquirySuccessTimer);
+    inquirySuccessTimer = setTimeout(() => {
+     inquirySuccess.classList.remove('is-visible');
+     inquirySuccess.setAttribute('aria-hidden', 'true');
+    }, 3000);
+   } else {
+    alert('Your inquiry has been submitted successfully.');
+   }
   } catch (error) {
    console.error('IEUM inquiry email failed:', error);
-   alert('Your inquiry could not be sent. Please try again later or contact ieumcorporation@gmail.com directly.');
+   if (error.name === 'AbortError') {
+    alert('The email service did not respond within 20 seconds. Please check your connection and try again.');
+   } else {
+    alert('Your inquiry could not be sent: ' + (error.message || 'Please try again later.') + '\n\nYou can also contact ieumcorporation@gmail.com directly.');
+   }
   } finally {
+   clearTimeout(timeoutId);
    submitButton.disabled = false;
    submitButton.innerHTML = originalButtonText;
   }
