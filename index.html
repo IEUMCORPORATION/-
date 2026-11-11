@@ -238,7 +238,7 @@
  .svc-hero.open { display:block; }
  .svc-hero.show { opacity:1; }
  .svc-hero .svc-scene { position:absolute; inset:0; width:100%; height:100%; display:none; }
- .svc-hero .svc-scene img { width:100%; height:100%; object-fit:cover; display:block; }
+ .svc-hero .svc-scene img { width:100%; height:100%; object-fit:contain; object-position:center center; display:block; }
  .svc-hero .svc-scene.on { display:block; }
  .svc-hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(3,5,10,.86) 0%,rgba(3,5,10,.58) 42%,rgba(3,5,10,.08) 78%), linear-gradient(0deg,rgba(3,5,10,.9) 0%,rgba(3,5,10,0) 34%); }
  .svc-hero-body { box-sizing:border-box; position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:max(20px,env(safe-area-inset-top)) clamp(20px,5vw,72px) max(24px,env(safe-area-inset-bottom)); }
@@ -661,7 +661,7 @@ We provide comprehensive settlement services for international students and glob
  
 
  <div class="space-y-6"><h3 class="text-xl font-bold text-black">Partner Information</h3><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
- <div class="light-card p-8 rounded-2xl space-y-4 border-black shadow-md bg-neutral-50"><div class="flex items-center justify-between"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Korea</h3><p class="text-[11px] font-mono text-neutral-500">Seoul</p></div></div><span class="px-2.5 py-1 text-[10px] font-bold bg-black text-white rounded-full">HQ HUB</span></div><div class="border-t border-neutral-200 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-white border border-neutral-300 text-xs font-semibold text-black rounded-lg">IEUM HQ &amp; Partner Network</span></div></div></div>
+ <div class="light-card p-8 rounded-2xl space-y-4 border-black shadow-md bg-neutral-50"><div class="flex items-center justify-between"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Korea</h3><p class="text-[11px] font-mono text-neutral-500">Seoul</p></div></div><span class="px-2.5 py-1 text-[10px] font-bold bg-black text-white rounded-full">HQ HUB</span></div><div class="border-t border-neutral-200 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-white border border-neutral-300 text-xs font-semibold text-black rounded-lg">IEUM HQ</span><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">NEXROUTE</span></div></div></div>
  <div class="light-card p-8 rounded-2xl space-y-4"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Bangladesh</h3><p class="text-[11px] font-mono text-neutral-400">Dhaka Hub</p></div></div><div class="border-t border-neutral-100 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">Elite Global Study</span><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">Pioneer Education</span><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">BAPO</span></div></div></div>
  <div class="light-card p-8 rounded-2xl space-y-4"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Hong Kong</h3><p class="text-[11px] font-mono text-neutral-400">Central Hub</p></div></div><div class="border-t border-neutral-100 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">GAJA KOREA</span></div></div></div>
  <div class="light-card p-8 rounded-2xl space-y-4"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Thailand</h3><p class="text-[11px] font-mono text-neutral-400">Bangkok Hub</p></div></div><div class="border-t border-neutral-100 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">Luxematters</span></div></div></div></div></div></div></section><section class="page-view" id="page-contact">
@@ -676,44 +676,6 @@ We provide comprehensive settlement services for international students and glob
 </div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
   <div class="max-w-4xl mx-auto space-y-14">
-    <section class="space-y-6" aria-labelledby="faq-heading">
-      <div class="space-y-2">
-        <p class="text-xs font-mono tracking-widest text-neutral-500 uppercase">Frequently Asked Questions</p>
-        <h2 class="text-2xl sm:text-3xl font-bold text-black" id="faq-heading">Q&amp;A</h2>
-        <p class="text-sm text-neutral-500">Find answers to common questions about IEUM's services and partnerships.</p>
-      </div>
-      <div class="divide-y divide-neutral-200 border-y border-neutral-200" id="ieum-faq">
-        <div class="faq-item">
-          <button class="faq-question" type="button" aria-expanded="false"><span>What services does IEUM provide?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-          <div class="faq-answer" hidden><p>IEUM provides consulting, settlement and housing support, concierge services, and education and translation services. Support may include housing search guidance, telecom and bank account setup guidance, airport meeting arrangements, language education, and coordination with local partners.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" type="button" aria-expanded="false"><span>Who can use IEUM's services?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-          <div class="faq-answer" hidden><p>Our services are designed for international students, global employees, individuals preparing to move to Korea, and overseas institutions or companies seeking local support and partnership opportunities.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" type="button" aria-expanded="false"><span>Can I receive assistance before arriving in Korea?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-          <div class="faq-answer" hidden><p>Yes. You can contact IEUM before your arrival to discuss your needs and arrange available support in advance, such as housing information, settlement guidance, and airport meeting arrangements.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" type="button" aria-expanded="false"><span>Can IEUM help me find housing in Korea?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-          <div class="faq-answer" hidden><p>IEUM can help identify housing options based on your location, budget, and preferred living conditions, and provide related information and communication support. Property availability, contract terms, and final decisions are subject to the relevant property provider and the customer.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" type="button" aria-expanded="false"><span>Does IEUM directly provide visa or legal services?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-          <div class="faq-answer" hidden><p>IEUM provides general guidance and coordination support. Where professional advice or representation is required, we may help connect customers with appropriately qualified partner professionals. Decisions and outcomes are determined by the relevant authorities and professionals.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" type="button" aria-expanded="false"><span>Can universities and overseas agencies work with IEUM?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-          <div class="faq-answer" hidden><p>Yes. IEUM welcomes inquiries from universities, educational institutions, overseas study-abroad agencies, and businesses interested in cooperation. Select “Global partnership &amp; etc.” in the inquiry form and describe your proposed collaboration.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" type="button" aria-expanded="false"><span>How can I request a consultation?</span><span class="faq-icon" aria-hidden="true">+</span></button>
-          <div class="faq-answer" hidden><p>Complete the inquiry form below with your contact details, the service area you are interested in, and a brief description of your needs. Our team will review your inquiry and contact you using the details provided.</p></div>
-        </div>
-      </div>
-    </section>
-
     <section class="w-full bg-white p-7 sm:p-10 rounded-3xl border border-neutral-200 shadow-xl space-y-6" aria-labelledby="inquiry-heading">
       <div class="space-y-2">
         <p class="text-xs font-mono tracking-widest text-neutral-500 uppercase">Contact IEUM</p>
@@ -754,6 +716,44 @@ We provide comprehensive settlement services for international students and glob
         <button id="contact-submit" class="w-full py-4 text-xs font-bold text-white bg-black hover:bg-neutral-800 disabled:opacity-60 disabled:cursor-not-allowed rounded-xl transition shadow-lg" type="submit"><span class="submit-label">Submit Inquiry</span></button>
         <p class="text-[11px] text-neutral-400 text-center">Your inquiry details will be sent securely to the IEUM team for follow-up.</p>
       </form>
+    </section>
+
+    <section class="space-y-6" aria-labelledby="faq-heading">
+      <div class="space-y-2">
+        <p class="text-xs font-mono tracking-widest text-neutral-500 uppercase">Frequently Asked Questions</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-black" id="faq-heading">Q&amp;A</h2>
+        <p class="text-sm text-neutral-500">Find answers to common questions about IEUM's services and partnerships.</p>
+      </div>
+      <div class="divide-y divide-neutral-200 border-y border-neutral-200" id="ieum-faq">
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false"><span>What services does IEUM provide?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" hidden><p>IEUM provides consulting, settlement and housing support, concierge services, and education and translation services. Support may include housing search guidance, telecom and bank account setup guidance, airport meeting arrangements, language education, and coordination with local partners.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false"><span>Who can use IEUM's services?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" hidden><p>Our services are designed for international students, global employees, individuals preparing to move to Korea, and overseas institutions or companies seeking local support and partnership opportunities.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false"><span>Can I receive assistance before arriving in Korea?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" hidden><p>Yes. You can contact IEUM before your arrival to discuss your needs and arrange available support in advance, such as housing information, settlement guidance, and airport meeting arrangements.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false"><span>Can IEUM help me find housing in Korea?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" hidden><p>IEUM can help identify housing options based on your location, budget, and preferred living conditions, and provide related information and communication support. Property availability, contract terms, and final decisions are subject to the relevant property provider and the customer.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false"><span>Does IEUM directly provide visa or legal services?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" hidden><p>IEUM provides general guidance and coordination support. Where professional advice or representation is required, we may help connect customers with appropriately qualified partner professionals. Decisions and outcomes are determined by the relevant authorities and professionals.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false"><span>Can universities and overseas agencies work with IEUM?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" hidden><p>Yes. IEUM welcomes inquiries from universities, educational institutions, overseas study-abroad agencies, and businesses interested in cooperation. Select “Global partnership &amp; etc.” in the inquiry form and describe your proposed collaboration.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false"><span>How can I request a consultation?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-answer" hidden><p>Complete the inquiry form below with your contact details, the service area you are interested in, and a brief description of your needs. Our team will review your inquiry and contact you using the details provided.</p></div>
+        </div>
+      </div>
     </section>
   </div>
  </div>
