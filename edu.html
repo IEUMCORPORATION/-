@@ -23,7 +23,16 @@ button{font:inherit}
 .logo span{color:var(--gold)}
 .nav{display:flex;align-items:center;gap:clamp(22px,3vw,44px);margin-left:auto}
 .nav a{font-size:13px;font-weight:600;color:#34465a;transition:color .2s}
+
 .nav a:hover,.nav a.active{color:var(--gold)}
+.nav-dropdown{position:relative;display:flex;align-items:center;height:100%}
+.nav-parent{display:flex;align-items:center;gap:7px}
+.nav-caret{font-size:14px;transition:transform .2s}
+.dropdown-menu{position:absolute;top:calc(100% - 10px);left:-18px;min-width:155px;padding:10px 0;background:#fff;border:1px solid var(--line);box-shadow:0 14px 35px rgba(23,43,67,.10);opacity:0;visibility:hidden;transform:translateY(8px);transition:.2s;z-index:30}
+.dropdown-menu a{display:block;padding:11px 18px;font-size:12px;white-space:nowrap}
+.nav-dropdown:hover .dropdown-menu,.nav-dropdown:focus-within .dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dropdown:hover .nav-caret{transform:rotate(180deg)}
+
 .header-actions{display:flex;align-items:center;gap:18px}
 .lang{border:0;background:transparent;color:#667386;font-size:11px;letter-spacing:.08em;cursor:pointer;padding:8px}
 .contact-link{border:1px solid #cbd2da;padding:12px 16px;font-size:12px;font-weight:600;transition:.2s}
@@ -98,23 +107,54 @@ h2{font-size:clamp(30px,3.6vw,45px);line-height:1.2;letter-spacing:-.045em;font-
 .footer-copy{font-size:10px;line-height:1.8;color:#8490a0}
 .footer-links{display:flex;gap:18px;font-size:11px;color:#5e6c7b}
 .small-note{font-size:10px;color:#8993a0;margin-top:20px}
+
+/* Single-file page navigation */
+.page-view{display:none;min-height:65vh;padding:76px 0 90px}
+body.route-page #home > section{display:none}
+body.route-page #pageView{display:block}
+.page-view .page-back{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.08em;margin-bottom:34px}
+.page-view .page-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(35px,7vw,90px);align-items:start}
+.page-view .page-heading{font-size:clamp(38px,5vw,62px);line-height:1.12;letter-spacing:-.05em;font-weight:500;margin:18px 0}
+.page-view .page-subtitle{font-size:13px;color:var(--gold);font-weight:600}
+.page-view .page-description{font-size:15px;line-height:1.95;color:var(--muted);max-width:520px}
+.page-view .page-detail{border-top:1px solid var(--line);padding-top:25px}
+.page-view .page-detail h3{font-size:18px;margin:0 0 18px}
+.page-view .page-detail ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.page-view .page-detail li{font-size:14px;color:var(--ink2);padding:0 0 14px;border-bottom:1px solid var(--line)}
+.page-view .page-cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+.page-view .page-cta a{display:inline-flex;padding:14px 19px;font-size:12px;font-weight:600;border:1px solid var(--ink)}
+.page-view .page-cta a:first-child{background:var(--ink);color:#fff}
+body.route-page #services,body.route-page .approach,body.route-page .process,body.route-page #contact{display:none}
+@media(max-width:650px){.page-view{padding:48px 0 65px}.page-view .page-layout{grid-template-columns:1fr;gap:26px}.page-view .page-heading{font-size:43px}.page-view .page-description{font-size:14px}}
 @media(max-width:850px){.wrap{width:min(100% - 40px,var(--max))}.hero-grid{grid-template-columns:1fr 1fr;gap:28px}.hero-media{min-height:410px}.nav{gap:18px}.header-actions{gap:8px}.approach-grid{gap:42px}.service{padding:24px 20px}.service h3{font-size:19px}}
-@media(max-width:650px){.wrap{width:calc(100% - 36px)}.site-header{height:70px}.logo{font-size:23px}.menu-toggle{display:block}.nav{display:none;position:absolute;top:69px;left:0;right:0;background:white;padding:20px 22px 24px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:20px}.nav.open{display:flex}.nav a{font-size:14px}.header-actions .contact-link{display:none}.hero{padding:42px 0 56px}.hero-grid{grid-template-columns:1fr;gap:32px}h1{font-size:46px;margin:20px 0}.hero-copy{font-size:14px}.hero-media{min-height:350px}.section{padding:64px 0}.section-head{display:block;margin-bottom:25px}.section-intro{margin-top:17px}.service-grid{grid-template-columns:1fr}.service{min-height:0;padding:25px 23px}.service+.service{border-left:0;border-top:1px solid var(--line)}.service h3{margin-top:20px}.service p{margin:12px 0 17px}.service-link{padding-top:20px}.approach{padding:60px 0}.approach-grid{grid-template-columns:1fr;gap:25px}.approach-lead{font-size:15px}.pillars{grid-template-columns:1fr;gap:22px}.process{padding:62px 0}.process-grid{grid-template-columns:1fr 1fr;row-gap:26px}.process-item{padding:20px 15px 0 0}.process-item+.process-item{border-left:0;padding-left:0}.process-item:nth-child(even){border-left:1px solid var(--line);padding-left:18px}.cta-section{padding-bottom:60px}.cta-panel{padding:30px 24px;align-items:flex-start;flex-direction:column}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}}
+@media(max-width:650px){.wrap{width:calc(100% - 36px)}.site-header{height:70px}.logo{font-size:23px}.menu-toggle{display:block}.nav{display:none;position:absolute;top:69px;left:0;right:0;background:white;padding:20px 22px 24px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:20px}
+.nav.open{display:flex}.nav a{font-size:14px}
+.nav-dropdown{height:auto;width:100%;display:block}
+.nav-dropdown>.nav-parent{width:100%}
+.dropdown-menu{position:static;display:flex;gap:8px;min-width:0;padding:8px 0 0 12px;border:0;box-shadow:none;opacity:1;visibility:visible;transform:none;background:transparent}
+.dropdown-menu a{padding:8px 12px;background:var(--soft);border:1px solid var(--line);font-size:12px}
+.header-actions .contact-link{display:none}.hero{padding:42px 0 56px}.hero-grid{grid-template-columns:1fr;gap:32px}h1{font-size:46px;margin:20px 0}.hero-copy{font-size:14px}.hero-media{min-height:350px}.section{padding:64px 0}.section-head{display:block;margin-bottom:25px}.section-intro{margin-top:17px}.service-grid{grid-template-columns:1fr}.service{min-height:0;padding:25px 23px}.service+.service{border-left:0;border-top:1px solid var(--line)}.service h3{margin-top:20px}.service p{margin:12px 0 17px}.service-link{padding-top:20px}.approach{padding:60px 0}.approach-grid{grid-template-columns:1fr;gap:25px}.approach-lead{font-size:15px}.pillars{grid-template-columns:1fr;gap:22px}.process{padding:62px 0}.process-grid{grid-template-columns:1fr 1fr;row-gap:26px}.process-item{padding:20px 15px 0 0}.process-item+.process-item{border-left:0;padding-left:0}.process-item:nth-child(even){border-left:1px solid var(--line);padding-left:18px}.cta-section{padding-bottom:60px}.cta-panel{padding:30px 24px;align-items:flex-start;flex-direction:column}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
 </style>
 </head>
 <body>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="logo" href="#home" aria-label="IEUM Home">IEUM<span>.</span></a>
+    <a class="logo" href="#/home" aria-label="IEUM Home">IEUM<span>.</span></a>
     <nav class="nav" id="mainNav" aria-label="Main navigation">
-      <a href="#education">Education</a>
-      <a href="#topik">TOPIK</a>
-      <a href="#translation">Translation</a>
+      <div class="nav-dropdown">
+        <a href="#/education" data-page="education" class="nav-parent">Education <span class="nav-caret">⌄</span></a>
+        <div class="dropdown-menu" aria-label="Education subjects">
+          <a href="#/education/korean" data-page="education-korean">Korean</a>
+          <a href="#/education/japanese" data-page="education-japanese">Japanese</a>
+        </div>
+      </div>
+      <a href="#/topik" data-page="topik">TOPIK</a>
+      <a href="#/translation" data-page="translation">Translation</a>
     </nav>
     <div class="header-actions">
       <button class="lang" id="langButton" type="button" aria-label="Switch language">KR / EN</button>
-      <a class="contact-link" href="#contact">Contact ↗</a>
+      <a class="contact-link" href="#/contact">Contact ↗</a>
       <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
     </div>
   </div>
@@ -204,19 +244,146 @@ h2{font-size:clamp(30px,3.6vw,45px);line-height:1.2;letter-spacing:-.045em;font-
   <div class="wrap"><div class="cta-panel"><div><div class="section-kicker">CONTACT IEUM</div><h2 data-ko="교육 및 협력 문의" data-en="Education & partnership enquiries">교육 및 협력 문의</h2><p data-ko="교육 과정, TOPIK 대비, 번역 서비스 또는 기관 협력에 대해 문의해 주세요." data-en="Contact us about language courses, TOPIK preparation, translation services, or institutional collaboration.">교육 과정, TOPIK 대비, 번역 서비스 또는 기관 협력에 대해 문의해 주세요.</p></div><a class="btn" href="mailto:contact@ieum.co.kr"><span data-ko="문의하기" data-en="CONTACT US">문의하기</span><span>↗</span></a></div></div>
 </section>
 </main>
-<footer class="footer"><div class="wrap footer-inner"><div><div class="footer-brand">IEUM<span style="color:var(--gold)">.</span></div><div class="footer-copy">Global Education & Language Services</div></div><div class="footer-links"><a href="#education">Education</a><a href="#topik">TOPIK</a><a href="#translation">Translation</a></div><div class="footer-copy">© IEUM. All rights reserved.</div></div><div class="wrap small-note">※ 본 페이지의 문의 이메일 및 서비스 세부 사항은 실제 운영 정보에 맞게 확인 후 수정해야 합니다.</div></footer>
+<footer class="footer"><div class="wrap footer-inner"><div><div class="footer-brand">IEUM<span style="color:var(--gold)">.</span></div><div class="footer-copy">Global Education & Language Services</div></div><div class="footer-links"><a href="#/education">Education</a><a href="#/topik">TOPIK</a><a href="#/translation">Translation</a></div><div class="footer-copy">© IEUM. All rights reserved.</div></div><div class="wrap small-note">※ 본 페이지의 문의 이메일 및 서비스 세부 사항은 실제 운영 정보에 맞게 확인 후 수정해야 합니다.</div></footer>
 <script>
 const menuToggle=document.getElementById('menuToggle');
 const nav=document.getElementById('mainNav');
-menuToggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuToggle.setAttribute('aria-expanded',String(open));menuToggle.textContent=open?'×':'☰';});
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');menuToggle.textContent='☰';}));
+function closeMenu(){
+  nav.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded','false');
+  menuToggle.textContent='☰';
+}
+menuToggle.addEventListener('click',()=>{
+  const open=nav.classList.toggle('open');
+  menuToggle.setAttribute('aria-expanded',String(open));
+  menuToggle.textContent=open?'×':'☰';
+});
+
+const pageView=document.getElementById('pageView');
+const pageData={
+  education:{
+    title:'Education',
+    subtitle:'Korean & Japanese Language Programs',
+    description:'IEUM provides practical language education designed around each learner’s goals, current level, and real-life communication needs. Our classes combine structured foundations with active speaking, listening, reading, and writing practice.',
+    label:'LANGUAGE EDUCATION',
+    intro:'How We Teach',
+    items:[
+      'Level-based learning — lessons are organized around the learner’s current proficiency and learning objectives.',
+      'Practical communication — speaking and listening activities help learners use the language in everyday situations.',
+      'Balanced language skills — reading, writing, vocabulary, and grammar are developed together.',
+      'Progress feedback — regular reviews help learners understand their progress and areas to improve.'
+    ],
+    extra:'Choose Korean or Japanese from the Education menu to explore each language program.'
+  },
+  'education-korean':{
+    title:'Korean',
+    subtitle:'한국어 교육 프로그램',
+    description:'한국어를 처음 배우는 학습자부터 실생활과 학업·업무에서 한국어를 활용하고 싶은 학습자까지, 수준과 목표에 맞춘 단계별 수업을 제공합니다.',
+    label:'EDUCATION · KOREAN',
+    intro:'Curriculum & Teaching Method',
+    items:[
+      '기초 한국어 — 한글, 발음, 기본 어휘와 기초 문형 익히기',
+      '초·중급 회화 — 일상생활 상황별 표현, 듣기와 말하기 연습',
+      '문법 및 읽기·쓰기 — 문장 구성, 핵심 문법, 짧은 글 읽기와 작성',
+      '실전 활용 — 학교생활, 생활 한국어, 비즈니스 등 목적별 의사소통 연습'
+    ],
+    extra:'수업은 학습자의 현재 수준과 목표를 확인한 뒤 적절한 단계와 학습 방향을 안내하는 방식으로 진행합니다.'
+  },
+  'education-japanese':{
+    title:'Japanese',
+    subtitle:'일본어 교육 프로그램',
+    description:'일본어 학습 목적과 현재 수준에 맞춰 기초부터 실제 의사소통까지 단계적으로 학습할 수 있도록 구성합니다.',
+    label:'EDUCATION · JAPANESE',
+    intro:'Curriculum & Teaching Method',
+    items:[
+      '기초 일본어 — 문자, 발음, 기본 어휘와 기초 문형 익히기',
+      '초·중급 회화 — 일상 및 상황별 표현, 듣기와 말하기 연습',
+      '문법 및 독해 — 문장 구조, 핵심 문법, 단계별 읽기 연습',
+      '작문 및 실전 활용 — 목적에 맞는 글쓰기와 실제 상황별 의사소통'
+    ],
+    extra:'학습자의 목표와 진도에 따라 수업 범위와 연습 비중을 조정하고 지속적인 피드백을 제공합니다.'
+  },
+  topik:{
+    title:'TOPIK',
+    subtitle:'시험 대비 및 학습 평가',
+    description:'목표 급수와 현재 학습 수준을 고려해 시험 준비와 학습 성과 관리를 지원합니다.',
+    label:'TESTING & ASSESSMENT',
+    intro:'Our Services',
+    items:['TOPIK 시험 대비반','학습 수준 진단','진도 및 성적 관리']
+  },
+  translation:{
+    title:'Translation',
+    subtitle:'번역 · 현지화 · 통역 지원',
+    description:'언어와 맥락을 함께 고려해 교육 및 국제 협력에 필요한 의사소통을 지원합니다.',
+    label:'TRANSLATION',
+    intro:'Our Services',
+    items:['다국어 문서 번역','교육 자료 및 콘텐츠 현지화','문서 관련 통역 지원']
+  }
+};
+
+function renderRoute(){
+  const match=location.hash.match(/^#\/(education\/korean|education\/japanese|education|topik|translation|contact)$/);
+  const route=match?match[1]:'home';
+  document.body.classList.toggle('route-page',route!=='home' && route!=='contact');
+  if(route==='home'){
+    pageView.innerHTML='';
+    document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));
+    return;
+  }
+  if(route==='contact'){
+    document.body.classList.remove('route-page');
+    pageView.innerHTML='';
+    closeMenu();
+    document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+  const data=pageData[route];
+  if(!data)return;
+  const items=data.items.map(item=>`<li>${item}</li>`).join('');
+  pageView.innerHTML=`
+    <div class="wrap">
+      <a class="page-back" href="#/home">← ALL SERVICES</a>
+      <div class="page-layout">
+        <div>
+          <div class="section-kicker">${data.label}</div>
+          <h1 class="page-heading">${data.title}</h1>
+          <div class="page-subtitle">${data.subtitle}</div>
+        </div>
+        <div>
+          <p class="page-description">${data.description}</p>
+          <div class="page-detail">
+            <h3>${data.intro}</h3>
+            <ul>${items}</ul>
+          </div>
+          ${data.extra?`<p class="page-description" style="margin-top:24px">${data.extra}</p>`:''}
+          <div class="page-cta">
+            <a href="#/contact">문의하기 ↗</a>
+            <a href="#/education">Education overview</a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  document.querySelectorAll('.nav a').forEach(a=>{
+    a.classList.toggle('active',a.dataset.page===route || (route.startsWith('education/') && a.dataset.page==='education'));
+  });
+  closeMenu();
+  window.scrollTo({top:0,behavior:'auto'});
+}
+window.addEventListener('hashchange',renderRoute);
+document.querySelectorAll('#mainNav a').forEach(a=>a.addEventListener('click',closeMenu));
+
 let english=false;
 document.getElementById('langButton').addEventListener('click',()=>{
   english=!english;
   document.documentElement.lang=english?'en':'ko';
   document.getElementById('langButton').textContent=english?'EN / KR':'KR / EN';
-  document.querySelectorAll('[data-ko][data-en]').forEach(el=>{el.innerHTML=english?el.dataset.en:el.dataset.ko;});
+  document.querySelectorAll('[data-ko][data-en]').forEach(el=>{
+    el.innerHTML=english?el.dataset.en:el.dataset.ko;
+  });
+  if(!location.hash || location.hash==='#/home')return;
+  renderRoute();
 });
+renderRoute();
 </script>
 </body>
 </html>
