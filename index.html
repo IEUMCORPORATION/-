@@ -621,46 +621,28 @@ We provide comprehensive settlement services for international students and glob
 </div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
   <div class="max-w-4xl mx-auto space-y-14">
-    <section class="w-full bg-white p-7 sm:p-10 rounded-3xl border border-neutral-200 shadow-xl space-y-6" aria-labelledby="inquiry-heading">
-      <div class="space-y-2">
+    <section class="w-full bg-white p-8 sm:p-12 rounded-3xl border border-neutral-200 shadow-xl space-y-8" aria-labelledby="inquiry-heading">
+      <div class="space-y-3">
         <p class="text-xs font-mono tracking-widest text-neutral-500 uppercase">Contact IEUM</p>
-        <h3 class="text-xl sm:text-2xl font-bold text-black" id="inquiry-heading">Consultation and partnership inquiries</h3>
-        <p class="text-sm text-neutral-500">Please complete the form below. Our team will review your inquiry and get back to you.</p>
+        <h3 class="text-xl sm:text-2xl font-bold text-black" id="inquiry-heading">Get in Touch</h3>
+        <p class="text-sm text-neutral-500 leading-relaxed">For service inquiries and partnership opportunities, please contact us using the information provided below.</p>
       </div>
-      <form class="space-y-4 text-xs" id="contact-form">
-        <input type="hidden" name="subject" value="New Inquiry from IEUM Website" />
-        <div>
-          <label class="block text-neutral-700 font-medium mb-1" for="contact-name">Name / Company Name *</label>
-          <input id="contact-name" name="from_name" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black transition" placeholder="Name / Company Name" autocomplete="name" required type="text" />
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-neutral-700 font-medium mb-1" for="contact-phone">Phone Number *</label>
-            <input id="contact-phone" name="phone" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black transition" placeholder="+00-00-0000-0000" autocomplete="tel" required type="tel" />
-          </div>
-          <div>
-            <label class="block text-neutral-700 font-medium mb-1" for="contact-email">E-mail *</label>
-            <input id="contact-email" name="reply_to" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black transition" placeholder="example@email.com" autocomplete="email" required type="email" />
-          </div>
-        </div>
-        <div>
-          <label class="block text-neutral-700 font-medium mb-1" for="contact-service">Inquiry Service Area *</label>
-          <select class="w-full bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black transition" id="contact-service" name="service_area" required>
-            <option value="Consulting">Consulting</option>
-            <option value="Settlement & Housing">Settlement &amp; Housing</option>
-            <option value="Concierge">Concierge</option>
-            <option value="Education & Translation">Education &amp; Translation</option>
-            <option value="Global partnership & etc.">Global partnership &amp; etc.</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-neutral-700 font-medium mb-1" for="contact-message">Detailed Inquiry *</label>
-          <textarea id="contact-message" name="message" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black transition" placeholder="Please enter the specific details of your inquiry." required rows="5"></textarea>
-        </div>
-        <p id="contact-form-status" class="hidden text-sm leading-relaxed" role="status" aria-live="polite"></p>
-        <button id="contact-submit" class="w-full py-4 text-xs font-bold text-white bg-black hover:bg-neutral-800 disabled:opacity-60 disabled:cursor-not-allowed rounded-xl transition shadow-lg" type="submit"><span class="submit-label">Submit Inquiry</span></button>
-        <p class="text-[11px] text-neutral-400 text-center">Your inquiry details will be sent securely to the IEUM team for follow-up.</p>
-      </form>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <a href="mailto:ieumcorporation@gmail.com" class="group flex items-center gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 sm:p-6 hover:border-black hover:bg-white transition">
+          <span class="w-12 h-12 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-lg"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
+          <span class="min-w-0">
+            <span class="block text-[11px] font-mono uppercase tracking-widest text-neutral-400 mb-1">E-mail</span>
+            <span class="block text-sm sm:text-base font-semibold text-black break-all group-hover:underline">ieumcorporation@gmail.com</span>
+          </span>
+        </a>
+        <a href="https://www.instagram.com/ieum_offcl/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 sm:p-6 hover:border-black hover:bg-white transition">
+          <span class="w-12 h-12 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-lg"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+          <span class="min-w-0">
+            <span class="block text-[11px] font-mono uppercase tracking-widest text-neutral-400 mb-1">Instagram</span>
+            <span class="block text-sm sm:text-base font-semibold text-black group-hover:underline">ieum_offcl</span>
+          </span>
+        </a>
+      </div>
     </section>
 
     <section class="space-y-6" aria-labelledby="faq-heading">
@@ -790,47 +772,7 @@ We provide comprehensive settlement services for international students and glob
    });
  });
 
- // Send inquiry details to IEUM using EmailJS.
- const contactForm = document.getElementById('contact-form');
- const contactSubmit = document.getElementById('contact-submit');
- const contactStatus = document.getElementById('contact-form-status');
- const EMAILJS_SERVICE_ID = 'service_wejbuvs';
- const EMAILJS_TEMPLATE_ID = 'ayvw8ak';
- const EMAILJS_PUBLIC_KEY = '3rykPoCGC50_Tbud8';
-
- contactForm.addEventListener('submit', async (event) => {
-   event.preventDefault();
-   if (!contactForm.reportValidity()) return;
-
-   const submitLabel = contactSubmit.querySelector('.submit-label');
-   contactSubmit.disabled = true;
-   submitLabel.textContent = 'Sending...';
-   contactStatus.textContent = '';
-   contactStatus.classList.add('hidden');
-   contactStatus.classList.remove('text-green-700', 'text-red-600');
-
-   try {
-     if (!window.emailjs) throw new Error('EmailJS library did not load.');
-     await window.emailjs.sendForm(
-       EMAILJS_SERVICE_ID,
-       EMAILJS_TEMPLATE_ID,
-       contactForm,
-       { publicKey: EMAILJS_PUBLIC_KEY }
-     );
-     contactStatus.textContent = 'Thank you. Your inquiry has been sent successfully. Our team will contact you soon.';
-     contactStatus.classList.remove('hidden');
-     contactStatus.classList.add('text-green-700');
-     contactForm.reset();
-   } catch (error) {
-     console.error('IEUM inquiry submission failed:', error);
-     contactStatus.textContent = 'Your inquiry could not be sent. Please try again or email ieumcorporation@gmail.com directly.';
-     contactStatus.classList.remove('hidden');
-     contactStatus.classList.add('text-red-600');
-   } finally {
-     contactSubmit.disabled = false;
-     submitLabel.textContent = 'Submit Inquiry';
-   }
- });
+ /* Contact form removed: inquiries are handled through the email and Instagram links above. */
  </script><script>
 /* Offline map layer: all map graphics are inline SVG; no map CDN or remote GeoJSON required. */
 (() => {
