@@ -783,7 +783,7 @@ We provide comprehensive settlement services for international students and glob
       <div class="space-y-2">
         <p class="text-xs font-mono tracking-widest text-amber-700 uppercase">QUOTE REQUEST</p>
         <h3 class="text-xl sm:text-2xl font-bold text-black" id="quote-request-heading">Send Your Inquiry</h3>
-        <p class="text-sm text-neutral-500 leading-relaxed">Please leave your contact details. IEUM will review your selected services and contact you with a final quotation.</p>
+        <p class="text-sm text-neutral-500 leading-relaxed">Please confirm your contact details. Your selected services and estimated total will be sent to IEUM, then you will continue to secure PayPal checkout.</p>
       </div>
       <form id="ieum-quote-request-form" class="space-y-5" action="https://formsubmit.co/ajax/ieumcorporation@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="[IEUM] New Quote Request">
@@ -800,8 +800,9 @@ We provide comprehensive settlement services for international students and glob
           <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Country</span><input name="Country" autocomplete="country-name" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="Your country"></label>
         </div>
         <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Additional message</span><textarea name="Additional Message" rows="4" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="Tell us about your schedule, needs, or any questions."></textarea></label>
-        <p id="ieum-quote-form-status" class="text-sm text-neutral-600" role="status" aria-live="polite"></p>
-        <button id="ieum-quote-form-submit" type="submit" class="w-full rounded-full bg-black text-white px-6 py-4 text-sm font-bold hover:bg-neutral-800 transition">Submit Quote Request <i class="fa-solid fa-arrow-right ml-2"></i></button>
+        <p class="text-xs leading-relaxed text-amber-800 bg-amber-50 border border-amber-100 rounded-xl p-4">Settlement &amp; Housing selected plans are charged at the displayed subtotal through PayPal. Please review the selected items and excluded third-party costs before continuing.</p>
+         <p id="ieum-quote-form-status" class="text-sm text-neutral-600" role="status" aria-live="polite"></p>
+        <button id="ieum-quote-form-submit" type="submit" class="w-full rounded-full bg-black text-white px-6 py-4 text-sm font-bold hover:bg-neutral-800 transition">Submit Inquiry <i class="fa-solid fa-arrow-right ml-2"></i></button>
         <p class="text-xs leading-relaxed text-neutral-400">Your information will be used only to review and respond to this inquiry. Final pricing and service availability are confirmed separately by IEUM.</p>
       </form>
     </section>
@@ -1190,6 +1191,8 @@ We provide comprehensive settlement services for international students and glob
     const quote = window.__ieumSettlementQuote;
     if (!quote || !quote.services.length) return;
     window.__ieumQuoteDraft = quote;
+    const formSubmitButton = document.getElementById('ieum-quote-form-submit');
+    if (formSubmitButton) formSubmitButton.innerHTML = 'Continue to PayPal Payment <i class="fa-solid fa-arrow-right ml-2"></i>';
     const contactPage = document.getElementById('page-contact');
     if (contactPage) {
       let summary = document.getElementById('settlement-quote-summary');
@@ -1199,18 +1202,21 @@ We provide comprehensive settlement services for international students and glob
         summary.className = 'max-w-4xl mx-auto';
         contactPage.querySelector('.max-w-7xl')?.prepend(summary);
       }
-      summary.innerHTML = `<p class="text-xs font-mono tracking-widest text-amber-700">YOUR SELECTED SERVICES</p>
-        <h3 class="text-xl font-bold mt-2">Settlement &amp; Housing Quote Request</h3>
+      summary.innerHTML = `<section class="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm">
+        <p class="text-xs font-mono tracking-widest text-amber-700">YOUR SELECTED SERVICES</p>
+        <h3 class="text-xl font-bold mt-2">Settlement &amp; Housing Payment Summary</h3>
         <div class="mt-4 space-y-2 text-sm">${quote.services.map(item => `<div class="flex justify-between gap-4"><span>${item.name}${item.key === 'personal_escort' ? ` (${item.quantity} hours)` : ''}</span><strong>$${item.amount.toFixed(2)}</strong></div>`).join('')}</div>
-        <div class="border-t border-neutral-200 mt-4 pt-4 flex justify-between font-bold"><span>Estimated subtotal</span><span>$${quote.subtotal.toFixed(2)} USD</span></div>
-        <p class="text-xs text-neutral-500 mt-3">Final pricing and availability will be confirmed by IEUM. Third-party expenses may be additional.</p>`;
+        <div class="border-t border-neutral-200 mt-4 pt-4 flex justify-between font-bold"><span>Payable subtotal</span><span>$${quote.subtotal.toFixed(2)} USD</span></div>
+        <p class="text-xs text-neutral-500 mt-3">This checkout charges the displayed service subtotal. Third-party expenses (including transport fares, SIM plans, deposits and government fees) are excluded.</p>
+      </section>`;
     }
     navigateTo('contact');
     document.getElementById('settlement-quote-summary')?.scrollIntoView({behavior:'smooth', block:'start'});
   });
 
 
-  // Keep the selected quote attached to the customer inquiry and email it to IEUM.
+  // General inquiries continue to use FormSubmit. A selected Settlement & Housing plan
+  // is sent to the secure server endpoint, which emails IEUM and creates a PayPal order.
   const ieumQuoteForm = document.getElementById('ieum-quote-request-form');
   if (ieumQuoteForm) {
     ieumQuoteForm.addEventListener('submit', async (event) => {
@@ -1218,23 +1224,41 @@ We provide comprehensive settlement services for international students and glob
       const status = document.getElementById('ieum-quote-form-status');
       const submit = document.getElementById('ieum-quote-form-submit');
       const draft = window.__ieumQuoteDraft || null;
-      const selectedLines = draft && Array.isArray(draft.services)
-        ? draft.services.map(item => `${item.name}${item.key === 'personal_escort' ? ` (${item.quantity} hours)` : ''}: $${Number(item.amount).toFixed(2)}`)
-        : [];
-      document.getElementById('ieum-form-selected-services').value = selectedLines.join('\n') || 'No pre-selected service package';
-      document.getElementById('ieum-form-estimated-total').value = draft ? `$${Number(draft.subtotal).toFixed(2)} USD` : 'To be discussed';
-      document.getElementById('ieum-form-quote-details').value = draft
-        ? `Selected services:\n${selectedLines.join('\n')}\nEstimated subtotal: $${Number(draft.subtotal).toFixed(2)} USD\nCurrency: USD\nFinal quotation subject to IEUM confirmation.`
-        : 'General inquiry; customer has not selected a priced package.';
       const data = new FormData(ieumQuoteForm);
       submit.disabled = true;
-      submit.textContent = 'Sending...';
-      status.textContent = 'Sending your inquiry securely...';
+
       try {
+        if (draft && Array.isArray(draft.services) && draft.services.length) {
+          submit.textContent = 'Creating secure PayPal checkout...';
+          status.textContent = 'Sending your selected plan to IEUM and preparing PayPal checkout...';
+          const customer = {
+            name: String(data.get('Name') || '').trim(),
+            email: String(data.get('Email') || '').trim(),
+            phone: String(data.get('Phone / WhatsApp') || '').trim(),
+            country: String(data.get('Country') || '').trim(),
+            message: String(data.get('Additional Message') || '').trim()
+          };
+          const response = await fetch('/api/create-paypal-order', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({customer, services: draft.services})
+          });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || !result.approvalUrl) {
+            throw new Error(result.error || 'Could not create the PayPal order.');
+          }
+          status.textContent = 'Your selected plan has been sent to IEUM. Redirecting to PayPal...';
+          window.location.assign(result.approvalUrl);
+          return;
+        }
+
+        // Non-priced/general inquiries are still submitted by FormSubmit.
+        submit.textContent = 'Sending...';
+        status.textContent = 'Sending your inquiry...';
         const response = await fetch(ieumQuoteForm.action, {
           method: 'POST',
           body: data,
-          headers: { 'Accept': 'application/json' }
+          headers: {'Accept': 'application/json'}
         });
         const result = await response.json().catch(() => ({}));
         if (!response.ok || result.success === 'false' || result.success === false) {
@@ -1244,15 +1268,61 @@ We provide comprehensive settlement services for international students and glob
         status.className = 'text-sm text-green-700';
         ieumQuoteForm.reset();
         window.__ieumQuoteDraft = null;
+        submit.innerHTML = 'Submit Inquiry <i class="fa-solid fa-arrow-right ml-2"></i>';
       } catch (error) {
-        status.textContent = 'We could not submit your inquiry. Please email ieumcorporation@gmail.com directly. If this is the first submission, the email recipient may need to complete FormSubmit activation.';
+        console.error('IEUM quote submission error:', error);
+        status.textContent = error.message || 'We could not submit your request. Please try again or email ieumcorporation@gmail.com.';
         status.className = 'text-sm text-red-700';
       } finally {
         submit.disabled = false;
-        submit.innerHTML = 'Submit Quote Request <i class="fa-solid fa-arrow-right ml-2"></i>';
+        submit.innerHTML = 'Continue to PayPal Payment <i class="fa-solid fa-arrow-right ml-2"></i>';
       }
     });
   }
+
+  // A customer may cancel at PayPal and return without a token.
+  const paypalParams = new URLSearchParams(window.location.search);
+  if (paypalParams.get('paypal') === 'cancel') {
+    navigateTo('contact');
+    const cancelStatus = document.getElementById('ieum-quote-form-status');
+    if (cancelStatus) {
+      cancelStatus.textContent = 'PayPal checkout was cancelled. No payment was confirmed. You can return to your selected services and try again.';
+      cancelStatus.className = 'text-sm text-amber-700';
+    }
+    window.history.replaceState({}, '', window.location.pathname + '#contact');
+  }
+
+  // PayPal returns the customer here after approval. Capture is performed server-side.
+  (async function handlePayPalReturn() {
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('token');
+    if (params.get('paypal') !== 'success' || !orderId) return;
+    const status = document.getElementById('ieum-quote-form-status');
+    if (status) status.textContent = 'Confirming your PayPal payment...';
+    try {
+      const response = await fetch('/api/capture-paypal-order', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({orderId})
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.status !== 'COMPLETED') {
+        throw new Error(result.error || 'Payment confirmation is pending.');
+      }
+      navigateTo('contact');
+      if (status) {
+        status.textContent = 'Payment completed successfully. IEUM has received your selected service details and payment confirmation.';
+        status.className = 'text-sm text-green-700';
+      }
+      window.history.replaceState({}, '', window.location.pathname + '#contact');
+    } catch (error) {
+      navigateTo('contact');
+      if (status) {
+        status.textContent = 'PayPal returned to IEUM, but payment confirmation could not be completed automatically. Please contact ieumcorporation@gmail.com with your PayPal order ID: ' + orderId;
+        status.className = 'text-sm text-red-700';
+      }
+    }
+  })();
 
   window.openIEUMServiceDetail = openDetail;
 
