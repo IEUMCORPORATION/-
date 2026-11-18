@@ -577,6 +577,20 @@
 .detail-process-step p{font-size:12px;line-height:1.8;color:#cbd5e1;margin-top:8px}
 #service-detail-scope li{display:flex;gap:13px;align-items:flex-start;font-size:13px;line-height:1.8;color:#4b5563}
 #service-detail-scope i{color:#a77d3e;margin-top:4px}
+
+#settlement-price-builder .settlement-price-option{display:flex;align-items:flex-start;gap:14px;padding:18px;border:1px solid #e5e7eb;border-radius:16px;background:#fff;cursor:pointer;transition:border-color .2s,background .2s}
+#settlement-price-builder .settlement-price-option:has(input:checked){border-color:#a77d3e;background:#fcfaf6}
+#settlement-price-builder .settlement-price-option>input{width:18px;height:18px;margin-top:3px;accent-color:#92703d;flex:0 0 auto}
+#settlement-price-builder .settlement-option-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}
+#settlement-price-builder .settlement-option-copy strong{font-size:13px;font-weight:800;color:#111827;line-height:1.45}
+#settlement-price-builder .settlement-option-copy small{font-size:11px;line-height:1.65;color:#6b7280;font-weight:400}
+#settlement-price-builder .settlement-price-option>b{white-space:nowrap;font-size:15px;color:#111827}
+#settlement-price-builder .settlement-price-option>b small{font-size:10px;color:#6b7280;font-weight:500}
+#settlement-price-builder .settlement-hours{display:flex;align-items:center;gap:9px;margin-top:7px;font-size:11px;color:#6b7280}
+#settlement-price-builder .settlement-hours input{width:72px;border:1px solid #d1d5db;border-radius:8px;padding:5px 8px;font-size:12px;color:#111827;background:white}
+#settlement-quote-summary{border:1px solid #e5e7eb;border-radius:18px;padding:20px;margin:18px 0;background:#fafafa}
+@media(max-width:640px){#settlement-price-builder .settlement-price-option{gap:10px;padding:14px}#settlement-price-builder .settlement-price-option>b{font-size:13px}}
+
 @media(max-width:640px){#page-service-detail .service-detail-hero{min-height:430px;padding:54px 0;background-position:60% center}}
 </style>
 
@@ -638,6 +652,67 @@ We provide comprehensive settlement services for international students and glob
       <div class="detail-section-heading"><span>01 / SERVICE OVERVIEW</span><h2>What We Provide</h2><p>서비스 목적과 고객의 상황에 맞춰 필요한 지원 범위를 구체적으로 설계합니다.</p></div>
       <div id="service-detail-offerings" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8"></div>
     </div>
+
+    <section id="settlement-price-builder" class="hidden rounded-[28px] border border-neutral-200 bg-white p-6 sm:p-10 shadow-sm">
+      <div class="detail-section-heading">
+        <span>02 / BUILD YOUR SERVICE</span>
+        <h2>Select the Support You Need</h2>
+        <p>필요한 세부 서비스를 선택하면 안내 가격이 자동으로 계산됩니다. 최종 금액은 일정과 요청 범위를 확인한 후 IEUM이 확정합니다.</p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_.8fr] gap-8 mt-8">
+        <div class="space-y-3" id="settlement-price-options">
+          <label class="settlement-price-option">
+            <input type="checkbox" data-price-item="airport_meeting" data-price="39">
+            <span class="settlement-option-copy"><strong>Airport Meeting Service</strong><small>도착장에서 고객을 맞이하고 합의된 미팅 지점까지 안내 · 1회</small></span>
+            <b>$39 <small>/ session</small></b>
+          </label>
+          <label class="settlement-price-option">
+            <input type="checkbox" data-price-item="airport_transport" data-price="20">
+            <span class="settlement-option-copy"><strong>Airport Transfer Booking Coordination</strong><small>정식 운송업체 차량 예약 조율 · 차량 운임 별도</small></span>
+            <b>$20 <small>/ booking fee</small></b>
+          </label>
+          <label class="settlement-price-option">
+            <input type="checkbox" data-price-item="personal_escort" data-price="29">
+            <span class="settlement-option-copy"><strong>Personal Accompaniment</strong><small>생활 업무 및 예약 방문 1:1 동행 · 최소 2시간</small>
+              <span class="settlement-hours"><span>Hours</span><input type="number" min="2" max="24" step="1" value="2" id="settlement-escort-hours" aria-label="Personal accompaniment hours"></span>
+            </span>
+            <b>$29 <small>/ hour</small></b>
+          </label>
+          <label class="settlement-price-option">
+            <input type="checkbox" data-price-item="banking" data-price="49">
+            <span class="settlement-option-copy"><strong>Bank Account Opening Support</strong><small>은행·상품 정보, 준비서류 체크리스트, 방문 일정 조율 및 현장 언어 지원 · 1건</small></span>
+            <b>$49 <small>/ case</small></b>
+          </label>
+          <label class="settlement-price-option">
+            <input type="checkbox" data-price-item="housing_search" data-price="69">
+            <span class="settlement-option-copy"><strong>Housing Search Support</strong><small>요청 조건 확인 및 이용 가능한 매물 최대 3개 안내 · 1건</small></span>
+            <b>$69 <small>/ case</small></b>
+          </label>
+          <label class="settlement-price-option">
+            <input type="checkbox" data-price-item="property_visit" data-price="179">
+            <span class="settlement-option-copy"><strong>Real Estate Visit &amp; Contract Language Support</strong><small>부동산 방문 동행 1회 및 계약 주요 내용 언어 지원 · 최대 4시간</small></span>
+            <b>$179 <small>/ 4 hours</small></b>
+          </label>
+          <label class="settlement-price-option">
+            <input type="checkbox" data-price-item="sim_setup" data-price="25">
+            <span class="settlement-option-copy"><strong>SIM / eSIM Setup Support</strong><small>통신 요금제 비교 및 제휴 통신사 개통 절차 안내 · 요금제 비용 별도</small></span>
+            <b>$25 <small>/ case</small></b>
+          </label>
+        </div>
+        <aside class="rounded-3xl bg-neutral-950 text-white p-6 sm:p-8 h-fit">
+          <p class="text-xs font-mono tracking-[.2em] text-amber-300">YOUR ESTIMATE</p>
+          <p class="text-sm text-white/65 mt-3">Selected services</p>
+          <div id="settlement-selected-list" class="mt-3 space-y-2 text-sm text-white/85"><p class="text-white/50">No services selected yet.</p></div>
+          <div class="border-t border-white/15 mt-6 pt-5 flex items-end justify-between gap-3">
+            <span class="text-sm text-white/70">Estimated subtotal</span>
+            <strong id="settlement-estimate-total" class="text-3xl tracking-tight">$0.00</strong>
+          </div>
+          <p class="text-[11px] leading-relaxed text-white/55 mt-4">안내된 서비스 수수료 기준 예상액입니다. 차량 운임, SIM 요금제, 보증금, 정부 수수료 및 기타 제3자 비용은 포함되지 않습니다. VAT 포함 가격이며, 최종 서면 견적이 우선합니다.</p>
+          <button type="button" id="settlement-request-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Request Final Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
+        </aside>
+      </div>
+    </section>
+
     <div class="bg-neutral-950 text-white rounded-[28px] px-7 py-10 sm:px-12 sm:py-14">
       <div class="detail-section-heading dark"><span>02 / HOW IT WORKS</span><h2>Our Process</h2><p>상담부터 서비스 완료까지, 각 단계의 진행 상황을 안내합니다.</p></div>
       <div id="service-detail-process" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mt-10"></div>
@@ -890,12 +965,14 @@ We provide comprehensive settlement services for international students and glob
    });
  }
  document.querySelectorAll('#page-services .svc-open-hero').forEach(button => {
-   button.innerHTML = '<i class="fa-solid fa-paper-plane text-[10px]"></i><span>Check Quote</span>';
+   button.innerHTML = '<i class="fa-solid fa-arrow-right text-[10px]"></i><span>View Detail</span>';
    button.type = 'button';
    button.addEventListener('click', event => {
      event.preventDefault();
      event.stopPropagation();
-     navigateTo('contact');
+     const card = button.closest('.svc-card');
+     const key = ['consulting','settlement','concierge','education'].find(name => card && card.classList.contains(name));
+     if (key && typeof window.openIEUMServiceDetail === 'function') window.openIEUMServiceDetail(key);
    });
  });
 })();
@@ -1019,6 +1096,11 @@ We provide comprehensive settlement services for international students and glob
     const data = serviceDetails[key];
     if (!data) return;
     document.getElementById('service-detail-title').textContent = data.title;
+    const settlementBuilder = document.getElementById('settlement-price-builder');
+    if (settlementBuilder) {
+      settlementBuilder.classList.toggle('hidden', key !== 'settlement');
+      if (key === 'settlement') updateSettlementEstimate();
+    }
     document.getElementById('service-detail-intro').textContent = data.intro;
     document.getElementById('service-detail-offerings').innerHTML = data.offerings.map((item, i) =>
       `<article class="detail-offer-card"><span class="offer-no">SERVICE 0${i+1}</span><h3>${item[0]}</h3><p>${item[1]}</p></article>`
@@ -1032,6 +1114,72 @@ We provide comprehensive settlement services for international students and glob
     navigateTo('service-detail');
     history.replaceState({page:'service-detail', service:key}, '', '#service-' + key);
   };
+
+  const settlementLabels = {
+    airport_meeting: 'Airport Meeting Service',
+    airport_transport: 'Airport Transfer Booking Coordination',
+    personal_escort: 'Personal Accompaniment',
+    banking: 'Bank Account Opening Support',
+    housing_search: 'Housing Search Support',
+    property_visit: 'Real Estate Visit & Contract Language Support',
+    sim_setup: 'SIM / eSIM Setup Support'
+  };
+  function updateSettlementEstimate() {
+    const panel = document.getElementById('settlement-price-builder');
+    if (!panel) return;
+    const selected = [...panel.querySelectorAll('input[data-price-item]:checked')];
+    const hoursInput = document.getElementById('settlement-escort-hours');
+    if (hoursInput) hoursInput.value = Math.max(2, Math.min(24, parseInt(hoursInput.value || '2', 10)));
+    const hours = hoursInput ? Number(hoursInput.value) : 2;
+    let total = 0;
+    const lines = selected.map(input => {
+      const key = input.dataset.priceItem;
+      const amount = Number(input.dataset.price) * (key === 'personal_escort' ? hours : 1);
+      total += amount;
+      const unit = key === 'personal_escort' ? ` × ${hours}h` : '';
+      return `<div class="flex justify-between gap-3"><span>${settlementLabels[key]}${unit}</span><strong class="whitespace-nowrap">$${amount.toFixed(2)}</strong></div>`;
+    });
+    document.getElementById('settlement-selected-list').innerHTML = lines.length ? lines.join('') : '<p class="text-white/50">No services selected yet.</p>';
+    document.getElementById('settlement-estimate-total').textContent = `$${total.toFixed(2)}`;
+    document.getElementById('settlement-request-quote').disabled = selected.length === 0;
+    window.__ieumSettlementQuote = {
+      services: selected.map(input => ({key: input.dataset.priceItem, name: settlementLabels[input.dataset.priceItem],
+        quantity: input.dataset.priceItem === 'personal_escort' ? hours : 1,
+        amount: Number(input.dataset.price) * (input.dataset.priceItem === 'personal_escort' ? hours : 1)})),
+      subtotal: total,
+      currency: 'USD'
+    };
+  }
+  document.addEventListener('change', event => {
+    if (event.target.closest('#settlement-price-builder')) updateSettlementEstimate();
+  });
+  document.addEventListener('input', event => {
+    if (event.target.id === 'settlement-escort-hours') updateSettlementEstimate();
+  });
+  document.getElementById('settlement-request-quote')?.addEventListener('click', () => {
+    const quote = window.__ieumSettlementQuote;
+    if (!quote || !quote.services.length) return;
+    window.__ieumQuoteDraft = quote;
+    const contactPage = document.getElementById('page-contact');
+    if (contactPage) {
+      let summary = document.getElementById('settlement-quote-summary');
+      if (!summary) {
+        summary = document.createElement('div');
+        summary.id = 'settlement-quote-summary';
+        summary.className = 'max-w-4xl mx-auto';
+        contactPage.querySelector('.max-w-7xl')?.prepend(summary);
+      }
+      summary.innerHTML = `<p class="text-xs font-mono tracking-widest text-amber-700">YOUR SELECTED SERVICES</p>
+        <h3 class="text-xl font-bold mt-2">Settlement &amp; Housing Quote Request</h3>
+        <div class="mt-4 space-y-2 text-sm">${quote.services.map(item => `<div class="flex justify-between gap-4"><span>${item.name}${item.key === 'personal_escort' ? ` (${item.quantity} hours)` : ''}</span><strong>$${item.amount.toFixed(2)}</strong></div>`).join('')}</div>
+        <div class="border-t border-neutral-200 mt-4 pt-4 flex justify-between font-bold"><span>Estimated subtotal</span><span>$${quote.subtotal.toFixed(2)} USD</span></div>
+        <p class="text-xs text-neutral-500 mt-3">Final pricing and availability will be confirmed by IEUM. Third-party expenses may be additional.</p>`;
+    }
+    navigateTo('contact');
+    document.getElementById('settlement-quote-summary')?.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  window.openIEUMServiceDetail = openDetail;
 
   document.querySelectorAll('#page-services #svc-grid .svc-card[data-hero]:not(.overview)').forEach(card => {
     card.setAttribute('role', 'link');
