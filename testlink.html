@@ -605,7 +605,37 @@
 @media(max-width:640px){#page-service-detail .service-detail-hero{min-height:430px;padding:54px 0;background-position:60% center}}
 </style>
 
-</head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-about" onclick="navigateTo('about')">About</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-services" onclick="navigateTo('services')">Business Area</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-global" onclick="navigateTo('global')">Global Network</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-contact" onclick="navigateTo('contact')">Q&amp;A</button></nav><div class="flex items-center space-x-3 sm:space-x-4"><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('about'); closeMobileMenu();">About</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('services'); closeMobileMenu();">Services</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('global'); closeMobileMenu();">Global Network</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white" onclick="navigateTo('contact'); closeMobileMenu();">Contact</button></div></header><main class="flex-grow"><section class="page-view active" id="page-home"><div class="home-hero text-center px-4"><div class="max-w-4xl mx-auto space-y-6"><span class="inline-block px-4 py-1.5 rounded-full border border-neutral-300 bg-white text-xs font-mono tracking-widest text-neutral-800">
+
+<style id="business-area-header-dropdown-styles">
+.nav-dropdown{position:relative;display:flex;align-items:center;height:100%}
+.nav-dropdown-menu{position:absolute;top:calc(100% - 1px);left:50%;z-index:100;min-width:270px;padding:9px;transform:translate(-50%,10px);border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(13,17,23,.97);box-shadow:0 18px 45px rgba(0,0,0,.28);backdrop-filter:blur(16px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
+.nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu,.nav-dropdown.is-open .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
+.nav-dropdown-menu:before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}
+.nav-dropdown-menu button{display:flex;width:100%;flex-direction:column;align-items:flex-start;gap:4px;padding:12px 13px;border-radius:9px;text-align:left;color:#f9fafb;transition:background .18s ease}
+.nav-dropdown-menu button:hover,.nav-dropdown-menu button:focus-visible{background:rgba(255,255,255,.1);outline:none}
+.nav-dropdown-menu button span{font-size:12px;font-weight:700;letter-spacing:.01em}
+.nav-dropdown-menu button small{font-size:10px;color:#9ca3af;font-weight:400}
+.nav-dropdown:hover #nav-services i,.nav-dropdown:focus-within #nav-services i,.nav-dropdown.is-open #nav-services i{transform:rotate(180deg)}
+.mobile-service-link{display:flex;align-items:center;justify-content:space-between;padding:9px 8px;color:#a3a3a3;font-size:12px;text-align:left}
+.mobile-service-link:hover{color:#fff}
+.mobile-service-link i{font-size:9px;color:#737373}
+@media(max-width:767px){.nav-dropdown-menu{display:none}}
+@media(prefers-reduced-motion:reduce){.nav-dropdown-menu,.nav-dropdown-menu button{transition:none}}
+</style>
+</head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-about" onclick="navigateTo('about')">About</button><div class="nav-dropdown relative" id="business-area-dropdown">
+<button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none inline-flex items-center gap-2" id="nav-services" type="button" aria-haspopup="true" aria-expanded="false" onclick="navigateTo('services')">Business Area <i class="fa-solid fa-chevron-down text-[9px] transition-transform" aria-hidden="true"></i></button>
+<div class="nav-dropdown-menu" role="menu" aria-label="Business Area services">
+<button type="button" role="menuitem" onclick="openIEUMServiceDetail('consulting')"><span>Consulting Service</span><small>Business &amp; university consulting</small></button>
+<button type="button" role="menuitem" onclick="openIEUMServiceDetail('settlement')"><span>Settlement &amp; Housing</span><small>Housing and daily-life support</small></button>
+<button type="button" role="menuitem" onclick="openIEUMServiceDetail('concierge')"><span>Concierge Service</span><small>Personal assistance in Korea</small></button>
+<button type="button" role="menuitem" onclick="openIEUMServiceDetail('education')"><span>Education &amp; Translation</span><small>Language learning and translation</small></button>
+</div></div><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-global" onclick="navigateTo('global')">Global Network</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-contact" onclick="navigateTo('contact')">Q&amp;A</button></nav><div class="flex items-center space-x-3 sm:space-x-4"><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('about'); closeMobileMenu();">About</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('services'); closeMobileMenu();">Business Area</button>
+<div class="grid grid-cols-1 gap-1 border-b border-neutral-800 pb-3 pl-4">
+<button class="mobile-service-link" onclick="openIEUMServiceDetail('consulting'); closeMobileMenu();">Consulting Service <i class="fa-solid fa-arrow-right"></i></button>
+<button class="mobile-service-link" onclick="openIEUMServiceDetail('settlement'); closeMobileMenu();">Settlement &amp; Housing <i class="fa-solid fa-arrow-right"></i></button>
+<button class="mobile-service-link" onclick="openIEUMServiceDetail('concierge'); closeMobileMenu();">Concierge Service <i class="fa-solid fa-arrow-right"></i></button>
+<button class="mobile-service-link" onclick="openIEUMServiceDetail('education'); closeMobileMenu();">Education &amp; Translation <i class="fa-solid fa-arrow-right"></i></button>
+</div><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('global'); closeMobileMenu();">Global Network</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white" onclick="navigateTo('contact'); closeMobileMenu();">Contact</button></div></header><main class="flex-grow"><section class="page-view active" id="page-home"><div class="home-hero text-center px-4"><div class="max-w-4xl mx-auto space-y-6"><span class="inline-block px-4 py-1.5 rounded-full border border-neutral-300 bg-white text-xs font-mono tracking-widest text-neutral-800">
  Global Bridge For a Better Tomorrow
  </span><h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-black leading-tight tracking-tight">
  IEUM
@@ -932,6 +962,32 @@ We provide comprehensive settlement services for international students and glob
 
  function closeMobileMenu() {
  mobileMenu.classList.add('hidden');
+ }
+
+ // Business Area submenu is available on hover, keyboard focus, and touch/click.
+ const businessAreaDropdown = document.getElementById('business-area-dropdown');
+ const businessAreaTrigger = document.getElementById('nav-services');
+ if (businessAreaDropdown && businessAreaTrigger) {
+   businessAreaTrigger.addEventListener('click', event => {
+     if (window.matchMedia('(hover: none)').matches) {
+       event.preventDefault();
+       const opened = businessAreaDropdown.classList.toggle('is-open');
+       businessAreaTrigger.setAttribute('aria-expanded', String(opened));
+     }
+   });
+   document.addEventListener('click', event => {
+     if (!businessAreaDropdown.contains(event.target)) {
+       businessAreaDropdown.classList.remove('is-open');
+       businessAreaTrigger.setAttribute('aria-expanded', 'false');
+     }
+   });
+   document.addEventListener('keydown', event => {
+     if (event.key === 'Escape') {
+       businessAreaDropdown.classList.remove('is-open');
+       businessAreaTrigger.setAttribute('aria-expanded', 'false');
+       businessAreaTrigger.focus();
+     }
+   });
  }
 
  function filterServiceCategory(category, scroll) {
