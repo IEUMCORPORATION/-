@@ -1259,7 +1259,7 @@ We provide comprehensive settlement services for international students and glob
     title.textContent=areaCount ? (areaCount===1 ? bundle.areas[0][1].title || quoteAreaNames[bundle.areas[0][0]] : `${areaCount} Service Areas Selected`) : 'Select a service to begin';
     count.textContent=`${bundle.services.length} ITEM${bundle.services.length===1?'':'S'}`;
     lines.innerHTML=bundle.services.length ? bundle.areas.map(([key, quote]) => {
-      const areaItems=quote.services.map(item=>`<div class="flex justify-between gap-4 border-b border-dashed border-neutral-100 pb-3"><span class="min-w-0">${item.name}${Number(item.quantity)>1?` <span class="text-neutral-400">× ${item.quantity}</span>`:''}</span><strong class="shrink-0 text-neutral-900">$${Number(item.amount).toFixed(2)}</strong></div>`).join('');
+      const areaItems=quote.services.map(item=>`<div class="flex items-start justify-between gap-3 border-b border-dashed border-neutral-100 pb-3"><div class="min-w-0"><p>${item.name}${Number(item.quantity)>1?` <span class="text-neutral-400">× ${item.quantity}</span>`:''}</p></div><div class="flex shrink-0 items-center gap-3"><strong class="text-neutral-900">$${Number(item.amount).toFixed(2)}</strong><button type="button" class="remove-quote-item inline-flex h-7 w-7 items-center justify-center rounded-full border border-neutral-200 text-neutral-400 transition hover:border-red-300 hover:bg-red-50 hover:text-red-600" data-area-key="${key}" data-item-key="${item.key}" aria-label="Remove ${item.name}" title="Remove item"><i class="fa-solid fa-xmark text-xs" aria-hidden="true"></i></button></div></div>`).join('');
       return `<div class="pt-2 first:pt-0"><p class="mb-3 text-[10px] font-bold uppercase tracking-[.16em] text-neutral-400">${quoteAreaNames[key] || key}</p><div class="space-y-3">${areaItems}</div></div>`;
     }).join('') : '<p class="text-neutral-400">Choose services in any category, then select Save Quote. Your saved selections will appear here together.</p>';
     total.textContent=bundle.services.length?`$${bundle.subtotal.toFixed(2)} USD`:'$0.00 USD';
@@ -1267,6 +1267,33 @@ We provide comprehensive settlement services for international students and glob
     proceed.disabled=!bundle.services.length;
     window.__ieumFindQuoteType='saved';
   }
+  // Remove an individual saved service and recalculate the combined estimate.
+  document.getElementById('find-quote-lines')?.addEventListener('click', event => {
+    const button = event.target.closest('.remove-quote-item');
+    if (!button) return;
+    const areaKey = button.dataset.areaKey;
+    const itemKey = button.dataset.itemKey;
+    const quote = window.__ieumSavedQuotes[areaKey];
+    if (!quote) return;
+    quote.services = quote.services.filter(item => String(item.key) !== String(itemKey));
+    if (!quote.services.length) delete window.__ieumSavedQuotes[areaKey];
+    else quote.subtotal = quote.services.reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+    // Keep the currently open service builder in sync with the saved quote.
+    if (window.__ieumCurrentServiceKey === areaKey) {
+      const selector = areaKey === 'settlement'
+        ? `#settlement-price-builder input[data-price-item="${CSS.escape(itemKey)}"]`
+        : `#custom-service-options input[data-custom-item="${CSS.escape(itemKey)}"]`;
+      const sourceInput = document.querySelector(selector);
+      if (sourceInput) {
+        sourceInput.checked = false;
+        if (areaKey === 'settlement') updateSettlementEstimate();
+        else updateCustomEstimate();
+      }
+    }
+    renderSavedFindYourQuote();
+  });
+
   function saveCurrentQuote(areaKey, quote) {
     if(!quote || !quote.services || !quote.services.length) return;
     window.__ieumSavedQuotes[areaKey] = {
