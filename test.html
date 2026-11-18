@@ -90,60 +90,6 @@
  #ieum-network-lines .pin-th { fill:#34d399; } #ieum-network-lines .pin-bd { fill:#fb923c; } #ieum-network-lines .pin-id { fill:#f472b6; }
 
 
- /* Home partner logo marquee: horizontal continuous motion */
- .partner-marquee {
- width:100%;
- overflow:hidden;
- -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
- mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
- }
- .partner-track {
- display:flex;
- flex-flow:row nowrap;
- align-items:center;
- width:max-content;
- gap:24px;
- padding:4px 12px;
- animation:partner-scroll 40s linear infinite;
- will-change:transform;
- }
- .partner-marquee:hover .partner-track { animation-play-state:paused; }
- .partner-logo {
- box-sizing:border-box;
- flex:0 0 240px;
- width:240px;
- height:120px;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:16px 20px;
- background:#fff;
- border:1px solid #E5E5E7;
- border-radius:16px;
- }
- .partner-logo img {
- display:block;
- width:100%;
- height:100%;
- max-width:100%;
- max-height:100%;
- object-fit:contain;
- user-select:none;
- }
- @keyframes partner-scroll {
- from { transform:translateX(0); }
- to { transform:translateX(calc(-50% - 12px)); }
- }
- @media (max-width:640px) {
- .partner-track { gap:16px; }
- .partner-logo { flex-basis:220px; width:220px; height:110px; }
- }
- @media (prefers-reduced-motion: reduce) {
- .partner-marquee { overflow-x:auto; -webkit-mask-image:none; mask-image:none; }
- .partner-track { animation:none; }
- }
-
-
  /* Our Services title: supplied image banner */
   #page-services .services-title-hero {
     position:relative; isolation:isolate; overflow:hidden;
@@ -238,7 +184,7 @@
  .svc-hero.open { display:block; }
  .svc-hero.show { opacity:1; }
  .svc-hero .svc-scene { position:absolute; inset:0; width:100%; height:100%; display:none; }
- .svc-hero .svc-scene img { width:100%; height:100%; object-fit:cover; display:block; }
+ .svc-hero .svc-scene img { width:100%; height:100%; object-fit:contain; object-position:center center; display:block; }
  .svc-hero .svc-scene.on { display:block; }
  .svc-hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(3,5,10,.86) 0%,rgba(3,5,10,.58) 42%,rgba(3,5,10,.08) 78%), linear-gradient(0deg,rgba(3,5,10,.9) 0%,rgba(3,5,10,0) 34%); }
  .svc-hero-body { box-sizing:border-box; position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:max(20px,env(safe-area-inset-top)) clamp(20px,5vw,72px) max(24px,env(safe-area-inset-bottom)); }
@@ -613,8 +559,29 @@
   .faq-question[aria-expanded="true"] .faq-icon{transform:rotate(45deg)}
   .faq-answer{padding:0 2rem 1.25rem 0;color:#666;font-size:.875rem;line-height:1.8}
   .faq-answer p{max-width:58rem}
-</style></head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-about" onclick="navigateTo('about')">About</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-services" onclick="navigateTo('services')">Business Area</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-global" onclick="navigateTo('global')">Global Network</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-contact" onclick="navigateTo('contact')">Q&amp;A</button></nav><div class="flex items-center space-x-3 sm:space-x-4"><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('about'); closeMobileMenu();">About</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('services'); closeMobileMenu();">Services</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('global'); closeMobileMenu();">Global Network</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white" onclick="navigateTo('contact'); closeMobileMenu();">Contact</button></div></header><main class="flex-grow"><section class="page-view active" id="page-home"><div class="home-hero text-center px-4"><div class="max-w-4xl mx-auto space-y-6"><span class="inline-block px-4 py-1.5 rounded-full border border-neutral-300 bg-white text-xs font-mono tracking-widest text-neutral-800">
- Global Business Group
+</style>
+<style>
+#page-service-detail .service-detail-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:460px;padding:76px 0;background:linear-gradient(90deg,rgba(4,8,16,.9),rgba(4,8,16,.55)),linear-gradient(0deg,rgba(4,8,16,.25),rgba(4,8,16,.1)),url("https://github.com/user-attachments/assets/fbe093ee-dcfc-42ad-80d7-f876ad69cb67") center/cover no-repeat;background-color:#080d18}
+#page-service-detail .service-back-link{display:inline-flex;align-items:center;gap:10px;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:11px 17px;font-size:12px;font-weight:700;background:rgba(0,0,0,.18);transition:.2s}
+#page-service-detail .service-back-link:hover{background:#fff;color:#111}
+.detail-section-heading span{font:700 10px/1.2 Inter,sans-serif;letter-spacing:.2em;color:#a77d3e}
+.detail-section-heading h2{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:850;letter-spacing:-.04em;color:#101827;margin-top:12px}
+.detail-section-heading p{font-size:14px;line-height:1.8;color:#697386;margin-top:12px}
+.detail-section-heading.dark h2{color:#fff}.detail-section-heading.dark p{color:#cbd5e1}
+.detail-offer-card{border:1px solid #e5e7eb;border-radius:20px;padding:27px;background:#fff;min-height:190px}
+.detail-offer-card .offer-no{font:700 11px Inter,sans-serif;letter-spacing:.15em;color:#a77d3e}
+.detail-offer-card h3{font-size:18px;font-weight:800;color:#111827;margin-top:15px}
+.detail-offer-card p{font-size:13px;line-height:1.85;color:#647084;margin-top:10px}
+.detail-process-step .step-no{display:flex;width:38px;height:38px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.35);border-radius:50%;font:700 12px Inter,sans-serif;color:#e6c58f}
+.detail-process-step h3{font-size:15px;font-weight:800;color:#fff;margin-top:17px}
+.detail-process-step p{font-size:12px;line-height:1.8;color:#cbd5e1;margin-top:8px}
+#service-detail-scope li{display:flex;gap:13px;align-items:flex-start;font-size:13px;line-height:1.8;color:#4b5563}
+#service-detail-scope i{color:#a77d3e;margin-top:4px}
+@media(max-width:640px){#page-service-detail .service-detail-hero{min-height:430px;padding:54px 0;background-position:60% center}}
+</style>
+
+</head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-about" onclick="navigateTo('about')">About</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-services" onclick="navigateTo('services')">Business Area</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-global" onclick="navigateTo('global')">Global Network</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-contact" onclick="navigateTo('contact')">Q&amp;A</button></nav><div class="flex items-center space-x-3 sm:space-x-4"><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('about'); closeMobileMenu();">About</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('services'); closeMobileMenu();">Services</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('global'); closeMobileMenu();">Global Network</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white" onclick="navigateTo('contact'); closeMobileMenu();">Contact</button></div></header><main class="flex-grow"><section class="page-view active" id="page-home"><div class="home-hero text-center px-4"><div class="max-w-4xl mx-auto space-y-6"><span class="inline-block px-4 py-1.5 rounded-full border border-neutral-300 bg-white text-xs font-mono tracking-widest text-neutral-800">
+ Global Bridge For a Better Tomorrow
  </span><h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-black leading-tight tracking-tight">
  IEUM
  </h1><p class="max-w-2xl mx-auto text-neutral-600 text-sm sm:text-base leading-relaxed font-light">
@@ -628,8 +595,8 @@
  </p></div><button class="inline-flex items-center text-xs font-bold text-black hover:underline pt-4 border-t border-neutral-100" onclick="navigateTo('about')"><span>View Detail</span><i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i></button></div><div class="light-card p-8 rounded-2xl flex flex-col justify-between space-y-6 border-black/20"><div class="space-y-4"><div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center"><i class="fa-solid fa-crown text-sm"></i></div><h3 class="text-xl font-bold text-black">Our Business</h3><p class="text-xs text-neutral-500 leading-relaxed">
  We provide consulting services, settlement and housing advice, concierge, and education and translation services.
  </p></div><button class="inline-flex items-center text-xs font-bold text-black hover:underline pt-4 border-t border-neutral-100" onclick="navigateTo('services')"><span>View Detail</span><i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i></button></div><div class="light-card p-8 rounded-2xl flex flex-col justify-between space-y-6"><div class="space-y-4"><div class="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center text-black"><i class="fa-solid fa-globe text-sm"></i></div><h3 class="text-xl font-bold text-black">Global Network</h3><p class="text-xs text-neutral-500 leading-relaxed">
- We have established a partner network in Bangladesh, Hong Kong, and Indonesia, including our headquarter in Seoul, South Korea.
- </p></div><button class="inline-flex items-center text-xs font-bold text-black hover:underline pt-4 border-t border-neutral-100" onclick="navigateTo('global')"><span>View Detail</span><i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i></button></div></div></div><div class="bg-white border-t border-brand-border py-20" id="home-partners"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 mb-12"><h2 class="text-2xl sm:text-3xl font-extrabold text-black">Our Partners</h2><p class="text-sm text-neutral-600 font-light max-w-xl mx-auto">We collaborate with local partners overseas, centered in our Seoul headquarters.</p></div><div aria-label="파트너사 로고" class="partner-marquee" role="region"><div class="partner-track" id="partner-track"><div class="partner-logo"><img alt="NexRoute" src="https://github.com/user-attachments/assets/35bee86e-9365-4d1e-908a-5875bf6ce85e"/></div><div class="partner-logo"><img alt="globaledu" src="https://github.com/user-attachments/assets/11743a37-37cc-49b8-a2cd-8ec9c4cad4f7"/></div></div></div></div></section><section class="page-view" id="page-about"><div class="about-title-hero text-white py-16 px-4"><div class="max-w-7xl mx-auto space-y-2 relative z-10"><span class="text-xs font-mono text-white/80 uppercase tracking-widest">ABOUT IEUM</span><h1 class="text-3xl sm:text-4xl font-extrabold text-white">Introduction</h1></div></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-20"><div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"><div class="lg:col-span-7 space-y-6"><span class="text-xs font-mono uppercase text-neutral-400 tracking-widest">CEO MESSAGE</span><h2 class="text-2xl sm:text-3xl font-extrabold text-black leading-tight">
+ We have established a partner network in Bangladesh, Thailand including our headquarter in Seoul, South Korea.
+ </p></div><button class="inline-flex items-center text-xs font-bold text-black hover:underline pt-4 border-t border-neutral-100" onclick="navigateTo('global')"><span>View Detail</span><i class="fa-solid fa-arrow-right ml-2 text-[10px]"></i></button></div></div></div></section><section class="page-view" id="page-about"><div class="about-title-hero text-white py-16 px-4"><div class="max-w-7xl mx-auto space-y-2 relative z-10"><span class="text-xs font-mono text-white/80 uppercase tracking-widest">ABOUT IEUM</span><h1 class="text-3xl sm:text-4xl font-extrabold text-white">Introduction</h1></div></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-20"><div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"><div class="lg:col-span-7 space-y-6"><span class="text-xs font-mono uppercase text-neutral-400 tracking-widest">CEO MESSAGE</span><h2 class="text-2xl sm:text-3xl font-extrabold text-black leading-tight">
  "We will be a reliable bridge for your new beginning."
  </h2><div class="space-y-4 text-xs sm:text-sm text-neutral-600 leading-relaxed font-light"><p>
  Settling in a new country with a different language and culture, and starting a study or business, is a challenging task for anyone.
@@ -641,12 +608,12 @@
  Consulting, Settlement &amp; Housing, Concierge, Education &amp; Translation. We connect your Seoul headquarters with our overseas partner network to provide support from before entry through to settlement.
  </p><button class="svc-open-hero" data-hero="all" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Apply for consultant</span></button></div></div><div class="svc-card consulting light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6" data-hero="consulting"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="consulting" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Consulting Service</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
  We provide comprehensive solutions, including advisory services for global enterprises expanding into Korea, as well as partnership building and admissions processing for overseas agencies and language academies.
- </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>B2B Global Expansion Consulting:</strong> 현지 유학원 및 어학원 파트너십 체결 지원</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Korean School Admissions Consulting:</strong> Customized undergraduate and graduate admissions guidance for international students</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Visa &amp; Administrative Legal Support:</strong> Service support provided through our network of partnered administrative attorneys, labor attorneys, and lawyers</span></li></ul></div></div><button class="svc-open-hero" data-hero="consulting" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Apply for consultant</span></button></div><div class="svc-card settlement light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6" data-hero="settlement"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="settlement" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Settlement &amp; Housing</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+ </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>B2B Global Expansion Consulting:</strong> Supporting strategic B2B partnerships with local agencies, educational institutions, and global corporate partners.</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Korean School Admissions Consulting:</strong> Customized undergraduate and graduate admissions guidance for international students</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Visa &amp; Administrative Legal Support:</strong> Service support provided through our network of partnered administrative attorneys, labor attorneys, and lawyers</span></li></ul></div></div><button class="svc-open-hero" data-hero="consulting" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Apply for consultant</span></button></div><div class="svc-card settlement light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6" data-hero="settlement"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="settlement" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Settlement &amp; Housing</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
 We provide comprehensive settlement services for international students and global employees, including short- and long-term housing search, SIM card and bank account setup, airport greeting and pickup, and orientation programs.
  </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Personal Housing Search</strong> Sourcing Verified Short/Long-Term Rentals, Studios & Serviced Apartments</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Telecom & Bank Account Setup:</strong> Foreigner SIM card activation and domestic bank account opening guidance</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Airport Meeting/Pick-up &amp; Life Orientation:</strong> Dedicated Incheon Airport meeting/pick-up and essential settlement support</span></li></ul></div></div><button class="svc-open-hero" data-hero="settlement" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Apply for consultant</span></button></div><div class="svc-card concierge light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6 border-black/30 shadow-md" data-hero="concierge"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="concierge" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Concierge Service</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
- 전용 디지털 컨시어지 플랫폼을 기반으로 품격 높은 라이프스타일 큐레이션, 24시간 실시간 통역 및 맞춤 의전을 제공합니다.
+ From personalized interpretation to refined lifestyle curation, we deliver bespoke concierge services tailored exclusively for you.
  </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Concierge Care:</strong> Instant assistance via dedicated mobile desk</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Lifestyle Curation:</strong> Private reservations and dining curation, etc.</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Live Interpretation Care:</strong> 1-on-1 dedicated real-time emergency interpretation, including medical accompaniment</span></li></ul></div></div><button class="svc-open-hero" data-hero="concierge" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Apply for consultant</span></button></div><div class="svc-card education light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6" data-hero="education"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="education" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Education &amp; Translation</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
- 태국, 방글라데시, 홍콩, 인도네시아, 일본 등 아시아 해외 네트워크 연계 TOPIK 어학원 및 대학 진학 입시반을 운영합니다.
+ Leveraging our extensive network across Asia, we provide a full range of services—from TOPIK preparation and university admissions programs to high-quality professional translation.
  </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Asia Overseas Network Partnership:</strong> Recruiting prospective students through partner institutions and matching with local language academies</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>TOPIK Language Center &amp; University Prep.:</strong> Targeted TOPIK level attainment and domestic university admission curriculum</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Global Talent Development:</strong> Industry-academic language internship matching program</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Professional Translation Services:</strong> Providing specialized and high-quality translation services</span></li></ul></div></div><button class="svc-open-hero" data-hero="education" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Apply for consultant</span></button></div></div>
 <div class="mt-16 rounded-3xl bg-neutral-100 border border-neutral-200 px-6 py-12 sm:px-12 sm:py-14 text-center">
  <span class="text-xs font-mono uppercase tracking-[0.2em] text-neutral-500">CONTACT IEUM</span>
@@ -655,18 +622,53 @@ We provide comprehensive settlement services for international students and glob
  <button class="mt-7 inline-flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-black text-white text-sm font-bold hover:bg-neutral-800 transition shadow-lg" onclick="navigateTo('contact')">
   Request a Consultation <i class="fa-solid fa-arrow-right text-xs"></i>
  </button>
-</div></div></section><section class="page-view" id="page-global"><div class="global-title-hero text-white py-16 px-4"><div class="max-w-7xl mx-auto space-y-2 relative z-10"><span class="text-xs font-mono text-white/80 uppercase tracking-widest">GLOBAL HUBS &amp; PARTNERS</span><h1 class="text-3xl sm:text-4xl font-extrabold text-white">Global Network</h1></div></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16"><div class="space-y-6"><div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2"><div><span class="text-xs font-mono uppercase text-amber-600 font-bold tracking-wider">GLOBAL NETWORK · HQ CONNECTIONS</span><h2 class="text-2xl font-bold text-black">Global Partner Country Network Map</h2><p class="text-sm text-neutral-500 mt-2">Displays an embedded world map image and partner hubs by country. </p></div><div class="text-xs font-mono text-neutral-700 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full font-bold">
- SEOUL + 4 Countries Partners
+</div></div></section>
+<section class="page-view" id="page-service-detail">
+  <div class="service-detail-hero" id="service-detail-hero">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <button type="button" onclick="navigateTo('services')" class="service-back-link"><i class="fa-solid fa-arrow-left"></i><span>Back to Our Services</span></button>
+      <p class="text-xs font-mono tracking-[.22em] text-amber-300 mt-10" id="service-detail-kicker">IEUM / OUR SERVICES</p>
+      <h1 class="text-4xl sm:text-6xl font-black text-white mt-4 max-w-3xl" id="service-detail-title"></h1>
+      <p class="text-sm sm:text-lg leading-relaxed text-white/80 mt-6 max-w-2xl" id="service-detail-intro"></p>
+      <button type="button" onclick="navigateTo('contact')" class="mt-8 inline-flex items-center gap-3 rounded-full bg-white text-black px-7 py-4 text-sm font-bold hover:bg-amber-300 transition">Request a Consultation <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 space-y-20">
+    <div>
+      <div class="detail-section-heading"><span>01 / SERVICE OVERVIEW</span><h2>What We Provide</h2><p>서비스 목적과 고객의 상황에 맞춰 필요한 지원 범위를 구체적으로 설계합니다.</p></div>
+      <div id="service-detail-offerings" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8"></div>
+    </div>
+    <div class="bg-neutral-950 text-white rounded-[28px] px-7 py-10 sm:px-12 sm:py-14">
+      <div class="detail-section-heading dark"><span>02 / HOW IT WORKS</span><h2>Our Process</h2><p>상담부터 서비스 완료까지, 각 단계의 진행 상황을 안내합니다.</p></div>
+      <div id="service-detail-process" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mt-10"></div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <div>
+        <div class="detail-section-heading"><span>03 / SERVICE SCOPE</span><h2>Support Designed Around You</h2></div>
+        <ul id="service-detail-scope" class="mt-7 space-y-4"></ul>
+      </div>
+      <div class="rounded-3xl border border-neutral-200 bg-neutral-50 p-8 sm:p-10">
+        <p class="text-xs font-mono tracking-[.2em] text-amber-700">LET'S CONNECT</p>
+        <h2 class="text-2xl sm:text-3xl font-extrabold mt-3">Let's discuss your needs.</h2>
+        <p class="text-sm text-neutral-600 leading-relaxed mt-4">서비스 범위와 일정은 고객의 목적, 상황, 요청 사항을 확인한 뒤 개별적으로 안내해 드립니다.</p>
+        <button type="button" onclick="navigateTo('contact')" class="mt-7 rounded-full bg-black text-white px-7 py-4 text-sm font-bold hover:bg-neutral-800 transition">Apply for Consultation <i class="fa-solid fa-arrow-right ml-2"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-view" id="page-global"><div class="global-title-hero text-white py-16 px-4"><div class="max-w-7xl mx-auto space-y-2 relative z-10"><span class="text-xs font-mono text-white/80 uppercase tracking-widest">GLOBAL HUBS &amp; PARTNERS</span><h1 class="text-3xl sm:text-4xl font-extrabold text-white">Global Network</h1></div></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16"><div class="space-y-6"><div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2"><div><span class="text-xs font-mono uppercase text-amber-600 font-bold tracking-wider">GLOBAL NETWORK · HQ CONNECTIONS</span><h2 class="text-2xl font-bold text-black">Global Partner Country Network Map</h2><p class="text-sm text-neutral-500 mt-2">Displays an embedded world map image and partner hubs by country. </p></div><div class="text-xs font-mono text-neutral-700 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full font-bold">
+ + 4 Partners
  </div></div><div class="ieum-atlas"><div class="ieum-atlas-scroll"><div class="ieum-atlas-stage"><img alt="IEUM 글로벌 네트워크 세계지도 (Korea, Bangladesh, Thailand)" class="ieum-atlas-img" src="https://github.com/user-attachments/assets/33df62f4-578a-4067-8656-a0f2e00cfc67"/><span class="ieum-atlas-tint" aria-hidden="true"></span><span class="ieum-hub" aria-hidden="true" style="left:40.9%;top:45.22%;--d:0s"></span><span class="ieum-hub" aria-hidden="true" style="left:31.44%;top:50.66%;--d:1.2s"></span><span class="ieum-hub" aria-hidden="true" style="left:34.97%;top:55.92%;--d:2.4s"></span></div></div></div></div>
  
 
  <div class="space-y-6"><h3 class="text-xl font-bold text-black">Partner Information</h3><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
- <div class="light-card p-8 rounded-2xl space-y-4 border-black shadow-md bg-neutral-50"><div class="flex items-center justify-between"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Korea</h3><p class="text-[11px] font-mono text-neutral-500">Seoul</p></div></div><span class="px-2.5 py-1 text-[10px] font-bold bg-black text-white rounded-full">HQ HUB</span></div><div class="border-t border-neutral-200 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-white border border-neutral-300 text-xs font-semibold text-black rounded-lg">IEUM HQ &amp; Partner Network</span></div></div></div>
+ <div class="light-card p-8 rounded-2xl space-y-4 border-black shadow-md bg-neutral-50"><div class="flex items-center justify-between"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Korea</h3><p class="text-[11px] font-mono text-neutral-500">Seoul</p></div></div><span class="px-2.5 py-1 text-[10px] font-bold bg-black text-white rounded-full">HQ HUB</span></div><div class="border-t border-neutral-200 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-white border border-neutral-300 text-xs font-semibold text-black rounded-lg">IEUM HQ</span><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">NEXROUTE</span></div></div></div>
  <div class="light-card p-8 rounded-2xl space-y-4"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Bangladesh</h3><p class="text-[11px] font-mono text-neutral-400">Dhaka Hub</p></div></div><div class="border-t border-neutral-100 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">Elite Global Study</span><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">Pioneer Education</span><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">BAPO</span></div></div></div>
- <div class="light-card p-8 rounded-2xl space-y-4"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Hong Kong</h3><p class="text-[11px] font-mono text-neutral-400">Central Hub</p></div></div><div class="border-t border-neutral-100 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">GAJA KOREA</span></div></div></div>
- <div class="light-card p-8 rounded-2xl space-y-4"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Thailand</h3><p class="text-[11px] font-mono text-neutral-400">Bangkok Hub</p></div></div><div class="border-t border-neutral-100 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">Luxematters</span></div></div></div></div></div></div></section><section class="page-view" id="page-contact">
+ <div class="light-card p-8 rounded-2xl space-y-4"><div class="flex items-center space-x-3"><div><h3 class="font-bold text-black text-base">Thailand</h3><p class="text-[11px] font-mono text-neutral-400">Bangkok Hub</p></div></div><div class="border-t border-neutral-100 pt-3 space-y-2"><p class="text-[11px] font-mono uppercase text-neutral-400 font-bold">Official Partners</p><div class="flex flex-wrap gap-1.5"><span class="px-2.5 py-1 bg-neutral-100 text-xs font-semibold text-neutral-800 rounded-lg">Under review</span></div></div></div></div></div></div></section><section class="page-view" id="page-contact">
 
-   
+
+
    <div class="contact-title-hero text-white py-16 px-4">
   <div class="max-w-7xl mx-auto space-y-2 relative z-10">
     <span class="text-xs font-mono text-white/80 uppercase tracking-widest">GET IN TOUCH</span>
@@ -675,6 +677,30 @@ We provide comprehensive settlement services for international students and glob
 </div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
   <div class="max-w-4xl mx-auto space-y-14">
+    <section class="w-full bg-white p-8 sm:p-12 rounded-3xl border border-neutral-200 shadow-xl space-y-8" aria-labelledby="inquiry-heading">
+      <div class="space-y-3">
+        <p class="text-xs font-mono tracking-widest text-neutral-500 uppercase">Contact IEUM</p>
+        <h3 class="text-xl sm:text-2xl font-bold text-black" id="inquiry-heading">Get in Touch</h3>
+        <p class="text-sm text-neutral-500 leading-relaxed">For service inquiries and partnership opportunities, please contact us using the information provided below.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <a href="mailto:ieumcorporation@gmail.com" class="group flex items-center gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 sm:p-6 hover:border-black hover:bg-white transition">
+          <span class="w-12 h-12 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-lg"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
+          <span class="min-w-0">
+            <span class="block text-[11px] font-mono uppercase tracking-widest text-neutral-400 mb-1">E-mail</span>
+            <span class="block text-sm sm:text-base font-semibold text-black break-all group-hover:underline">ieumcorporation@gmail.com</span>
+          </span>
+        </a>
+        <a href="https://www.instagram.com/ieum_offcl/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 sm:p-6 hover:border-black hover:bg-white transition">
+          <span class="w-12 h-12 shrink-0 rounded-full bg-black text-white flex items-center justify-center text-lg"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+          <span class="min-w-0">
+            <span class="block text-[11px] font-mono uppercase tracking-widest text-neutral-400 mb-1">Instagram</span>
+            <span class="block text-sm sm:text-base font-semibold text-black group-hover:underline">ieum_offcl</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
     <section class="space-y-6" aria-labelledby="faq-heading">
       <div class="space-y-2">
         <p class="text-xs font-mono tracking-widest text-neutral-500 uppercase">Frequently Asked Questions</p>
@@ -711,48 +737,6 @@ We provide comprehensive settlement services for international students and glob
           <div class="faq-answer" hidden><p>Complete the inquiry form below with your contact details, the service area you are interested in, and a brief description of your needs. Our team will review your inquiry and contact you using the details provided.</p></div>
         </div>
       </div>
-    </section>
-
-    <section class="w-full bg-white p-7 sm:p-10 rounded-3xl border border-neutral-200 shadow-xl space-y-6" aria-labelledby="inquiry-heading">
-      <div class="space-y-2">
-        <p class="text-xs font-mono tracking-widest text-neutral-500 uppercase">Contact IEUM</p>
-        <h3 class="text-xl sm:text-2xl font-bold text-black" id="inquiry-heading">Consultation and partnership inquiries</h3>
-        <p class="text-sm text-neutral-500">Please complete the form below. Our team will review your inquiry and get back to you.</p>
-      </div>
-      <form class="space-y-4 text-xs" id="contact-form">
-        <input type="hidden" name="subject" value="New Inquiry from IEUM Website" />
-        <div>
-          <label class="block text-neutral-700 font-medium mb-1" for="contact-name">Name / Company Name *</label>
-          <input id="contact-name" name="from_name" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black transition" placeholder="Name / Company Name" autocomplete="name" required type="text" />
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-neutral-700 font-medium mb-1" for="contact-phone">Phone Number *</label>
-            <input id="contact-phone" name="phone" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black transition" placeholder="+00-00-0000-0000" autocomplete="tel" required type="tel" />
-          </div>
-          <div>
-            <label class="block text-neutral-700 font-medium mb-1" for="contact-email">E-mail *</label>
-            <input id="contact-email" name="reply_to" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black transition" placeholder="example@email.com" autocomplete="email" required type="email" />
-          </div>
-        </div>
-        <div>
-          <label class="block text-neutral-700 font-medium mb-1" for="contact-service">Inquiry Service Area *</label>
-          <select class="w-full bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black transition" id="contact-service" name="service_area" required>
-            <option value="Consulting">Consulting</option>
-            <option value="Settlement & Housing">Settlement &amp; Housing</option>
-            <option value="Concierge">Concierge</option>
-            <option value="Education & Translation">Education &amp; Translation</option>
-            <option value="Global partnership & etc.">Global partnership &amp; etc.</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-neutral-700 font-medium mb-1" for="contact-message">Detailed Inquiry *</label>
-          <textarea id="contact-message" name="message" class="w-full bg-neutral-50 border border-neutral-300 rounded-xl px-4 py-3 text-black focus:outline-none focus:border-black transition" placeholder="Please enter the specific details of your inquiry." required rows="5"></textarea>
-        </div>
-        <p id="contact-form-status" class="hidden text-sm leading-relaxed" role="status" aria-live="polite"></p>
-        <button id="contact-submit" class="w-full py-4 text-xs font-bold text-white bg-black hover:bg-neutral-800 disabled:opacity-60 disabled:cursor-not-allowed rounded-xl transition shadow-lg" type="submit"><span class="submit-label">Submit Inquiry</span></button>
-        <p class="text-[11px] text-neutral-400 text-center">Your inquiry details will be sent securely to the IEUM team for follow-up.</p>
-      </form>
     </section>
   </div>
  </div>
@@ -844,47 +828,7 @@ We provide comprehensive settlement services for international students and glob
    });
  });
 
- // Send inquiry details to IEUM using EmailJS.
- const contactForm = document.getElementById('contact-form');
- const contactSubmit = document.getElementById('contact-submit');
- const contactStatus = document.getElementById('contact-form-status');
- const EMAILJS_SERVICE_ID = 'service_wejbuvs';
- const EMAILJS_TEMPLATE_ID = 'ayvw8ak';
- const EMAILJS_PUBLIC_KEY = '3rykPoCGC50_Tbud8';
-
- contactForm.addEventListener('submit', async (event) => {
-   event.preventDefault();
-   if (!contactForm.reportValidity()) return;
-
-   const submitLabel = contactSubmit.querySelector('.submit-label');
-   contactSubmit.disabled = true;
-   submitLabel.textContent = 'Sending...';
-   contactStatus.textContent = '';
-   contactStatus.classList.add('hidden');
-   contactStatus.classList.remove('text-green-700', 'text-red-600');
-
-   try {
-     if (!window.emailjs) throw new Error('EmailJS library did not load.');
-     await window.emailjs.sendForm(
-       EMAILJS_SERVICE_ID,
-       EMAILJS_TEMPLATE_ID,
-       contactForm,
-       { publicKey: EMAILJS_PUBLIC_KEY }
-     );
-     contactStatus.textContent = 'Thank you. Your inquiry has been sent successfully. Our team will contact you soon.';
-     contactStatus.classList.remove('hidden');
-     contactStatus.classList.add('text-green-700');
-     contactForm.reset();
-   } catch (error) {
-     console.error('IEUM inquiry submission failed:', error);
-     contactStatus.textContent = 'Your inquiry could not be sent. Please try again or email ieumcorporation@gmail.com directly.';
-     contactStatus.classList.remove('hidden');
-     contactStatus.classList.add('text-red-600');
-   } finally {
-     contactSubmit.disabled = false;
-     submitLabel.textContent = 'Submit Inquiry';
-   }
- });
+ /* Contact form removed: inquiries are handled through the email and Instagram links above. */
  </script><script>
 /* Offline map layer: all map graphics are inline SVG; no map CDN or remote GeoJSON required. */
 (() => {
@@ -901,7 +845,6 @@ We provide comprehensive settlement services for international students and glob
  const hubs = [
  {id:'hq', name:'SOUTH KOREA · SEOUL HQ', x:1682, y:600, color:'#111827', labelX:1430, labelY:548, labelW:250},
  {id:'jp', name:'JAPAN', x:1752, y:620, color:'#60a5fa', labelX:1768, labelY:600, labelW:105},
- {id:'hk', name:'HONG KONG', x:1595, y:685, color:'#c084fc', labelX:1612, labelY:664, labelW:150},
  {id:'th', name:'THAILAND', x:1548, y:750, color:'#34d399', labelX:1565, labelY:730, labelW:130},
  {id:'bd', name:'BANGLADESH', x:1495, y:678, color:'#fb923c', labelX:1300, labelY:658, labelW:170},
  {id:'id', name:'INDONESIA', x:1612, y:880, color:'#f472b6', labelX:1630, labelY:860, labelW:145}
@@ -934,29 +877,6 @@ We provide comprehensive settlement services for international students and glob
  g.addEventListener('mouseenter', zoomIn); g.addEventListener('mouseleave', zoomOut);
  g.addEventListener('focus', zoomIn); g.addEventListener('blur', zoomOut);
  });
-})();
-</script><script>
-/* Partner logo marquee: repeat the logo set so the loop is seamless at any width. */
-(() => {
- const track = document.getElementById('partner-track');
- if (!track) return;
- const originals = Array.from(track.children);
- if (!originals.length) return;
- const build = () => {
- Array.from(track.children).slice(originals.length).forEach(n => n.remove());
- const marquee = track.parentElement;
- const unit = originals.length * (240 + 24);
- const reps = Math.max(2, Math.ceil((marquee.clientWidth || window.innerWidth) / unit) + 1);
- const half = [];
- for (let i = 1; i < reps; i++) originals.forEach(o => { const c = o.cloneNode(true); half.push(c); });
- half.forEach(c => track.appendChild(c));
- const setCount = track.children.length;
- // duplicate whole set once more for translateX(-50%) looping
- Array.from(track.children).slice(0, setCount).forEach(o => { const c = o.cloneNode(true); c.setAttribute('aria-hidden','true'); c.querySelector('img').alt=''; track.appendChild(c); });
- };
- build();
- let w = window.innerWidth;
- window.addEventListener('resize', () => { if (Math.abs(window.innerWidth - w) > 100) { w = window.innerWidth; build(); } });
 })();
 </script><script>
 /* Business Area: keep the inline card details and route application buttons to Q&A. */
@@ -1017,6 +937,119 @@ We provide comprehensive settlement services for international students and glob
     document.querySelectorAll('#page-services #svc-grid .svc-card.is-revealed')
       .forEach(card => card.classList.remove('is-revealed'));
   }, true);
+})();
+</script>
+
+
+<script>
+/* IEUM service detail pages: each Business Area card opens its own in-site detail view. */
+(() => {
+  const serviceDetails = {
+    consulting: {
+      title: 'Consulting Service',
+      intro: '한국 진출을 준비하는 글로벌 기업과 한국 유학을 계획하는 해외 학생·교육기관을 위해 상황에 맞는 전략과 실행 방향을 함께 설계합니다.',
+      offerings: [
+        ['Global Business & Partnership', '한국 시장 진출 방향을 검토하고 현지 기업·교육기관·에이전시 등 잠재 파트너 발굴과 협력 구조 수립을 지원합니다.'],
+        ['University Admissions Consulting', '희망 전공과 학력, 한국어 능력, 예산 및 일정 등을 확인해 학부·대학원 진학 방향과 지원 준비를 안내합니다.'],
+        ['Application Preparation', '지원 일정과 제출 서류를 점검하고 학교별 요구사항에 맞춰 지원 절차를 체계적으로 정리합니다.'],
+        ['Professional Network Connection', '비자·노무·법률 등 전문적인 검토가 필요한 사안은 관련 제휴 전문가와의 상담 연결을 지원합니다.']
+      ],
+      process: [
+        ['Initial Consultation', '목표와 현재 상황, 필요한 지원 범위를 확인합니다.'],
+        ['Needs Analysis', '학교·시장·파트너 조건과 일정, 준비사항을 함께 검토합니다.'],
+        ['Action Plan', '우선순위와 실행 단계, 담당 범위를 정리해 맞춤 계획을 제안합니다.'],
+        ['Follow-up Support', '진행 상황을 확인하고 다음 단계에 필요한 실무 지원을 이어갑니다.']
+      ],
+      scope: ['기업의 한국 시장 진출 및 사업 협력 방향 상담', '해외 교육기관·유학 파트너와의 협력 구조 검토', '한국 대학 학부·대학원 진학 방향 및 지원 절차 안내', '전문 자문이 필요한 사안의 제휴 전문가 연결']
+    },
+    settlement: {
+      title: 'Settlement & Housing',
+      intro: '한국에 처음 도착하는 유학생과 글로벌 임직원이 낯선 환경에서도 안정적으로 생활을 시작할 수 있도록 주거 탐색부터 초기 정착까지 필요한 과정을 지원합니다.',
+      offerings: [
+        ['Housing Search', '희망 지역, 예산, 거주 기간과 생활 조건을 확인해 단기·장기 임대 주택, 원룸 및 서비스드 아파트 탐색을 돕습니다.'],
+        ['Move-in Preparation', '매물 확인 시 고려할 사항과 계약 전 확인 항목을 안내하고 입주 일정에 맞춰 준비 과정을 정리합니다.'],
+        ['SIM & Banking Guidance', '외국인 휴대전화 개통과 국내 은행 계좌 개설에 필요한 기본 절차 및 준비사항을 안내합니다.'],
+        ['Airport Pick-up & Orientation', '요청 일정에 맞춘 인천공항 미팅·픽업과 교통, 주변 편의시설 등 초기 생활 오리엔테이션을 지원합니다.']
+      ],
+      process: [
+        ['Pre-arrival Check', '입국일, 체류 기간, 예산, 희망 지역과 요청 서비스를 확인합니다.'],
+        ['Options & Planning', '조건에 맞는 주거 및 정착 지원 항목과 예상 일정을 정리합니다.'],
+        ['On-site Assistance', '합의된 범위에 따라 주거 탐색, 입주 준비, 픽업 및 초기 정착을 지원합니다.'],
+        ['Settlement Check', '서비스 완료 후 추가로 필요한 생활 정보를 확인하고 후속 안내를 제공합니다.']
+      ],
+      scope: ['단기·장기 주거 옵션 탐색 및 정보 제공', '입주 전 확인사항과 초기 생활 준비 안내', '외국인 SIM 개통 및 은행 업무 절차 안내', '공항 미팅·픽업과 한국 생활 오리엔테이션']
+    },
+    concierge: {
+      title: 'Concierge Service',
+      intro: '한국에서의 일상과 특별한 일정이 보다 편리하고 원활하게 이어지도록 고객의 요청과 선호에 맞춘 개인별 컨시어지 지원을 제공합니다.',
+      offerings: [
+        ['Personal Assistance', '고객의 요청 사항을 접수하고 일정·장소·필요 서비스를 확인해 적합한 지원 방법을 안내합니다.'],
+        ['Lifestyle Curation', '식사와 문화생활, 방문 장소 등 고객의 취향과 목적에 맞는 선택지를 조사하고 예약 관련 절차를 지원합니다.'],
+        ['Interpretation Support', '병원 방문이나 생활 현장 등 의사소통이 필요한 상황에서 통역 지원을 조율합니다.'],
+        ['Schedule & Visit Coordination', '방문 일정과 이동 동선, 현장 요청사항을 사전에 확인해 일정이 원활히 진행되도록 돕습니다.']
+      ],
+      process: [
+        ['Request', '필요한 서비스, 희망 일정, 장소와 선호사항을 전달합니다.'],
+        ['Confirmation', '가능 여부와 지원 범위, 일정 및 비용을 확인합니다.'],
+        ['Coordination', '예약·통역·현장 지원 등 확정된 내용을 준비하고 조율합니다.'],
+        ['Service & Review', '약속된 일정에 맞춰 지원하고 추가 요청이나 피드백을 확인합니다.']
+      ],
+      scope: ['개인별 일정 및 생활 편의 지원', '식음·문화·방문 장소 정보 탐색 및 예약 지원', '병원 방문 등 상황별 통역 지원 조율', '방문 일정과 이동·현장 요청사항 조정']
+    },
+    education: {
+      title: 'Education & Translation',
+      intro: '한국 유학과 학업, 글로벌 커뮤니케이션에 필요한 언어 역량을 키울 수 있도록 한국어 교육·TOPIK 및 진학 준비, 전문 번역 서비스를 연결합니다.',
+      offerings: [
+        ['Korean Language & TOPIK', '학습자의 현재 수준과 목표 급수에 따라 한국어 학습 방향을 설정하고 TOPIK 시험 준비를 지원합니다.'],
+        ['University Preparation', '한국 대학 진학을 목표로 하는 학생에게 학교 및 전공 탐색, 지원 일정과 준비 과정에 대한 안내를 제공합니다.'],
+        ['Overseas Education Network', '아시아 지역 교육기관 및 파트너 네트워크를 통해 교육 협력과 학생 상담·연계 기회를 모색합니다.'],
+        ['Professional Translation', '번역 목적과 문서 종류, 언어 및 납기를 확인한 뒤 적합한 번역·검수 절차를 진행합니다.']
+      ],
+      process: [
+        ['Level & Needs Check', '학습 수준, 목표 시험·진학 계획 또는 번역 목적과 자료를 확인합니다.'],
+        ['Learning / Work Plan', '학습 계획이나 번역 범위, 일정과 진행 방식을 협의합니다.'],
+        ['Delivery', '수업·진학 준비 또는 번역 작업을 합의한 일정과 방식에 따라 진행합니다.'],
+        ['Feedback & Next Step', '학습 피드백이나 번역 검수 의견을 반영하고 후속 계획을 안내합니다.']
+      ],
+      scope: ['한국어 학습 및 TOPIK 목표별 준비', '한국 대학 진학 준비 관련 정보와 절차 안내', '해외 교육기관과의 교육 협력 및 학생 연계', '문서 목적에 맞춘 전문 번역과 검수']
+    }
+  };
+
+  const openDetail = (key) => {
+    const data = serviceDetails[key];
+    if (!data) return;
+    document.getElementById('service-detail-title').textContent = data.title;
+    document.getElementById('service-detail-intro').textContent = data.intro;
+    document.getElementById('service-detail-offerings').innerHTML = data.offerings.map((item, i) =>
+      `<article class="detail-offer-card"><span class="offer-no">SERVICE 0${i+1}</span><h3>${item[0]}</h3><p>${item[1]}</p></article>`
+    ).join('');
+    document.getElementById('service-detail-process').innerHTML = data.process.map((item, i) =>
+      `<article class="detail-process-step"><span class="step-no">0${i+1}</span><h3>${item[0]}</h3><p>${item[1]}</p></article>`
+    ).join('');
+    document.getElementById('service-detail-scope').innerHTML = data.scope.map(item =>
+      `<li><i class="fa-solid fa-check"></i><span>${item}</span></li>`
+    ).join('');
+    navigateTo('service-detail');
+    history.replaceState({page:'service-detail', service:key}, '', '#service-' + key);
+  };
+
+  document.querySelectorAll('#page-services #svc-grid .svc-card[data-hero]:not(.overview)').forEach(card => {
+    card.setAttribute('role', 'link');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', card.querySelector('h3')?.textContent.trim() + ' 상세 페이지 보기');
+    card.addEventListener('click', event => {
+      if (event.target.closest('.svc-open-hero')) return;
+      const key = ['consulting','settlement','concierge','education'].find(name => card.classList.contains(name));
+      if (key) openDetail(key);
+    });
+    card.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (event.target !== card) return;
+      event.preventDefault();
+      const key = ['consulting','settlement','concierge','education'].find(name => card.classList.contains(name));
+      if (key) openDetail(key);
+    });
+  });
 })();
 </script>
 
