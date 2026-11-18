@@ -778,6 +778,34 @@ We provide comprehensive settlement services for international students and glob
       </div>
     </section>
 
+
+    <section class="w-full bg-white p-8 sm:p-12 rounded-3xl border border-neutral-200 shadow-xl space-y-7" aria-labelledby="quote-request-heading">
+      <div class="space-y-2">
+        <p class="text-xs font-mono tracking-widest text-amber-700 uppercase">QUOTE REQUEST</p>
+        <h3 class="text-xl sm:text-2xl font-bold text-black" id="quote-request-heading">Send Your Inquiry</h3>
+        <p class="text-sm text-neutral-500 leading-relaxed">Please leave your contact details. IEUM will review your selected services and contact you with a final quotation.</p>
+      </div>
+      <form id="ieum-quote-request-form" class="space-y-5" action="https://formsubmit.co/ajax/ieumcorporation@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="[IEUM] New Quote Request">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="Request Type" value="Website quote request">
+        <input type="hidden" name="Selected Services" id="ieum-form-selected-services" value="">
+        <input type="hidden" name="Estimated Subtotal (USD)" id="ieum-form-estimated-total" value="">
+        <input type="hidden" name="Quote Details" id="ieum-form-quote-details" value="">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Name *</span><input required name="Name" autocomplete="name" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="Your name"></label>
+          <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Email *</span><input required type="email" name="Email" autocomplete="email" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="name@example.com"></label>
+          <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Phone / WhatsApp *</span><input required name="Phone / WhatsApp" autocomplete="tel" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="+82 ..."></label>
+          <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Country</span><input name="Country" autocomplete="country-name" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="Your country"></label>
+        </div>
+        <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Additional message</span><textarea name="Additional Message" rows="4" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="Tell us about your schedule, needs, or any questions."></textarea></label>
+        <p id="ieum-quote-form-status" class="text-sm text-neutral-600" role="status" aria-live="polite"></p>
+        <button id="ieum-quote-form-submit" type="submit" class="w-full rounded-full bg-black text-white px-6 py-4 text-sm font-bold hover:bg-neutral-800 transition">Submit Quote Request <i class="fa-solid fa-arrow-right ml-2"></i></button>
+        <p class="text-xs leading-relaxed text-neutral-400">Your information will be used only to review and respond to this inquiry. Final pricing and service availability are confirmed separately by IEUM.</p>
+      </form>
+    </section>
+
     <section class="space-y-6" aria-labelledby="faq-heading">
       <div class="space-y-2">
         <p class="text-xs font-mono tracking-widest text-neutral-500 uppercase">Frequently Asked Questions</p>
@@ -1180,6 +1208,51 @@ We provide comprehensive settlement services for international students and glob
     navigateTo('contact');
     document.getElementById('settlement-quote-summary')?.scrollIntoView({behavior:'smooth', block:'start'});
   });
+
+
+  // Keep the selected quote attached to the customer inquiry and email it to IEUM.
+  const ieumQuoteForm = document.getElementById('ieum-quote-request-form');
+  if (ieumQuoteForm) {
+    ieumQuoteForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const status = document.getElementById('ieum-quote-form-status');
+      const submit = document.getElementById('ieum-quote-form-submit');
+      const draft = window.__ieumQuoteDraft || null;
+      const selectedLines = draft && Array.isArray(draft.services)
+        ? draft.services.map(item => `${item.name}${item.key === 'personal_escort' ? ` (${item.quantity} hours)` : ''}: $${Number(item.amount).toFixed(2)}`)
+        : [];
+      document.getElementById('ieum-form-selected-services').value = selectedLines.join('\n') || 'No pre-selected service package';
+      document.getElementById('ieum-form-estimated-total').value = draft ? `$${Number(draft.subtotal).toFixed(2)} USD` : 'To be discussed';
+      document.getElementById('ieum-form-quote-details').value = draft
+        ? `Selected services:\n${selectedLines.join('\n')}\nEstimated subtotal: $${Number(draft.subtotal).toFixed(2)} USD\nCurrency: USD\nFinal quotation subject to IEUM confirmation.`
+        : 'General inquiry; customer has not selected a priced package.';
+      const data = new FormData(ieumQuoteForm);
+      submit.disabled = true;
+      submit.textContent = 'Sending...';
+      status.textContent = 'Sending your inquiry securely...';
+      try {
+        const response = await fetch(ieumQuoteForm.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.success === 'false' || result.success === false) {
+          throw new Error(result.message || 'The form service did not accept the request.');
+        }
+        status.textContent = 'Your inquiry has been submitted. IEUM will contact you after reviewing your request.';
+        status.className = 'text-sm text-green-700';
+        ieumQuoteForm.reset();
+        window.__ieumQuoteDraft = null;
+      } catch (error) {
+        status.textContent = 'We could not submit your inquiry. Please email ieumcorporation@gmail.com directly. If this is the first submission, the email recipient may need to complete FormSubmit activation.';
+        status.className = 'text-sm text-red-700';
+      } finally {
+        submit.disabled = false;
+        submit.innerHTML = 'Submit Quote Request <i class="fa-solid fa-arrow-right ml-2"></i>';
+      }
+    });
+  }
 
   window.openIEUMServiceDetail = openDetail;
 
