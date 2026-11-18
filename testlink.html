@@ -731,7 +731,7 @@ We provide comprehensive settlement services for international students and glob
             <strong id="settlement-estimate-total" class="text-3xl tracking-tight">$0.00</strong>
           </div>
           <p class="text-[11px] leading-relaxed text-white/55 mt-4">안내된 서비스 수수료 기준 예상액입니다. 차량 운임, SIM 요금제, 보증금, 정부 수수료 및 기타 제3자 비용은 포함되지 않습니다. VAT 포함 가격이며, 최종 서면 견적이 우선합니다.</p>
-          <button type="button" id="settlement-request-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Request Final Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
+          <button type="button" id="settlement-save-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Save Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
         </aside>
       </div>
     </section>
@@ -752,8 +752,30 @@ We provide comprehensive settlement services for international students and glob
               <strong id="custom-estimate-total" class="text-2xl tracking-tight">Custom Quote</strong>
             </div>
             <p class="text-[11px] leading-relaxed text-white/55 mt-4">표시 금액은 초기 검토용 예시 가격이며 확정 결제 금액이 아닙니다. 서비스 범위, 소요 시간, 문서 분량 및 외부 비용에 따라 변경될 수 있습니다.</p>
-            <button type="button" id="custom-request-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Request Final Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            <button type="button" id="custom-save-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Save Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
           </aside>
+        </div>
+      </section>
+      <section id="find-your-quote" class="rounded-[28px] border border-neutral-200 bg-neutral-50 p-6 sm:p-10 shadow-sm">
+        <div class="detail-section-heading">
+          <span>05 / FIND YOUR QUOTE</span>
+          <h2>Your Journey, Your Services.</h2>
+          <p>Review your selected services and estimated total before proceeding. Your selection updates automatically as you build your service.</p>
+        </div>
+        <div class="mt-8 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-end">
+          <div class="rounded-2xl border border-neutral-200 bg-white p-5 sm:p-7">
+            <div class="flex items-center justify-between gap-3 border-b border-neutral-200 pb-4">
+              <div><p class="text-xs font-mono tracking-[.18em] text-neutral-400">QUOTE SUMMARY</p><h3 id="find-quote-service-title" class="mt-1 text-lg font-bold text-neutral-900">Select a service to begin</h3></div>
+              <span id="find-quote-item-count" class="rounded-full bg-neutral-100 px-3 py-1 text-[11px] font-semibold text-neutral-500">0 ITEMS</span>
+            </div>
+            <div id="find-quote-lines" class="min-h-[72px] space-y-3 py-4 text-sm text-neutral-600"><p class="text-neutral-400">Your selected services will appear here.</p></div>
+            <div class="flex items-center justify-between gap-4 border-t border-neutral-200 pt-4"><span class="text-sm font-semibold text-neutral-500">Estimated Total</span><strong id="find-quote-total" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-950">$0.00 USD</strong></div>
+            <p id="find-quote-disclaimer" class="mt-4 text-[11px] leading-relaxed text-neutral-400">Final pricing may vary depending on your requirements and service conditions.</p>
+          </div>
+          <div class="space-y-3 lg:min-w-[220px]">
+            <button type="button" id="find-quote-proceed" class="w-full rounded-full bg-neutral-950 px-8 py-4 text-sm font-bold tracking-wide text-white transition hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-35" disabled>Review Your Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            <p class="max-w-xs text-center text-[11px] leading-relaxed text-neutral-400">Review your selected services, then send an inquiry to IEUM.</p>
+          </div>
         </div>
       </section>
     </div>
@@ -809,7 +831,7 @@ We provide comprehensive settlement services for international students and glob
       <div class="space-y-2">
         <p class="text-xs font-mono tracking-widest text-amber-700 uppercase">QUOTE REQUEST</p>
         <h3 class="text-xl sm:text-2xl font-bold text-black" id="quote-request-heading">Send Your Inquiry</h3>
-        <p class="text-sm text-neutral-500 leading-relaxed">Please confirm your contact details. Your selected services and estimated total will be sent to IEUM, then you will continue to secure PayPal checkout.</p>
+        <p class="text-sm text-neutral-500 leading-relaxed">Please confirm your contact details. Your selected services and estimated total will be sent to IEUM for review. No payment is collected at this stage.</p>
       </div>
       <form id="ieum-quote-request-form" class="space-y-5" action="https://formsubmit.co/ajax/ieumcorporation@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="[IEUM] New Quote Request">
@@ -826,7 +848,7 @@ We provide comprehensive settlement services for international students and glob
           <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Country</span><input name="Country" autocomplete="country-name" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="Your country"></label>
         </div>
         <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Additional message</span><textarea name="Additional Message" rows="4" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="Tell us about your schedule, needs, or any questions."></textarea></label>
-        <p class="text-xs leading-relaxed text-amber-800 bg-amber-50 border border-amber-100 rounded-xl p-4">Settlement &amp; Housing selected plans are charged at the displayed subtotal through PayPal. Please review the selected items and excluded third-party costs before continuing.</p>
+        <p class="text-xs leading-relaxed text-neutral-500 bg-neutral-50 border border-neutral-200 rounded-xl p-4">This form is an inquiry only. No payment is collected now. IEUM will review your selected services and contact you with the final quotation and next steps.</p>
          <p id="ieum-quote-form-status" class="text-sm text-neutral-600" role="status" aria-live="polite"></p>
         <button id="ieum-quote-form-submit" type="submit" class="w-full rounded-full bg-black text-white px-6 py-4 text-sm font-bold hover:bg-neutral-800 transition">Submit Inquiry <i class="fa-solid fa-arrow-right ml-2"></i></button>
         <p class="text-xs leading-relaxed text-neutral-400">Your information will be used only to review and respond to this inquiry. Final pricing and service availability are confirmed separately by IEUM.</p>
@@ -1149,6 +1171,66 @@ We provide comprehensive settlement services for international students and glob
     }
   };
 
+  // Saved selections are kept by service area, so moving between areas never
+  // overwrites another area's quote. Saving again replaces only that area's items.
+  window.__ieumSavedQuotes = window.__ieumSavedQuotes || {};
+  const quoteAreaNames = {
+    settlement: 'Settlement & Housing',
+    consulting: 'Consulting Service',
+    concierge: 'Concierge Service',
+    education: 'Education & Translation'
+  };
+  function getSavedQuoteBundle() {
+    const areas = Object.entries(window.__ieumSavedQuotes || {}).filter(([, quote]) => quote && quote.services && quote.services.length);
+    const services = areas.flatMap(([key, quote]) => quote.services.map(item => ({...item, area:key, areaTitle:quoteAreaNames[key] || key})));
+    return {
+      areas,
+      services,
+      subtotal: services.reduce((sum, item) => sum + Number(item.amount || 0), 0),
+      currency: 'USD'
+    };
+  }
+  function renderSavedFindYourQuote() {
+    const title=document.getElementById('find-quote-service-title');
+    const lines=document.getElementById('find-quote-lines');
+    const count=document.getElementById('find-quote-item-count');
+    const total=document.getElementById('find-quote-total');
+    const note=document.getElementById('find-quote-disclaimer');
+    const proceed=document.getElementById('find-quote-proceed');
+    if(!title||!lines||!count||!total||!proceed)return;
+    const bundle=getSavedQuoteBundle();
+    const areaCount=bundle.areas.length;
+    title.textContent=areaCount ? (areaCount===1 ? bundle.areas[0][1].title || quoteAreaNames[bundle.areas[0][0]] : `${areaCount} Service Areas Selected`) : 'Select a service to begin';
+    count.textContent=`${bundle.services.length} ITEM${bundle.services.length===1?'':'S'}`;
+    lines.innerHTML=bundle.services.length ? bundle.areas.map(([key, quote]) => {
+      const areaItems=quote.services.map(item=>`<div class="flex justify-between gap-4 border-b border-dashed border-neutral-100 pb-3"><span class="min-w-0">${item.name}${Number(item.quantity)>1?` <span class="text-neutral-400">× ${item.quantity}</span>`:''}</span><strong class="shrink-0 text-neutral-900">$${Number(item.amount).toFixed(2)}</strong></div>`).join('');
+      return `<div class="pt-2 first:pt-0"><p class="mb-3 text-[10px] font-bold uppercase tracking-[.16em] text-neutral-400">${quoteAreaNames[key] || key}</p><div class="space-y-3">${areaItems}</div></div>`;
+    }).join('') : '<p class="text-neutral-400">Choose services in any category, then select Save Quote. Your saved selections will appear here together.</p>';
+    total.textContent=bundle.services.length?`$${bundle.subtotal.toFixed(2)} USD`:'$0.00 USD';
+    note.textContent='Your saved selections from all service areas are combined here. Prices are indicative only; IEUM will review your requirements and confirm the final quotation.';
+    proceed.disabled=!bundle.services.length;
+    window.__ieumFindQuoteType='saved';
+  }
+  function saveCurrentQuote(areaKey, quote) {
+    if(!quote || !quote.services || !quote.services.length) return;
+    window.__ieumSavedQuotes[areaKey] = {
+      title: quoteAreaNames[areaKey] || areaKey,
+      services: quote.services.map(item=>({...item})),
+      subtotal: Number(quote.subtotal || 0),
+      currency: 'USD',
+      isCustom: areaKey !== 'settlement'
+    };
+    renderSavedFindYourQuote();
+    const findQuote=document.getElementById('find-your-quote');
+    findQuote?.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  document.getElementById('find-quote-proceed')?.addEventListener('click',()=>{
+    const bundle=getSavedQuoteBundle();
+    if(!bundle.services.length) return;
+    showIEUMSelectionReceipt(bundle, 'All Selected Service Areas', bundle.areas.some(([,quote])=>quote.isCustom));
+  });
+  renderSavedFindYourQuote();
+
   const openDetail = (key) => {
     const data = serviceDetails[key];
     if (!data) return;
@@ -1207,9 +1289,10 @@ We provide comprehensive settlement services for international students and glob
     host.innerHTML = list.map(item => `<label class="settlement-price-option"><input type="checkbox" data-custom-item="${item[0]}" data-price="${item[3]}" data-name="${item[1]}"><span class="settlement-option-copy"><strong>${item[1]}</strong><small>${item[2]}</small></span><b>$${item[3]} <small>${item[4]}</small></b></label>`).join('');
     document.getElementById('custom-selected-list').innerHTML = '<p class="text-white/50">No services selected yet.</p>';
     document.getElementById('custom-estimate-total').textContent = 'Custom Quote';
-    document.getElementById('custom-request-quote').disabled = true;
+    document.getElementById('custom-save-quote').disabled = true;
     window.__ieumCustomQuote = null;
     window.__ieumCurrentServiceKey = key;
+    renderSavedFindYourQuote();
   }
   function updateCustomEstimate() {
     const selected = [...document.querySelectorAll('#custom-service-options input[data-custom-item]:checked')];
@@ -1217,14 +1300,15 @@ We provide comprehensive settlement services for international students and glob
     const total = services.reduce((sum,item)=>sum+item.amount,0);
     document.getElementById('custom-selected-list').innerHTML = services.length ? services.map(item=>`<div class="flex justify-between gap-3"><span>${item.name}</span><strong class="whitespace-nowrap">$${item.amount.toFixed(2)}</strong></div>`).join('') : '<p class="text-white/50">No services selected yet.</p>';
     document.getElementById('custom-estimate-total').textContent = services.length ? `$${total.toFixed(2)}*` : 'Custom Quote';
-    document.getElementById('custom-request-quote').disabled = !services.length;
+    document.getElementById('custom-save-quote').disabled = !services.length;
     window.__ieumCustomQuote = {serviceKey:window.__ieumCurrentServiceKey,services,subtotal:total,currency:'USD'};
+    document.getElementById('custom-save-quote').disabled = !services.length;
   }
   document.addEventListener('change',event=>{if(event.target.closest('#custom-service-options')) updateCustomEstimate();});
-  document.getElementById('custom-request-quote')?.addEventListener('click',event=>{
+  document.getElementById('custom-save-quote')?.addEventListener('click',event=>{
     event.preventDefault(); event.stopPropagation();
     const quote=window.__ieumCustomQuote; if(!quote || !quote.services.length) return;
-    showIEUMSelectionReceipt(quote, customServiceTitles[quote.serviceKey] || 'IEUM Services', true);
+    saveCurrentQuote(quote.serviceKey, quote);
   },true);
 
   const settlementLabels = {
@@ -1253,7 +1337,7 @@ We provide comprehensive settlement services for international students and glob
     });
     document.getElementById('settlement-selected-list').innerHTML = lines.length ? lines.join('') : '<p class="text-white/50">No services selected yet.</p>';
     document.getElementById('settlement-estimate-total').textContent = `$${total.toFixed(2)}`;
-    document.getElementById('settlement-request-quote').disabled = selected.length === 0;
+    document.getElementById('settlement-save-quote').disabled = selected.length === 0;
     window.__ieumSettlementQuote = {
       services: selected.map(input => ({key: input.dataset.priceItem, name: settlementLabels[input.dataset.priceItem],
         quantity: input.dataset.priceItem === 'personal_escort' ? hours : 1,
@@ -1261,6 +1345,7 @@ We provide comprehensive settlement services for international students and glob
       subtotal: total,
       currency: 'USD'
     };
+    document.getElementById('settlement-save-quote').disabled = selected.length === 0;
   }
   document.addEventListener('change', event => {
     if (event.target.closest('#settlement-price-builder')) updateSettlementEstimate();
@@ -1269,7 +1354,7 @@ We provide comprehensive settlement services for international students and glob
     if (event.target.id === 'settlement-escort-hours') updateSettlementEstimate();
   });
   function showIEUMSelectionReceipt(quote, serviceTitle, isCustom) {
-    window.__ieumQuoteDraft = isCustom ? null : quote;
+    window.__ieumQuoteDraft = null;
     let receiptOverlay = document.getElementById('settlement-receipt-modal');
     if (!receiptOverlay) {
       receiptOverlay = document.createElement('div');
@@ -1285,35 +1370,29 @@ We provide comprehensive settlement services for international students and glob
     const receipt=document.getElementById('settlement-selection-receipt');
     const receiptDate=new Date().toLocaleString(undefined,{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
     const receiptNo='IEUM-'+new Date().toISOString().replace(/[-:T.Z]/g,'').slice(0,14);
-    const rows=quote.services.map(item=>`<div class="grid grid-cols-[minmax(0,1fr)_auto_auto] items-start gap-3 border-b border-dashed border-neutral-200 py-4 text-sm"><div class="min-w-0"><p class="font-semibold text-neutral-900">${item.name}</p><p class="mt-1 text-xs text-neutral-500">$${Number(item.amount).toFixed(2)} × ${Number(item.quantity||1)}</p></div><span class="whitespace-nowrap text-xs text-neutral-500">${Number(item.quantity||1)}</span><strong class="whitespace-nowrap text-neutral-900">$${Number(item.amount).toFixed(2)}</strong></div>`).join('');
-    receipt.innerHTML=`<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-neutral-950 px-6 py-6 sm:px-8 text-white"><div><p class="text-[10px] font-mono tracking-[.24em] text-amber-300">IEUM · SERVICE SELECTION</p><h3 id="settlement-receipt-title" class="mt-2 text-2xl font-bold tracking-tight">Selection Receipt</h3><p class="mt-1 text-xs text-white/55">${serviceTitle}</p></div><div class="text-left sm:text-right text-xs text-white/65"><p>Receipt No. <span class="text-white">${receiptNo}</span></p><p class="mt-1">${receiptDate}</p></div></div><div class="px-6 py-6 sm:px-8"><div class="grid grid-cols-[minmax(0,1fr)_auto_auto] gap-3 border-b border-neutral-300 pb-3 text-[10px] font-bold uppercase tracking-wider text-neutral-400"><span>Selected service</span><span>Qty</span><span>Amount</span></div>${rows}<div class="ml-auto mt-6 max-w-sm space-y-2"><div class="flex justify-between text-sm text-neutral-500"><span>${isCustom?'Indicative subtotal':'Subtotal'}</span><span>$${quote.subtotal.toFixed(2)}</span></div><div class="flex justify-between border-t border-neutral-200 pt-4 text-lg font-extrabold text-neutral-950"><span>${isCustom?'Estimated Total (USD)':'Total (USD)'}</span><span>$${quote.subtotal.toFixed(2)} USD</span></div></div><div class="mt-6 rounded-xl bg-neutral-50 p-4 text-xs leading-relaxed text-neutral-500">${isCustom?'These are preliminary reference prices for planning only, not a confirmed charge. IEUM will review your requirements and confirm the final quotation. Do not make a payment based on this estimate.':'This is a summary of the services selected and their displayed prices. It is not a payment receipt or confirmation of booking. Third-party expenses such as transport fares, SIM plans, deposits and government fees are not included.'}</div><div class="mt-5 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3"><p class="text-[11px] text-neutral-400">Thank you for choosing IEUM.</p><button type="button" id="settlement-edit-selection" class="rounded-full bg-neutral-950 px-7 py-3 text-xs font-bold tracking-wide text-white hover:bg-neutral-700 transition">Payment <i class="fa-solid fa-arrow-right ml-2"></i></button></div></div>`;
+    const rows=quote.services.map(item=>`<div class="grid grid-cols-[minmax(0,1fr)_auto_auto] items-start gap-3 border-b border-dashed border-neutral-200 py-4 text-sm"><div class="min-w-0"><p class="text-[10px] font-bold uppercase tracking-wider text-neutral-400">${item.areaTitle || serviceTitle}</p><p class="mt-1 font-semibold text-neutral-900">${item.name}</p><p class="mt-1 text-xs text-neutral-500">$${(Number(item.amount)/Math.max(1,Number(item.quantity||1))).toFixed(2)} × ${Number(item.quantity||1)}</p></div><span class="whitespace-nowrap text-xs text-neutral-500">${Number(item.quantity||1)}</span><strong class="whitespace-nowrap text-neutral-900">$${Number(item.amount).toFixed(2)}</strong></div>`).join('');
+    receipt.innerHTML=`<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-neutral-950 px-6 py-6 sm:px-8 text-white"><div><p class="text-[10px] font-mono tracking-[.24em] text-amber-300">IEUM · SERVICE SELECTION</p><h3 id="settlement-receipt-title" class="mt-2 text-2xl font-bold tracking-tight">Selection Receipt</h3><p class="mt-1 text-xs text-white/55">${serviceTitle}</p></div><div class="text-left sm:text-right text-xs text-white/65"><p>Receipt No. <span class="text-white">${receiptNo}</span></p><p class="mt-1">${receiptDate}</p></div></div><div class="px-6 py-6 sm:px-8"><div class="grid grid-cols-[minmax(0,1fr)_auto_auto] gap-3 border-b border-neutral-300 pb-3 text-[10px] font-bold uppercase tracking-wider text-neutral-400"><span>Selected service</span><span>Qty</span><span>Amount</span></div>${rows}<div class="ml-auto mt-6 max-w-sm space-y-2"><div class="flex justify-between text-sm text-neutral-500"><span>Estimated subtotal</span><span>$${quote.subtotal.toFixed(2)}</span></div><div class="flex justify-between border-t border-neutral-200 pt-4 text-lg font-extrabold text-neutral-950"><span>Estimated Total (USD)</span><span>$${quote.subtotal.toFixed(2)} USD</span></div></div><div class="mt-6 rounded-xl bg-neutral-50 p-4 text-xs leading-relaxed text-neutral-500">This is an inquiry summary of all saved services and indicative prices. It is not a payment receipt, confirmed quotation, or booking confirmation. IEUM will review your requirements and confirm the final quotation.</div><div class="mt-5 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3"><p class="text-[11px] text-neutral-400">Thank you for choosing IEUM.</p><button type="button" id="settlement-edit-selection" class="rounded-full bg-neutral-950 px-7 py-3 text-xs font-bold tracking-wide text-white hover:bg-neutral-700 transition">Continue to Inquiry <i class="fa-solid fa-arrow-right ml-2"></i></button></div></div>`;
     receiptOverlay.classList.remove('hidden'); receiptOverlay.classList.add('flex'); document.body.classList.add('overflow-hidden');
     document.getElementById('settlement-edit-selection')?.addEventListener('click',()=>{
       closeIEUMReceipt();
-      if(isCustom){
-        const details=quote.services.map(item=>`${item.name}: $${Number(item.amount).toFixed(2)}`).join('\n');
-        const message=document.querySelector('#ieum-quote-request-form textarea[name="Additional Message"]');
-        if(message) message.value=`Service area: ${serviceTitle}\nSelected services:\n${details}\nIndicative subtotal: $${quote.subtotal.toFixed(2)} USD\nPlease review and provide a final quotation.`;
-        const selected=document.getElementById('ieum-form-selected-services'); if(selected) selected.value=quote.services.map(item=>item.name).join('; ');
-        const total=document.getElementById('ieum-form-estimated-total'); if(total) total.value=`Indicative only: $${quote.subtotal.toFixed(2)} USD`;
-        const detail=document.getElementById('ieum-form-quote-details'); if(detail) detail.value=details;
-        const submit=document.getElementById('ieum-quote-form-submit'); if(submit) submit.innerHTML='Submit Quote Request <i class="fa-solid fa-arrow-right ml-2"></i>';
-        window.__ieumQuoteDraft=null;
-      } else {
-        const selected=document.getElementById('ieum-form-selected-services'); if(selected) selected.value=quote.services.map(item=>item.name).join('; ');
-        const total=document.getElementById('ieum-form-estimated-total'); if(total) total.value=`$${quote.subtotal.toFixed(2)} USD`;
-        const detail=document.getElementById('ieum-form-quote-details'); if(detail) detail.value=quote.services.map(item=>`${item.name} x ${item.quantity}: $${item.amount.toFixed(2)}`).join('\n');
-      }
+      const details=quote.services.map(item=>`${item.areaTitle || serviceTitle} — ${item.name} x ${Number(item.quantity||1)}: $${Number(item.amount).toFixed(2)}`).join('\n');
+      const message=document.querySelector('#ieum-quote-request-form textarea[name="Additional Message"]');
+      if(message) message.value=`Selected service areas: ${[...new Set(quote.services.map(item=>item.areaTitle || serviceTitle))].join(', ')}\nAll selected services:\n${details}\nIndicative subtotal: $${Number(quote.subtotal).toFixed(2)} USD\nPlease review and provide the final quotation.`;
+      const selected=document.getElementById('ieum-form-selected-services'); if(selected) selected.value=quote.services.map(item=>`${item.areaTitle || serviceTitle}: ${item.name}`).join('; ');
+      const total=document.getElementById('ieum-form-estimated-total'); if(total) total.value=`Indicative only: $${Number(quote.subtotal).toFixed(2)} USD`;
+      const detail=document.getElementById('ieum-form-quote-details'); if(detail) detail.value=details;
+      const submit=document.getElementById('ieum-quote-form-submit'); if(submit) submit.innerHTML='Submit Quote Request <i class="fa-solid fa-arrow-right ml-2"></i>';
+      window.__ieumQuoteDraft=null;
       if(typeof navigateTo==='function') navigateTo('contact');
       setTimeout(()=>{const target=document.getElementById('ieum-quote-request-form')||document.getElementById('contact');target?.scrollIntoView({behavior:'smooth',block:'start'});},120);
     },{once:true});
     document.getElementById('settlement-receipt-close')?.focus();
   }
   function closeIEUMReceipt(){const modal=document.getElementById('settlement-receipt-modal');if(modal){modal.classList.add('hidden');modal.classList.remove('flex');}document.body.classList.remove('overflow-hidden');}
-  document.getElementById('settlement-request-quote')?.addEventListener('click',event=>{
+  document.getElementById('settlement-save-quote')?.addEventListener('click',event=>{
     event.preventDefault();event.stopPropagation();
     const quote=window.__ieumSettlementQuote;if(!quote||!quote.services.length)return;
-    showIEUMSelectionReceipt(quote,'Settlement & Housing',false);
+    saveCurrentQuote('settlement', quote);
   },true);
   document.addEventListener('keydown', (event) => {
     const modal = document.getElementById('settlement-receipt-modal');
@@ -1325,46 +1404,19 @@ We provide comprehensive settlement services for international students and glob
   });
 
 
-  // General inquiries continue to use FormSubmit. A selected Settlement & Housing plan
-  // is sent to the secure server endpoint, which emails IEUM and creates a PayPal order.
+  // All selected service plans are inquiry-only for now. Payment integration will be added after the website is finalized.
   const ieumQuoteForm = document.getElementById('ieum-quote-request-form');
   if (ieumQuoteForm) {
     ieumQuoteForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       const status = document.getElementById('ieum-quote-form-status');
       const submit = document.getElementById('ieum-quote-form-submit');
-      const draft = window.__ieumQuoteDraft || null;
       const data = new FormData(ieumQuoteForm);
       submit.disabled = true;
-
+      submit.textContent = 'Sending...';
+      status.textContent = 'Sending your inquiry to IEUM...';
+      status.className = 'text-sm text-neutral-600';
       try {
-        if (draft && Array.isArray(draft.services) && draft.services.length) {
-          submit.textContent = 'Creating secure PayPal checkout...';
-          status.textContent = 'Sending your selected plan to IEUM and preparing PayPal checkout...';
-          const customer = {
-            name: String(data.get('Name') || '').trim(),
-            email: String(data.get('Email') || '').trim(),
-            phone: String(data.get('Phone / WhatsApp') || '').trim(),
-            country: String(data.get('Country') || '').trim(),
-            message: String(data.get('Additional Message') || '').trim()
-          };
-          const response = await fetch('/api/create-paypal-order', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({customer, services: draft.services})
-          });
-          const result = await response.json().catch(() => ({}));
-          if (!response.ok || !result.approvalUrl) {
-            throw new Error(result.error || 'Could not create the PayPal order.');
-          }
-          status.textContent = 'Your selected plan has been sent to IEUM. Redirecting to PayPal...';
-          window.location.assign(result.approvalUrl);
-          return;
-        }
-
-        // Non-priced/general inquiries are still submitted by FormSubmit.
-        submit.textContent = 'Sending...';
-        status.textContent = 'Sending your inquiry...';
         const response = await fetch(ieumQuoteForm.action, {
           method: 'POST',
           body: data,
@@ -1385,54 +1437,10 @@ We provide comprehensive settlement services for international students and glob
         status.className = 'text-sm text-red-700';
       } finally {
         submit.disabled = false;
-        submit.innerHTML = 'Continue to PayPal Payment <i class="fa-solid fa-arrow-right ml-2"></i>';
+        submit.innerHTML = 'Submit Inquiry <i class="fa-solid fa-arrow-right ml-2"></i>';
       }
     });
   }
-
-  // A customer may cancel at PayPal and return without a token.
-  const paypalParams = new URLSearchParams(window.location.search);
-  if (paypalParams.get('paypal') === 'cancel') {
-    navigateTo('contact');
-    const cancelStatus = document.getElementById('ieum-quote-form-status');
-    if (cancelStatus) {
-      cancelStatus.textContent = 'PayPal checkout was cancelled. No payment was confirmed. You can return to your selected services and try again.';
-      cancelStatus.className = 'text-sm text-amber-700';
-    }
-    window.history.replaceState({}, '', window.location.pathname + '#contact');
-  }
-
-  // PayPal returns the customer here after approval. Capture is performed server-side.
-  (async function handlePayPalReturn() {
-    const params = new URLSearchParams(window.location.search);
-    const orderId = params.get('token');
-    if (params.get('paypal') !== 'success' || !orderId) return;
-    const status = document.getElementById('ieum-quote-form-status');
-    if (status) status.textContent = 'Confirming your PayPal payment...';
-    try {
-      const response = await fetch('/api/capture-paypal-order', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({orderId})
-      });
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok || result.status !== 'COMPLETED') {
-        throw new Error(result.error || 'Payment confirmation is pending.');
-      }
-      navigateTo('contact');
-      if (status) {
-        status.textContent = 'Payment completed successfully. IEUM has received your selected service details and payment confirmation.';
-        status.className = 'text-sm text-green-700';
-      }
-      window.history.replaceState({}, '', window.location.pathname + '#contact');
-    } catch (error) {
-      navigateTo('contact');
-      if (status) {
-        status.textContent = 'PayPal returned to IEUM, but payment confirmation could not be completed automatically. Please contact ieumcorporation@gmail.com with your PayPal order ID: ' + orderId;
-        status.className = 'text-sm text-red-700';
-      }
-    }
-  })();
 
   window.openIEUMServiceDetail = openDetail;
 
