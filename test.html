@@ -1218,7 +1218,7 @@ table.ieum-price-clarity tbody tr:not(:first-child) > * { border-bottom:1px soli
 </div>
 <div class="mt-5 flex flex-col gap-3 rounded-2xl border border-[#dfd4bf] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
 <div><p class="text-[10px] font-bold uppercase tracking-[.16em] text-[#a77d3e]">Optional Add-on</p><p class="mt-1 text-sm font-semibold text-neutral-800">Additional Accompaniment · 1 Hour</p><p class="mt-1 text-xs leading-relaxed text-neutral-500">One additional hour of in-person housing assistance. Select this option in the detailed quote builder.</p></div>
-<strong class="whitespace-nowrap text-xl text-neutral-900">$9.90 <span class="text-xs font-normal text-neutral-400">/ hour</span></strong>
+<strong class="whitespace-nowrap text-xl text-neutral-900">$14.90 <span class="text-xs font-normal text-neutral-400">/ hour</span></strong>
 </div>
 <div class="mt-3 flex flex-col gap-3 rounded-2xl border border-[#dfd4bf] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
 <div><p class="text-[10px] font-bold uppercase tracking-[.16em] text-[#a77d3e]">Optional Add-on</p><p class="mt-1 text-sm font-semibold text-neutral-800">Move-in Cleaning Service</p><p class="mt-1 text-xs leading-relaxed text-neutral-500">Move-in cleaning assistance for your new home. Service scope and scheduling are confirmed before booking.</p></div>
@@ -1325,9 +1325,9 @@ We help international students and global professionals find suitable housing th
 <div class="mt-5 rounded-2xl border border-amber-200 bg-[#fcfaf6] p-4">
 <p class="mb-3 text-xs font-bold uppercase tracking-widest text-[#99743d]">Optional Add-on</p>
 <label class="settlement-price-option">
-<input data-price="9.9" data-price-item="extra_accompaniment" type="checkbox"/>
+<input data-price="14.9" data-price-item="extra_accompaniment" type="checkbox"/>
 <span class="settlement-option-copy"><strong>Additional Accompaniment · 1 Hour</strong><small>Add one extra hour of in-person assistance to your housing support plan.</small></span>
-<b>$9.90 <small>/ hour</small></b>
+<b>$14.90 <small>/ hour</small></b>
 </label>
 <label class="settlement-price-option">
 <input data-price="189.9" data-price-item="move_in_cleaning" type="checkbox"/>
@@ -1729,11 +1729,11 @@ We help international students and global professionals find suitable housing th
       title: 'Concierge Service',
       intro: 'From arrival in Korea to daily life, we coordinate transportation, mobile connectivity, banking, and practical assistance.',
       offerings: [
-        ['Bank Assistance', 'Includes bank account opening guidance and one hour of accompaniment at the bank.'],
+        
         ['SIM & eSIM Setup', 'We assist international clients with SIM/eSIM activation and initial device setup.'],
         ['Airport Pickup & Meeting', 'We arrange airport arrival meetings and pickup to an agreed destination. Vehicle fares are charged separately.'],
         ['Administrative Support', 'We explain essential administrative procedures and help coordinate appointments.'],
-        ['Personal Assistance', 'Includes six hours per month of personal accompaniment, interpretation, and practical assistance.']
+        
       ],
       process: [
         ['Request', 'Tell us which services you need and your preferred time and location.'],
@@ -1885,7 +1885,7 @@ We help international students and global professionals find suitable housing th
       ['consulting_premium','Premium Consulting','Two consultations, up to 5 options, two reviews and 30-day follow-up',199.9,'/ package']
     ],
     concierge:[
-      ['concierge_basic','Basic Concierge','1-hour bank accompaniment and one appointment coordination',49.9,'/ package'],
+      ['concierge_basic','Basic Concierge','1-hour bank accompaniment and one appointment coordination',39.9,'/ package'],
       ['concierge_standard','Standard Concierge','Bank assistance, airport arrival coordination, two appointments and a welcome gift',119.9,'/ package'],
       ['concierge_premium','Premium Concierge','Standard assistance plus 6 accompaniment hours, 30-day coordination, a welcome gift and eSIM support',299.9,'/ package'],
       ['concierge_esim','eSIM Setup · 3 Months','Includes three months of SIM activation and setup; free incoming calls and text messages on 5G service',66.6,'/ 3 months']
@@ -2144,6 +2144,16 @@ function showIEUMServicePlans(key){
  const table=panel.querySelector('table');table.classList.add('ieum-tier-table','ieum-price-clarity');
  table.querySelector('thead').innerHTML='<tr class="bg-[#f6f2e9] text-neutral-900"><th class="px-5 py-4">Service details</th><th class="px-4 py-4">Basic</th><th class="px-4 py-4 bg-[#eee5d4]">Standard</th><th class="px-4 py-4">Premium</th>'+(isEducation?'<th class="px-4 py-4">Translation</th>':'')+'</tr>'; 
  panel.querySelector('.ieum-concierge-addon')?.remove();
+ if(key==='concierge'){
+   const addon=document.createElement('div');
+   addon.className='ieum-concierge-addon mt-6 rounded-2xl border border-[#e8dfce] bg-[#fcfaf6] px-5 py-5 sm:px-7';
+   addon.innerHTML='<p class="text-xs font-bold uppercase tracking-[.16em] text-[#99743d]">Optional Services</p><div class="mt-4 grid gap-3 sm:grid-cols-3">'+[
+    
+    ['Additional Accompaniment','1 additional hour','$14.90']
+   ].map(([name,detail,price])=>'<div class="rounded-xl border border-[#e8dfce] bg-white p-4"><strong class="block text-sm text-neutral-900">'+name+'</strong><span class="mt-1 block text-xs text-neutral-500">'+detail+'</span><b class="mt-3 block text-lg text-neutral-900">'+price+'</b></div>').join('')+'</div>';
+   table.closest('.overflow-x-auto').after(addon);
+ }
+
  panel.querySelector('.ieum-education-optional')?.remove();
  panel.querySelector('.ieum-plan-note')?.remove();
  if(isEducation){
@@ -2362,7 +2372,7 @@ window.IEUMPromo={
   const optional=document.createElement('div');optional.className='ieum-settlement-optional-select ieum-optional-picker';
   const optionalTitle=document.createElement('p');optionalTitle.className='ieum-picker-heading';optionalTitle.textContent='02 / OPTIONAL SERVICES';optional.append(optionalTitle);
   const optionalGrid=document.createElement('div');optionalGrid.className='ieum-optional-grid';
-  [['Additional Accompaniment','1 Hour','One extra hour of in-person housing assistance.',9.9,'/ hour','Additional Accompaniment · 1 Hour'],['Move-in Cleaning Service','', 'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',189.9,'','Move-in Cleaning Service']].forEach(([name,detail,description,price,unit,quoteName])=>{
+  [['Additional Accompaniment','1 Hour','One extra hour of in-person housing assistance.',14.9,'/ hour','Additional Accompaniment · 1 Hour'],['Move-in Cleaning Service','', 'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',189.9,'','Move-in Cleaning Service']].forEach(([name,detail,description,price,unit,quoteName])=>{
     const card=document.createElement('article');card.className='ieum-optional-card';
     const top=document.createElement('div');top.className='ieum-optional-top';
     const info=document.createElement('div');info.className='ieum-optional-copy';
@@ -2430,7 +2440,7 @@ window.IEUMPromo={
 })();
 </script><script>
 (function(){
- const catalog={settlement:{title:'Settlement Service',prices:[9.9,99.9,199.9],extras:[{key:'optional_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One extra hour of in-person housing assistance.',price:9.9},{key:'optional_move_in_cleaning',name:'Move-in Cleaning Service',description:'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',price:189.9}]},concierge:{title:'Concierge Service',prices:[49.9,119.9,299.9],extras:[{key:'optional_esim_3months',name:'eSIM Setup · 3 Months',description:'SIM/eSIM activation and setup assistance. Carrier charges may be separate.',price:66.6}]},consulting:{title:'Consulting Services',prices:[39.9,99.9,199.9],extras:[]},education:{title:'Education & Translation',prices:[29.9,89.9,199.9],extras:[
+ const catalog={settlement:{title:'Settlement Service',prices:[9.9,99.9,199.9],extras:[{key:'optional_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One extra hour of in-person housing assistance.',price:14.9},{key:'optional_move_in_cleaning',name:'Move-in Cleaning Service',description:'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',price:189.9}]},concierge:{title:'Concierge Service',prices:[49.9,119.9,299.9],extras:[{key:'optional_concierge_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One additional hour of accompaniment.',price:14.9},{key:'optional_esim_3months',name:'eSIM Setup · 3 Months',description:'SIM/eSIM activation and setup assistance. Carrier charges may be separate.',price:66.6}]},consulting:{title:'Consulting Services',prices:[39.9,99.9,199.9],extras:[]},education:{title:'Education & Translation',prices:[29.9,89.9,199.9],extras:[
 {key:'education_language_korean',name:'Korean',description:'Preferred language for education or translation requests.',price:0},
 {key:'education_language_english',name:'English',description:'Preferred language for education or translation requests.',price:0},
 {key:'education_language_japanese',name:'Japanese',description:'Preferred language for education or translation requests.',price:0},
@@ -2460,7 +2470,7 @@ window.IEUMPromo={
  plans.append(b);
 }
  extras.replaceChildren();if(!plan.extras.length){const p=document.createElement('p');p.textContent='No optional services are currently listed for this service.';p.style.cssText='font-size:13px;color:#777;padding:15px 0';extras.append(p)}
- plan.extras.forEach(extra=>{const current=items.find(x=>x.area===active&&x.key===extra.key),qty=Number(current?.quantity||0);const card=document.createElement('article');card.className='ieum-quote-option';const info=document.createElement('div');const title=document.createElement('h3');title.textContent=extra.name;const desc=document.createElement('p');desc.textContent=extra.description;info.append(title,desc);const side=document.createElement('div');const price=document.createElement('strong');price.textContent=extra.price===0?'Included / No extra charge':money(extra.price)+(extra.key.includes('accompaniment')?' / hour':'');const picker=document.createElement('div');picker.className='ieum-quote-qty';const minus=document.createElement('button');minus.type='button';minus.textContent='−';minus.disabled=qty===0;minus.setAttribute('aria-label','Decrease '+extra.name);const count=document.createElement('output');count.textContent=String(qty);const plus=document.createElement('button');plus.type='button';plus.textContent='+';plus.setAttribute('aria-label','Increase '+extra.name);minus.onclick=()=>saveItem(active,{key:extra.key,name:extra.name,amount:extra.price,quantity:Math.max(0,qty-1),custom:false});plus.onclick=()=>saveItem(active,{key:extra.key,name:extra.name,amount:extra.price,quantity:Math.min(99,qty+1),custom:false});picker.append(minus,count,plus);side.append(price,picker);card.append(info,side);extras.append(card)});
+ plan.extras.forEach(extra=>{const current=items.find(x=>x.area===active&&x.key===extra.key),qty=Number(current?.quantity||0);const card=document.createElement('article');card.className='ieum-quote-option';const info=document.createElement('div');const title=document.createElement('h3');title.textContent=extra.name;const desc=document.createElement('p');desc.textContent=extra.description;info.append(title,desc);const side=document.createElement('div');const price=document.createElement('strong');price.textContent=extra.price===0?'Select Language':money(extra.price)+(extra.key.includes('accompaniment')?' / hour':'');const picker=document.createElement('div');picker.className='ieum-quote-qty';const minus=document.createElement('button');minus.type='button';minus.textContent='−';minus.disabled=qty===0;minus.setAttribute('aria-label','Decrease '+extra.name);const count=document.createElement('output');count.textContent=String(qty);const plus=document.createElement('button');plus.type='button';plus.textContent='+';plus.setAttribute('aria-label','Increase '+extra.name);minus.onclick=()=>saveItem(active,{key:extra.key,name:extra.name,amount:extra.price,quantity:Math.max(0,qty-1),custom:false});plus.onclick=()=>saveItem(active,{key:extra.key,name:extra.name,amount:extra.price,quantity:Math.min(99,qty+1),custom:false});picker.append(minus,count,plus);side.append(price,picker);card.append(info,side);extras.append(card)});
  const summary=document.getElementById('ieum-quote-summary-lines');summary.replaceChildren();if(!items.length){const p=document.createElement('p');p.textContent='No services selected yet.';p.style.cssText='color:#888;font-size:12px;margin-top:22px';summary.append(p)}items.forEach(item=>{const row=document.createElement('div');row.className='ieum-quote-summary-line';const left=document.createElement('span');left.textContent=(catalog[item.area]?.title||item.area)+' · '+item.name+(Number(item.quantity)>1?' × '+item.quantity:'');const right=document.createElement('strong');right.textContent=item.custom?'Custom Quote':money(Number(item.amount||0)*Number(item.quantity||1));const actions=document.createElement('div');actions.className='ieum-quote-summary-actions';const remove=document.createElement('button');remove.type='button';remove.className='ieum-quote-remove';remove.textContent='Remove';remove.setAttribute('aria-label','Remove '+item.name+' from estimate');remove.onclick=()=>removeEstimateItem(item.area,item.key);actions.append(right,remove);row.append(left,actions);summary.append(row)});const subtotal=items.reduce((n,x)=>n+Number(x.amount||0)*Number(x.quantity||1),0);document.getElementById('ieum-quote-total').textContent=money(window.IEUMPromo.total(subtotal));const discountLine=document.getElementById('ieum-quote-discount-line');discountLine.hidden=!window.IEUMPromo.code;document.getElementById('ieum-quote-discount').textContent='−'+money(window.IEUMPromo.discount(subtotal));
  }
  window.openIEUMQuote=function(area){if(catalog[area])active=area;window.IEUMProposal?.close?.();navigateTo('quote');render();window.scrollTo({top:0,behavior:'instant'})};
