@@ -2177,6 +2177,24 @@ function closeIEUMSettlementTable(){
 <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px;padding:14px 0;border-top:1px solid #ddd6c9;border-bottom:1px solid #ddd6c9;font-size:11px;color:#666"><div><strong style="color:#111820">ISSUED BY</strong><br/>IEUM Corporation<br/>ieumcorporation@gmail.com</div><div style="text-align:right"><strong style="color:#111820">DOCUMENT</strong><br/>Pro Forma Invoice · USD<br/><span id="ieum-invoice-date"></span></div></div><div id="ieum-proposal-items" style="margin-top:24px"></div>
 <div id="ieum-invoice-promo-line" style="display:none;justify-content:space-between;padding:12px 0;font-size:13px;color:#8b672e"><span>Promo discount · STUDYKR2027 (10%)</span><strong id="ieum-invoice-discount">−$0.00</strong></div><div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid #d8d1c4"><strong>Estimated Total (USD)</strong><strong id="ieum-proposal-total" style="font-size:28px">$0.00</strong></div>
 <p style="font-size:11px;color:#777;line-height:1.7">Indicative pricing only. IEUM will confirm service availability, final scope and price before payment. Custom-quote services are excluded from the numeric total.</p>
+<section id="ieum-booking-information" class="ieum-booking-section" aria-labelledby="ieum-booking-heading">
+<div class="ieum-booking-eyebrow">02 / BOOKING INFORMATION</div>
+<h3 id="ieum-booking-heading">Booking Information</h3>
+<p class="ieum-booking-intro">Provide your contact details and information needed for the selected services. Only relevant questions appear.</p>
+<div class="ieum-booking-grid">
+<label>Full Name <span>*</span><input id="ib-name" autocomplete="name" required placeholder="Full name"></label>
+<label>Email Address <span>*</span><input id="ib-email" type="email" autocomplete="email" required placeholder="name@example.com"></label>
+<label>Phone / WhatsApp <span>*</span><input id="ib-phone" type="tel" autocomplete="tel" required placeholder="Include country code"></label>
+<label>Preferred Contact Language<select id="ib-language"><option value="English">English</option><option value="Korean">한국어</option><option value="Thai">ภาษาไทย</option><option value="Japanese">日本語</option></select></label>
+</div>
+<div id="ib-airport" class="ib-conditional" hidden><h4>Flight & Arrival Information — Concierge Standard / Premium</h4><div class="ieum-booking-grid"><label>Flight Number <span>*</span><input id="ib-flight" placeholder="e.g. TG658" data-required="1"></label><label>Arrival Date <span>*</span><input id="ib-arrival-date" type="date" data-required="1"></label><label>Scheduled Arrival Time <span>*</span><input id="ib-arrival-time" type="time" data-required="1"></label><label>Arrival Airport <span>*</span><select id="ib-airport-name" data-required="1"><option value="">Select airport</option><option>Incheon International Airport (ICN)</option><option>Gimpo International Airport (GMP)</option><option>Other / To be confirmed</option></select></label><label class="ib-full">Drop-off Address <span>*</span><input id="ib-dropoff" placeholder="Hotel or destination address" data-required="1"></label></div></div>
+<div id="ib-housing" class="ib-conditional" hidden><h4>Settlement Service</h4><div class="ieum-booking-grid"><label>Preferred Move-in Date<input id="ib-move-date" type="date"></label><label>Monthly Housing Budget (USD)<input id="ib-budget" type="number" min="0" step="1" placeholder="Optional"></label></div></div>
+<div id="ib-education" class="ib-conditional" hidden><h4>Education & Translation</h4><div class="ieum-booking-grid"><label>Preferred School / Program<input id="ib-school" placeholder="If applicable"></label><label>Preferred Start Date<input id="ib-start-date" type="date"></label></div></div>
+<div id="ib-concierge" class="ib-conditional" hidden><h4>Concierge Service — Basic</h4><div class="ieum-booking-grid"><label>Preferred Service Date<input id="ib-service-date" type="date"></label></div></div>
+<label class="ib-notes">Additional Requests<textarea id="ib-notes" rows="3" placeholder="Anything else we should know?"></textarea></label>
+<p id="ib-error" role="alert" aria-live="polite"></p>
+<p class="ib-privacy">Your information is used to prepare your booking request. Please avoid entering passport numbers or payment details here. No booking or payment is confirmed until IEUM verifies the request.</p>
+</section>
 <div class="ieum-proposal-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px">
 <button onclick="IEUMProposal.close()" style="padding:14px 18px;border:1px solid #aaa;font-size:12px" type="button">Continue Selecting</button>
 <button onclick="IEUMProposal.print()" style="padding:14px 18px;border:1px solid #aaa;font-size:12px" type="button">Print / Save PDF</button>
@@ -2184,6 +2202,42 @@ function closeIEUMSettlementTable(){
 </div>
 </div>
 </div>
+<script id="ieum-booking-engine">
+(function(){
+ const $=id=>document.getElementById(id);
+ const fieldIds=['ib-name','ib-email','ib-phone','ib-language','ib-flight','ib-arrival-date','ib-arrival-time','ib-airport-name','ib-dropoff','ib-move-date','ib-budget','ib-school','ib-start-date','ib-service-date','ib-notes'];
+ const labels={'ib-name':'Full Name','ib-email':'Email','ib-phone':'Phone / WhatsApp','ib-language':'Preferred Contact Language','ib-flight':'Flight Number','ib-arrival-date':'Arrival Date','ib-arrival-time':'Scheduled Arrival Time','ib-airport-name':'Arrival Airport','ib-dropoff':'Drop-off Address','ib-move-date':'Preferred Move-in Date','ib-budget':'Monthly Housing Budget (USD)','ib-school':'Preferred School / Program','ib-start-date':'Preferred Start Date','ib-service-date':'Preferred Service Date','ib-notes':'Additional Requests'};
+ function selected(){return Object.entries(window.__ieumSavedQuotes||{}).flatMap(([area,q])=>(q.services||[]).map(item=>({...item,area})));}
+ function update(){const entries=selected();const airport=entries.some(x=>{
+   if(String(x.area||'').toLowerCase()!=='concierge')return false;
+   const key=String(x.key||'').toLowerCase().trim();
+   const name=String(x.name||'').toLowerCase().trim();
+   // The quote builder saves tiers as proposal_standard / proposal_premium,
+   // while the service catalogue saves concierge_standard / concierge_premium.
+   return ['concierge_standard','concierge_premium','proposal_standard','proposal_premium'].includes(key)
+     || /^(standard|premium)(?:\s+concierge|\s+service)?$/.test(name)
+     || /^(standard|premium) concierge$/.test(name);
+ });
+ const areas={ 'ib-airport':airport,'ib-housing':entries.some(x=>x.area==='settlement'),'ib-education':entries.some(x=>x.area==='education'),'ib-concierge':entries.some(x=>x.area==='concierge') && !airport};
+ Object.entries(areas).forEach(([id,show])=>{$(id).hidden=!show;$(id).querySelectorAll('[data-required]').forEach(el=>el.required=show)});
+ }
+ function collect(){update();$('ib-error').textContent='';
+ const active=fieldIds.map(id=>$(id)).filter(el=>el&&!!el.offsetParent);
+ for(const el of active){if(!el.checkValidity()){ $('ib-error').textContent='Please complete the required booking information before continuing.';el.reportValidity();el.focus();return null;}}
+ return active.map(el=>labels[el.id]+': '+(el.value.trim()||'Not provided')).join('\n');
+ }
+ window.IEUMBooking={update,collect};
+ const observer=new MutationObserver(()=>{if($('ieum-proposal-overlay')?.classList.contains('open'))update()});
+ document.addEventListener('DOMContentLoaded',()=>{observer.observe($('ieum-proposal-overlay'),{attributes:true,attributeFilter:['class']});update()});
+})();
+</script>
+<style>
+.ieum-booking-section{margin-top:30px;padding:26px 0;border-top:2px solid #b08b51;border-bottom:1px solid #ddd6c9;color:#202020}
+.ieum-booking-eyebrow{font-size:11px;letter-spacing:.15em;color:#9d743b;font-weight:800}.ieum-booking-section h3{font-size:25px;font-weight:700;letter-spacing:-.03em;margin:9px 0}.ieum-booking-intro{font-size:12px;color:#666;line-height:1.7;margin-bottom:20px}
+.ieum-booking-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.ieum-booking-section label{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:650;color:#333}.ieum-booking-section label span{color:#ad6936}.ieum-booking-section input,.ieum-booking-section select,.ieum-booking-section textarea{width:100%;min-width:0;border:1px solid #d7d1c8;border-radius:5px;padding:12px;font-size:13px;background:#fff;color:#222}.ieum-booking-section input:focus,.ieum-booking-section select:focus,.ieum-booking-section textarea:focus{outline:2px solid #b08b51;outline-offset:1px}.ib-conditional{padding:20px;margin-top:20px;background:#faf8f4;border:1px solid #e8dfd1;border-radius:8px}.ib-conditional[hidden]{display:none!important}.ib-conditional h4{font-size:14px;font-weight:800;margin:0 0 16px}.ib-full{grid-column:1/-1}.ib-notes{margin-top:18px}.ib-privacy{font-size:11px;color:#777;line-height:1.7;margin-top:14px}#ib-error{color:#a32626;font-size:12px;margin-top:10px}
+@media(max-width:600px){.ieum-booking-grid{grid-template-columns:1fr}.ieum-booking-section{padding:20px 0}.ib-conditional{padding:15px}}
+@media print{#ieum-booking-information{display:none!important}}
+</style>
 <script id="ieum-promo-engine">
 window.IEUMPromo={
  code:'',rate:0.10,
@@ -2212,6 +2266,7 @@ window.IEUMPromo={
  const saved=()=>window.__ieumSavedQuotes||(window.__ieumSavedQuotes={});
  const entries=()=>Object.entries(saved()).flatMap(([area,q])=>(q.services||[]).map(item=>({...item,area})));
  function refresh(){
+  if(window.IEUMBooking) window.IEUMBooking.update();
   const items=entries(); const root=document.getElementById('ieum-proposal-items');
   document.getElementById('ieum-plan-count').textContent='('+items.length+')';
   root.replaceChildren();document.getElementById('ieum-invoice-date').textContent=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
@@ -2255,10 +2310,12 @@ window.IEUMPromo={
   if(!entries().length)return;
   const summary=entries().map(x=>(labels[x.area]||x.area)+' — '+x.name+': '+(x.custom?'Custom Quote':money(Number(x.amount||0)*Number(x.quantity||1)))+' (Qty '+Number(x.quantity||1)+')'+'\n'+scopeText(x)).join('\n\n');
   const subtotal=entries().reduce((n,x)=>n+Number(x.amount||0)*Number(x.quantity||1),0);const total=window.IEUMPromo.total(subtotal);const promoDetails=window.IEUMPromo.code?'\nPromo code: '+window.IEUMPromo.code+' (10% off)\nDiscount: −'+money(window.IEUMPromo.discount(subtotal)):'';
-  close();window.__ieumQuoteDraft={proposal:summary,total};
+  const booking=window.IEUMBooking?.collect();
+  if(!booking)return;
+  close();window.__ieumQuoteDraft={proposal:summary,total,booking};
   navigator.clipboard?.writeText('IEUM Pro Forma Invoice\n'+summary+promoDetails+'\nEstimated total: '+money(total)).catch(()=>{});
   const subject=encodeURIComponent('IEUM Pro Forma Invoice / Final Proposal Request');
-  const body=encodeURIComponent('Hello IEUM,\n\nI would like to request a final proposal for:\n\n'+summary+promoDetails+'\n\nEstimated total: '+money(total)+'\n\nName:\nContact:\nAdditional requirements:\n');
+  const body=encodeURIComponent('Hello IEUM,\n\nI would like to request a final proposal for:\n\n'+summary+promoDetails+'\n\nEstimated total: '+money(total)+'\n\nBOOKING INFORMATION\n'+booking+'\n');
   window.location.href='mailto:ieumcorporation@gmail.com?subject='+subject+'&body='+body;
  }};
  // Buttons beneath existing comparison tables; no alteration to package prices.
