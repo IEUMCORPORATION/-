@@ -895,7 +895,13 @@ header.glass-nav .font-serif{color:#151515!important}
 @media(max-width:1000px){#page-home .ieum-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#page-home .ieum-product-card{border:1px solid #e8e5df!important}}
 @media(max-width:700px){#page-home .ieum-editorial-hero{display:flex;flex-direction:column;align-items:stretch;min-height:0;padding:48px 22px 44px;gap:34px}#page-home .ieum-editorial-hero h1{font-size:clamp(42px,11vw,60px)!important}#page-home .ieum-lead{font-size:15px!important}#page-home .ieum-hero-photo{min-height:290px}#page-home .ieum-floating-note{left:10px;bottom:35px}#page-home .ieum-trust-row{padding:20px 22px;gap:14px}#page-home .ieum-editorial-services,#page-home .ieum-audience-section,#page-home .ieum-how-section{padding:62px 22px}#page-home .ieum-section-heading{display:block}#page-home .ieum-section-heading>p{margin-top:18px}#page-home .ieum-product-grid{grid-template-columns:1fr;gap:12px}#page-home .ieum-product-card{min-height:245px;padding:22px}#page-home .ieum-product-icon{margin:17px 0 13px}#page-home .ieum-product-card p{font-size:13px!important}#page-home .ieum-audience-grid{grid-template-columns:1fr}#ieum-settlement-inline-panel table{font-size:12px!important}}
 </style>
-</head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><div class="nav-dropdown relative" id="business-area-dropdown">
+<style id="settlement-premium-highlight">
+#ieum-settlement-inline-panel table thead th:nth-child(3),
+#ieum-settlement-inline-panel table tbody td:nth-child(3){background:#fff!important;border-left:0!important}
+#ieum-settlement-inline-panel table thead th:nth-child(4){background:#f4e7cc!important;border-top:3px solid #c49a51!important;border-left:2px solid #c49a51!important;border-right:2px solid #c49a51!important}
+#ieum-settlement-inline-panel table tbody td:nth-child(4){background:#fffbf3!important;border-left:2px solid #c49a51!important;border-right:2px solid #c49a51!important}
+#ieum-settlement-inline-panel table tbody tr:last-child td:nth-child(4){border-bottom:2px solid #c49a51!important}
+</style></head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><div class="nav-dropdown relative" id="business-area-dropdown">
 <button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none inline-flex items-center gap-2" id="nav-services" type="button" aria-haspopup="true" aria-expanded="false" onclick="navigateTo('services')">Business Area <i class="fa-solid fa-chevron-down text-[9px] transition-transform" aria-hidden="true"></i></button>
 <div class="nav-dropdown-menu" role="menu" aria-label="Business Area services">
 <button type="button" role="menuitem" onclick="openIEUMServiceDetail('consulting')"><span>Consulting Service</span><small>Business &amp; university consulting</small></button>
@@ -1000,45 +1006,45 @@ header.glass-nav .font-serif{color:#151515!important}
               <tr class="bg-[#eef4f0] text-[#34443b]">
                 <th class="w-[25%] px-5 py-4 font-bold sm:px-7">Service details</th>
                 <th class="w-[25%] px-4 py-4 font-bold">Basic</th>
-                <th class="w-[25%] bg-[#edf5f0] px-4 py-4 font-bold">Standard</th>
-                <th class="w-[25%] px-4 py-4 font-bold">Premium</th>
+                <th class="w-[25%] px-4 py-4 font-bold">Standard</th>
+                <th class="w-[25%] bg-[#f4e7cc] px-4 py-4 font-bold">Premium</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-neutral-200 text-neutral-600">
               <tr>
                 <th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-800 sm:px-7">Plan price</th>
                 <td class="px-4 py-4"><strong class="text-lg text-[#26352e]">$9.90</strong><span class="mt-1 block text-[11px] text-neutral-400">/ report</span></td>
-                <td class="bg-[#fbfdfb] px-4 py-4"><strong class="text-lg text-[#26352e]">$99.90</strong><span class="mt-1 block text-[11px] text-neutral-400">/ plan</span></td>
+                <td class="px-4 py-4"><strong class="text-lg text-[#26352e]">$99.90</strong><span class="mt-1 block text-[11px] text-neutral-400">/ plan</span></td>
                 <td class="px-4 py-4"><strong class="text-lg text-[#26352e]">$259.90</strong><span class="mt-1 block text-[11px] text-neutral-400">/ plan</span></td>
               </tr>
               <tr>
                 <th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-800 sm:px-7">Housing search &amp; options</th>
                 <td class="px-4 py-4">Personal conditions review and summary report<br><b class="mt-1 block text-neutral-800">Up to 3 options</b></td>
-                <td class="bg-[#fbfdfb] px-4 py-4">Multiple platforms and independent listings<br><b class="mt-1 block text-neutral-800">Up to 5 options</b></td>
+                <td class="px-4 py-4">Multiple platforms and independent listings<br><b class="mt-1 block text-neutral-800">Up to 5 options</b></td>
                 <td class="px-4 py-4">All Standard search support<br><b class="mt-1 block text-neutral-800">Unlimited Search</b></td>
               </tr>
               <tr>
                 <th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-800 sm:px-7">Property &amp; area check</th>
                 <td class="px-4 py-4 text-neutral-300">—</td>
-                <td class="bg-[#fbfdfb] px-4 py-4">One selected property visit and surrounding-area check</td>
+                <td class="px-4 py-4">One selected property visit and surrounding-area check</td>
                 <td class="px-4 py-4">One selected property visit and surrounding-area check<br><b class="mt-1 block text-neutral-800">4 hours of accompaniment included</b></td>
               </tr>
               <tr>
                 <th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-800 sm:px-7">Move-in preparation</th>
                 <td class="px-4 py-4 text-neutral-300">—</td>
-                <td class="bg-[#fbfdfb] px-4 py-4 text-neutral-300">—</td>
+                <td class="px-4 py-4 text-neutral-300">—</td>
                 <td class="px-4 py-4">Key contract guidance, move-in checklist and initial settlement guidance</td>
               </tr>
               <tr>
                 <th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-800 sm:px-7">After-service care</th>
                 <td class="px-4 py-4 text-neutral-300">—</td>
-                <td class="bg-[#fbfdfb] px-4 py-4 text-neutral-300">—</td>
+                <td class="px-4 py-4 text-neutral-300">—</td>
                 <td class="px-4 py-4"><b class="text-neutral-800">12-month care</b><br>Housing-related inquiries and settlement follow-up</td>
               </tr>
               <tr>
                 <th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-800 sm:px-7">ARC address guidance</th>
                 <td class="px-4 py-4 text-neutral-300">—</td>
-                <td class="bg-[#fbfdfb] px-4 py-4 text-neutral-300">—</td>
+                <td class="px-4 py-4 text-neutral-300">—</td>
                 <td class="px-4 py-4">Guidance on address-change procedures</td>
               </tr>
             </tbody>
@@ -1974,8 +1980,8 @@ const ieumTierPlans = {
  ['Language lessons','One 50-minute online lesson','Three 50-minute online lessons','Eight 50-minute online lessons','—'],
  ['Learning plan','Brief level check','Personalized study plan','Personalized plan with progress review','—'],
  ['TOPIK preparation','General exam guidance','One practice review','Two practice reviews','—'],
- ['Translation assistance','—','Up to 200 words of general text','Up to 500 words of general text','Translation and review based on document type and length'],
- ['Support period','Single session','30 days','60 days','Based on project scope'] ],note:'Translation covers general non-certified text only; specialized, certified or notarized translation is quoted separately. Lessons depend on instructor availability.'}
+ ['Translation assistance','—','—','—','Translation and review based on document type and length'],
+ ['Support period','—','—','—','Based on project scope'] ],note:'Translation covers general non-certified text only; specialized, certified or notarized translation is quoted separately. Lessons depend on instructor availability.'}
 };
 function showIEUMServicePlans(key){
  const panel=document.getElementById('ieum-other-inline-panel');const plan=ieumTierPlans[key];
