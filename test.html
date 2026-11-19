@@ -577,10 +577,65 @@
 .detail-process-step p{font-size:12px;line-height:1.8;color:#cbd5e1;margin-top:8px}
 #service-detail-scope li{display:flex;gap:13px;align-items:flex-start;font-size:13px;line-height:1.8;color:#4b5563}
 #service-detail-scope i{color:#a77d3e;margin-top:4px}
+
+#settlement-price-builder .settlement-price-option{display:flex;align-items:flex-start;gap:14px;padding:18px;border:1px solid #e5e7eb;border-radius:16px;background:#fff;cursor:pointer;transition:border-color .2s,background .2s}
+#settlement-price-builder .settlement-price-option:has(input:checked){border-color:#a77d3e;background:#fcfaf6}
+#settlement-price-builder .settlement-price-option>input{width:18px;height:18px;margin-top:3px;accent-color:#92703d;flex:0 0 auto}
+#settlement-price-builder .settlement-option-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}
+#settlement-price-builder .settlement-option-copy strong{font-size:13px;font-weight:800;color:#111827;line-height:1.45}
+#settlement-price-builder .settlement-option-copy small{font-size:11px;line-height:1.65;color:#6b7280;font-weight:400}
+#settlement-price-builder .settlement-price-option>b{white-space:nowrap;font-size:15px;color:#111827}
+#settlement-price-builder .settlement-price-option>b small{font-size:10px;color:#6b7280;font-weight:500}
+#settlement-price-builder .settlement-hours{display:flex;align-items:center;gap:9px;margin-top:7px;font-size:11px;color:#6b7280}
+#settlement-price-builder .settlement-hours input{width:72px;border:1px solid #d1d5db;border-radius:8px;padding:5px 8px;font-size:12px;color:#111827;background:white}
+#custom-service-builder .settlement-price-option{display:flex;align-items:flex-start;gap:14px;padding:18px;border:1px solid #e5e7eb;border-radius:16px;background:#fff;cursor:pointer;transition:border-color .2s,background .2s}
+#custom-service-builder .settlement-price-option:has(input:checked){border-color:#a77d3e;background:#fcfaf6}
+#custom-service-builder .settlement-price-option>input{width:18px;height:18px;margin-top:3px;accent-color:#92703d;flex:0 0 auto}
+#custom-service-builder .settlement-option-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}
+#custom-service-builder .settlement-option-copy strong{font-size:13px;font-weight:800;color:#111827;line-height:1.45}
+#custom-service-builder .settlement-option-copy small{font-size:11px;line-height:1.65;color:#6b7280;font-weight:400}
+#custom-service-builder .settlement-price-option>b{white-space:nowrap;font-size:15px;color:#111827}
+#custom-service-builder .settlement-price-option>b small{font-size:10px;color:#6b7280;font-weight:500}
+@media(max-width:640px){#custom-service-builder .settlement-price-option{gap:10px;padding:14px}#custom-service-builder .settlement-price-option>b{font-size:13px}}
+#settlement-quote-summary{border:1px solid #e5e7eb;border-radius:18px;padding:20px;margin:18px 0;background:#fafafa}
+#settlement-selection-receipt{scroll-margin-top:110px}
+@media print{body *{visibility:hidden!important}#settlement-selection-receipt,#settlement-selection-receipt *{visibility:visible!important}#settlement-selection-receipt{position:absolute;left:0;top:0;width:100%;margin:0;box-shadow:none!important}}
+@media(max-width:640px){#settlement-price-builder .settlement-price-option{gap:10px;padding:14px}#settlement-price-builder .settlement-price-option>b{font-size:13px}}
+
 @media(max-width:640px){#page-service-detail .service-detail-hero{min-height:430px;padding:54px 0;background-position:60% center}}
 </style>
 
-</head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-about" onclick="navigateTo('about')">About</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-services" onclick="navigateTo('services')">Business Area</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-global" onclick="navigateTo('global')">Global Network</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-contact" onclick="navigateTo('contact')">Q&amp;A</button></nav><div class="flex items-center space-x-3 sm:space-x-4"><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('about'); closeMobileMenu();">About</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('services'); closeMobileMenu();">Services</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('global'); closeMobileMenu();">Global Network</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white" onclick="navigateTo('contact'); closeMobileMenu();">Contact</button></div></header><main class="flex-grow"><section class="page-view active" id="page-home"><div class="home-hero text-center px-4"><div class="max-w-4xl mx-auto space-y-6"><span class="inline-block px-4 py-1.5 rounded-full border border-neutral-300 bg-white text-xs font-mono tracking-widest text-neutral-800">
+
+<style id="business-area-header-dropdown-styles">
+.nav-dropdown{position:relative;display:flex;align-items:center;height:100%}
+.nav-dropdown-menu{position:absolute;top:calc(100% - 1px);left:50%;z-index:100;min-width:270px;padding:9px;transform:translate(-50%,10px);border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(13,17,23,.97);box-shadow:0 18px 45px rgba(0,0,0,.28);backdrop-filter:blur(16px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
+.nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu,.nav-dropdown.is-open .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
+.nav-dropdown-menu:before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}
+.nav-dropdown-menu button{display:flex;width:100%;flex-direction:column;align-items:flex-start;gap:4px;padding:12px 13px;border-radius:9px;text-align:left;color:#f9fafb;transition:background .18s ease}
+.nav-dropdown-menu button:hover,.nav-dropdown-menu button:focus-visible{background:rgba(255,255,255,.1);outline:none}
+.nav-dropdown-menu button span{font-size:12px;font-weight:700;letter-spacing:.01em}
+.nav-dropdown-menu button small{font-size:10px;color:#9ca3af;font-weight:400}
+.nav-dropdown:hover #nav-services i,.nav-dropdown:focus-within #nav-services i,.nav-dropdown.is-open #nav-services i{transform:rotate(180deg)}
+.mobile-service-link{display:flex;align-items:center;justify-content:space-between;padding:9px 8px;color:#a3a3a3;font-size:12px;text-align:left}
+.mobile-service-link:hover{color:#fff}
+.mobile-service-link i{font-size:9px;color:#737373}
+@media(max-width:767px){.nav-dropdown-menu{display:none}}
+@media(prefers-reduced-motion:reduce){.nav-dropdown-menu,.nav-dropdown-menu button{transition:none}}
+</style>
+</head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-about" onclick="navigateTo('about')">About</button><div class="nav-dropdown relative" id="business-area-dropdown">
+<button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none inline-flex items-center gap-2" id="nav-services" type="button" aria-haspopup="true" aria-expanded="false" onclick="navigateTo('services')">Business Area <i class="fa-solid fa-chevron-down text-[9px] transition-transform" aria-hidden="true"></i></button>
+<div class="nav-dropdown-menu" role="menu" aria-label="Business Area services">
+<button type="button" role="menuitem" onclick="openIEUMServiceDetail('consulting')"><span>Consulting Service</span><small>Business &amp; university consulting</small></button>
+<button type="button" role="menuitem" onclick="openIEUMServiceDetail('settlement')"><span>Settlement Service</span><small>Housing and daily-life support</small></button>
+<button type="button" role="menuitem" onclick="openIEUMServiceDetail('concierge')"><span>Concierge Service</span><small>Personal assistance in Korea</small></button>
+<button type="button" role="menuitem" onclick="openIEUMServiceDetail('education')"><span>Education &amp; Translation</span><small>Language learning and translation</small></button>
+</div></div><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-global" onclick="navigateTo('global')">Global Network</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-contact" onclick="navigateTo('contact')">Q&amp;A</button></nav><div class="flex items-center space-x-3 sm:space-x-4"><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('about'); closeMobileMenu();">About</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('services'); closeMobileMenu();">Business Area</button>
+<div class="grid grid-cols-1 gap-1 border-b border-neutral-800 pb-3 pl-4">
+<button class="mobile-service-link" onclick="openIEUMServiceDetail('consulting'); closeMobileMenu();">Consulting Service <i class="fa-solid fa-arrow-right"></i></button>
+<button class="mobile-service-link" onclick="openIEUMServiceDetail('settlement'); closeMobileMenu();">Settlement Service <i class="fa-solid fa-arrow-right"></i></button>
+<button class="mobile-service-link" onclick="openIEUMServiceDetail('concierge'); closeMobileMenu();">Concierge Service <i class="fa-solid fa-arrow-right"></i></button>
+<button class="mobile-service-link" onclick="openIEUMServiceDetail('education'); closeMobileMenu();">Education &amp; Translation <i class="fa-solid fa-arrow-right"></i></button>
+</div><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('global'); closeMobileMenu();">Global Network</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white" onclick="navigateTo('contact'); closeMobileMenu();">Contact</button></div></header><main class="flex-grow"><section class="page-view active" id="page-home"><div class="home-hero text-center px-4"><div class="max-w-4xl mx-auto space-y-6"><span class="inline-block px-4 py-1.5 rounded-full border border-neutral-300 bg-white text-xs font-mono tracking-widest text-neutral-800">
  Global Bridge For a Better Tomorrow
  </span><h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-black leading-tight tracking-tight">
  IEUM
@@ -604,15 +659,15 @@
  IEUM has established a comprehensive, one-stop professional solution that provides comprehensive care in one place, ranging from finding housing and handling paperwork to settling in, concierge services, and language education.
  </p><p>
  Beyond simple advice, we promise to stand by you as a sophisticated and secure partner tailored to the individual needs of each client.
- </p></div><div class="pt-4 border-t border-neutral-200"><p class="text-sm font-bold text-black">HOJIN KIM</p></div></div><div class="lg:col-span-5 bg-brand-light p-8 rounded-3xl border border-neutral-200 space-y-6"><h3 class="text-lg font-bold text-black">Core Values</h3><ul class="space-y-4 text-xs text-neutral-600"><li class="flex items-start space-x-3"><i class="fa-solid fa-shield-halved text-black mt-0.5"></i><span><strong>Trust:</strong> Services tailored to what the customer needs, rather than rigid packaged products</span></li><li class="flex items-start space-x-3"><i class="fa-solid fa-crown text-black mt-0.5"></i><span><strong>Royalty:</strong> Personalized lifestyle and relocation care for seamless transition</span></li><li class="flex items-start space-x-3"><i class="fa-solid fa-network-wired text-black mt-0.5"></i><span><strong>Connectivity:</strong> A trusted network bridging global and educational opportunities</span></li></ul></div></div><div class="space-y-8 pt-8 border-t border-neutral-200"><div class="text-center max-w-xl mx-auto space-y-2"><span class="text-xs font-mono uppercase text-neutral-400 tracking-widest"></span><h3 class="text-2xl font-bold text-black">TIME LINE</h3></div><div class="max-w-3xl mx-auto space-y-6 border-l-2 border-black pl-6 sm:pl-8 py-2"><div class="relative space-y-1"><span class="text-xs font-mono font-bold text-black">2026</span><h4 class="text-sm font-bold text-black">- Establishment of partnership with local institution in Bangladesh and support for processing<br>- Expansion of concierge and global study abroad partners</h4><p class="text-xs text-neutral-500"></p></div><div class="relative space-y-1 pt-4"><span class="text-xs font-mono font-bold text-black">2025</span><h4 class="text-sm font-bold text-black">- Establishment of IEUM Company</h4><p class="text-xs text-neutral-500"></p></div></div></div></div></section><section class="page-view" id="page-services"><div class="services-title-hero text-white py-16 px-4"><div class="max-w-7xl mx-auto space-y-2 relative z-10"><span class="text-xs font-mono text-white/80 uppercase tracking-widest"></span><h1 class="text-3xl sm:text-4xl font-extrabold text-white">Our Services</h1></div></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-12"><div class="flex flex-wrap gap-2 justify-center border-b border-neutral-200 pb-6"><button class="svc-tab px-5 py-2.5 rounded-full text-xs font-bold bg-black text-white transition" id="svc-tab-all" onclick="filterServiceCategory('all', true)">All</button><button class="svc-tab px-5 py-2.5 rounded-full text-xs font-medium text-neutral-600 hover:text-black transition" id="svc-tab-consulting" onclick="filterServiceCategory('consulting', true)">Consulting</button><button class="svc-tab px-5 py-2.5 rounded-full text-xs font-medium text-neutral-600 hover:text-black transition" id="svc-tab-settlement" onclick="filterServiceCategory('settlement', true)">Settlement &amp; Housing</button><button class="svc-tab px-5 py-2.5 rounded-full text-xs font-medium text-neutral-600 hover:text-black transition" id="svc-tab-concierge" onclick="filterServiceCategory('concierge', true)">Concierge</button><button class="svc-tab px-5 py-2.5 rounded-full text-xs font-medium text-neutral-600 hover:text-black transition" id="svc-tab-education" onclick="filterServiceCategory('education', true)">Education &amp; Translation</button></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8" id="svc-grid"><div class="svc-card overview light-card col-span-full rounded-3xl flex flex-col justify-center p-8 sm:p-12 min-h-[340px]" data-hero="all"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="all" draggable="false"/></div><div class="max-w-xl space-y-4"><div class="flex items-center gap-3"><span class="text-xs font-mono">ALL SERVICES</span><span class="px-3 py-1 rounded-full text-[10px] font-bold">Overview</span></div><h3 class="text-3xl font-bold">All Services</h3><p class="text-sm leading-relaxed">
- Consulting, Settlement &amp; Housing, Concierge, Education &amp; Translation. We connect your Seoul headquarters with our overseas partner network to provide support from before entry through to settlement.
+ </p></div><div class="pt-4 border-t border-neutral-200"><p class="text-sm font-bold text-black">HOJIN KIM</p></div></div><div class="lg:col-span-5 bg-brand-light p-8 rounded-3xl border border-neutral-200 space-y-6"><h3 class="text-lg font-bold text-black">Core Values</h3><ul class="space-y-4 text-xs text-neutral-600"><li class="flex items-start space-x-3"><i class="fa-solid fa-shield-halved text-black mt-0.5"></i><span><strong>Trust:</strong> Services tailored to what the customer needs, rather than rigid packaged products</span></li><li class="flex items-start space-x-3"><i class="fa-solid fa-crown text-black mt-0.5"></i><span><strong>Royalty:</strong> Personalized lifestyle and relocation care for seamless transition</span></li><li class="flex items-start space-x-3"><i class="fa-solid fa-network-wired text-black mt-0.5"></i><span><strong>Connectivity:</strong> A trusted network bridging global and educational opportunities</span></li></ul></div></div><div class="space-y-8 pt-8 border-t border-neutral-200"><div class="text-center max-w-xl mx-auto space-y-2"><span class="text-xs font-mono uppercase text-neutral-400 tracking-widest"></span><h3 class="text-2xl font-bold text-black">TIME LINE</h3></div><div class="max-w-3xl mx-auto space-y-6 border-l-2 border-black pl-6 sm:pl-8 py-2"><div class="relative space-y-1"><span class="text-xs font-mono font-bold text-black">2026</span><h4 class="text-sm font-bold text-black">- Establishment of partnership with local institution in Bangladesh and support for processing<br>- Expansion of concierge and global study abroad partners</h4><p class="text-xs text-neutral-500"></p></div><div class="relative space-y-1 pt-4"><span class="text-xs font-mono font-bold text-black">2025</span><h4 class="text-sm font-bold text-black">- Establishment of IEUM Company</h4><p class="text-xs text-neutral-500"></p></div></div></div></div></section><section class="page-view" id="page-services"><div class="services-title-hero text-white py-16 px-4"><div class="max-w-7xl mx-auto space-y-2 relative z-10"><span class="text-xs font-mono text-white/80 uppercase tracking-widest"></span><h1 class="text-3xl sm:text-4xl font-extrabold text-white">Our Services</h1></div></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-12"><div class="flex flex-wrap gap-2 justify-center border-b border-neutral-200 pb-6"><button class="svc-tab px-5 py-2.5 rounded-full text-xs font-bold bg-black text-white transition" id="svc-tab-all" onclick="filterServiceCategory('all', true)">All</button><button class="svc-tab px-5 py-2.5 rounded-full text-xs font-medium text-neutral-600 hover:text-black transition" id="svc-tab-consulting" onclick="filterServiceCategory('consulting', true)">Consulting</button><button class="svc-tab px-5 py-2.5 rounded-full text-xs font-medium text-neutral-600 hover:text-black transition" id="svc-tab-settlement" onclick="filterServiceCategory('settlement', true)">Settlement Service</button><button class="svc-tab px-5 py-2.5 rounded-full text-xs font-medium text-neutral-600 hover:text-black transition" id="svc-tab-concierge" onclick="filterServiceCategory('concierge', true)">Concierge</button><button class="svc-tab px-5 py-2.5 rounded-full text-xs font-medium text-neutral-600 hover:text-black transition" id="svc-tab-education" onclick="filterServiceCategory('education', true)">Education &amp; Translation</button></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8" id="svc-grid"><div class="svc-card overview light-card col-span-full rounded-3xl flex flex-col justify-center p-8 sm:p-12 min-h-[340px]" data-hero="all"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="all" draggable="false"/></div><div class="max-w-xl space-y-4"><div class="flex items-center gap-3"><span class="text-xs font-mono">ALL SERVICES</span><span class="px-3 py-1 rounded-full text-[10px] font-bold">Overview</span></div><h3 class="text-3xl font-bold">All Services</h3><p class="text-sm leading-relaxed">
+ Consulting, Settlement Service, Concierge, Education &amp; Translation. We connect your Seoul headquarters with our overseas partner network to provide support from before entry through to settlement.
  </p><button class="svc-open-hero" data-hero="all" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Check Quote</span></button></div></div><div class="svc-card consulting light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6" data-hero="consulting"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="consulting" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Consulting Service</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
  We provide comprehensive solutions, including advisory services for global enterprises expanding into Korea, as well as partnership building and admissions processing for overseas agencies and language academies.
- </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>B2B Global Expansion Consulting:</strong> Supporting strategic B2B partnerships with local agencies, educational institutions, and global corporate partners.</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Korean School Admissions Consulting:</strong> Customized undergraduate and graduate admissions guidance for international students</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Visa &amp; Administrative Legal Support:</strong> Service support provided through our network of partnered administrative attorneys, labor attorneys, and lawyers</span></li></ul></div></div><button class="svc-open-hero" data-hero="consulting" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Check Quote</span></button></div><div class="svc-card settlement light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6" data-hero="settlement"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="settlement" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Settlement &amp; Housing</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
-We provide comprehensive settlement services for international students and global employees, including short- and long-term housing search, SIM card and bank account setup, airport greeting and pickup, and orientation programs.
- </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Personal Housing Search</strong> Sourcing Verified Short/Long-Term Rentals, Studios & Serviced Apartments</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Telecom & Bank Account Setup:</strong> Foreigner SIM card activation and domestic bank account opening guidance</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Airport Meeting/Pick-up &amp; Life Orientation:</strong> Dedicated Incheon Airport meeting/pick-up and essential settlement support</span></li></ul></div></div><button class="svc-open-hero" data-hero="settlement" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Check Quote</span></button></div><div class="svc-card concierge light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6 border-black/30 shadow-md" data-hero="concierge"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="concierge" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Concierge Service</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
- From personalized interpretation to refined lifestyle curation, we deliver bespoke concierge services tailored exclusively for you.
- </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Concierge Care:</strong> Instant assistance via dedicated mobile desk</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Lifestyle Curation:</strong> Private reservations and dining curation, etc.</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Live Interpretation Care:</strong> 1-on-1 dedicated real-time emergency interpretation, including medical accompaniment</span></li></ul></div></div><button class="svc-open-hero" data-hero="concierge" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Check Quote</span></button></div><div class="svc-card education light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6" data-hero="education"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="education" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Education &amp; Translation</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+ </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>B2B Global Expansion Consulting:</strong> Supporting strategic B2B partnerships with local agencies, educational institutions, and global corporate partners.</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Korean School Admissions Consulting:</strong> Customized undergraduate and graduate admissions guidance for international students</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Visa &amp; Administrative Legal Support:</strong> Service support provided through our network of partnered administrative attorneys, labor attorneys, and lawyers</span></li></ul></div></div><button class="svc-open-hero" data-hero="consulting" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Check Quote</span></button></div><div class="svc-card settlement light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6" data-hero="settlement"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="settlement" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Settlement Service</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+We help international students and global professionals find suitable housing through tailored property searches, comparison reports, in-person checks and move-in guidance.
+ </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Housing Search & Comparison</strong> Tailored short- and long-term rental search with clear property comparisons</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Property Visit & Condition Check:</strong> Selected property and surrounding-area checks, depending on plan</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Contract & Move-in Guidance:</strong> Language support for key contract terms and move-in preparation</span></li></ul></div></div><button class="svc-open-hero" data-hero="settlement" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Check Quote</span></button></div><div class="svc-card concierge light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6 border-black/30 shadow-md" data-hero="concierge"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="concierge" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Concierge Service</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+ Airport arrival, connectivity and everyday support—coordinated around your schedule and needs.
+ </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Airport Meeting &amp; Pickup:</strong> Arrival greeting and transfer coordination</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>SIM / eSIM &amp; Banking:</strong> Mobile setup and bank visit guidance</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Personal Assistance:</strong> Interpretation, appointments and daily-life coordination</span></li></ul></div></div><button class="svc-open-hero" data-hero="concierge" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Check Quote</span></button></div><div class="svc-card education light-card p-8 sm:p-10 rounded-3xl flex flex-col justify-between space-y-6" data-hero="education"><div aria-hidden="true" class="svc-card-bg"><img alt="" data-scene-src="education" draggable="false"/></div><div class="space-y-4"><h3 class="text-2xl font-bold text-black">Education &amp; Translation</h3><p class="text-xs sm:text-sm text-neutral-600 leading-relaxed">
  Leveraging our extensive network across Asia, we provide a full range of services—from TOPIK preparation and university admissions programs to high-quality professional translation.
  </p><div class="pt-4 border-t border-neutral-100 space-y-3"><h4 class="text-xs font-bold text-black uppercase tracking-wider">Key Offerings</h4><ul class="space-y-2 text-xs text-neutral-600"><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Asia Overseas Network Partnership:</strong> Recruiting prospective students through partner institutions and matching with local language academies</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>TOPIK Language Center &amp; University Prep.:</strong> Targeted TOPIK level attainment and domestic university admission curriculum</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Global Talent Development:</strong> Industry-academic language internship matching program</span></li><li class="flex items-start space-x-2.5"><i class="fa-solid fa-check text-black mt-0.5 text-[11px]"></i><span><strong>Professional Translation Services:</strong> Providing specialized and high-quality translation services</span></li></ul></div></div><button class="svc-open-hero" data-hero="education" type="button"><i class="fa-solid fa-expand text-[10px]"></i><span>Check Quote</span></button></div></div>
 <div class="mt-16 rounded-3xl bg-neutral-100 border border-neutral-200 px-6 py-12 sm:px-12 sm:py-14 text-center">
@@ -638,21 +693,101 @@ We provide comprehensive settlement services for international students and glob
       <div class="detail-section-heading"><span>01 / SERVICE OVERVIEW</span><h2>What We Provide</h2><p>서비스 목적과 고객의 상황에 맞춰 필요한 지원 범위를 구체적으로 설계합니다.</p></div>
       <div id="service-detail-offerings" class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8"></div>
     </div>
+
+    
+
     <div class="bg-neutral-950 text-white rounded-[28px] px-7 py-10 sm:px-12 sm:py-14">
       <div class="detail-section-heading dark"><span>02 / HOW IT WORKS</span><h2>Our Process</h2><p>상담부터 서비스 완료까지, 각 단계의 진행 상황을 안내합니다.</p></div>
       <div id="service-detail-process" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mt-10"></div>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+    <div class="space-y-10">
       <div>
         <div class="detail-section-heading"><span>03 / SERVICE SCOPE</span><h2>Support Designed Around You</h2></div>
         <ul id="service-detail-scope" class="mt-7 space-y-4"></ul>
       </div>
-      <div class="rounded-3xl border border-neutral-200 bg-neutral-50 p-8 sm:p-10">
-        <p class="text-xs font-mono tracking-[.2em] text-amber-700">LET'S CONNECT</p>
-        <h2 class="text-2xl sm:text-3xl font-extrabold mt-3">Let's discuss your needs.</h2>
-        <p class="text-sm text-neutral-600 leading-relaxed mt-4">서비스 범위와 일정은 고객의 목적, 상황, 요청 사항을 확인한 뒤 개별적으로 안내해 드립니다.</p>
-        <button type="button" onclick="navigateTo('contact')" class="mt-7 rounded-full bg-black text-white px-7 py-4 text-sm font-bold hover:bg-neutral-800 transition">Check Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
+
+      <section id="settlement-price-builder" class="hidden rounded-[28px] border border-neutral-200 bg-white p-6 sm:p-10 shadow-sm">
+      <div class="detail-section-heading">
+        <span>04 / BUILD YOUR SERVICE</span>
+        <h2>Select the Support You Need</h2>
+        <p>필요한 주거 지원 플랜 하나를 선택하세요. 최종 제공 범위와 현장 방문 일정은 요청 지역 및 매물 상황 확인 후 확정됩니다.</p>
       </div>
+      <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_.8fr] gap-8 mt-8">
+        <div class="space-y-3" id="settlement-price-options">
+          <p class="mb-2 text-xs font-semibold uppercase tracking-[.16em] text-neutral-500">Choose one housing plan</p>
+          <label class="settlement-price-option">
+            <input type="radio" name="housing_plan" data-price-item="home_brief" data-price="9.9">
+            <span class="settlement-option-copy"><strong>Basic</strong><small>개인 조건 확인 및 주거 탐색 요약 리포트 · 공개 매물 출처를 바탕으로 최대 3개 옵션 정리</small></span>
+            <b>$9.90 <small>/ report</small></b>
+          </label>
+          <label class="settlement-price-option">
+            <input type="radio" name="housing_plan" data-price-item="core_plus" data-price="99.9">
+            <span class="settlement-option-copy"><strong>Standard</strong><small>Basic 포함 · 복수 매물 플랫폼 및 독립·개인 등록 매물 탐색 · 최대 5개 옵션 비교 · 선택 매물 1곳 현장 및 주변 환경 확인</small></span>
+            <b>$99.90 <small>/ plan</small></b>
+          </label>
+          <label class="settlement-price-option">
+            <input type="radio" name="housing_plan" data-price-item="full_care" data-price="259.9">
+            <span class="settlement-option-copy"><strong>Premium</strong><small>Standard 포함 · 계약 주요 내용 언어 안내 · 입주 체크리스트 · 계약 후 초기 정착 안내 · ARC 주소 변경 절차 안내 · 입주 후 1년간 주거 관련 문의 및 생활 정착 케어</small></span>
+            <b>$259.90 <small>/ plan</small></b>
+          </label>
+          <p class="mt-3 text-[11px] leading-relaxed text-neutral-500">매물의 실제 방문 가능 여부와 일정은 지역·임대인·중개업소 사정에 따라 달라집니다. 중개·법률 대리, 계약 체결, 보증금 및 임대료는 포함되지 않습니다.</p>
+        </div>
+        <aside class="rounded-3xl bg-neutral-950 text-white p-6 sm:p-8 h-fit">
+          <p class="text-xs font-mono tracking-[.2em] text-amber-300">YOUR ESTIMATE</p>
+          <p class="text-sm text-white/65 mt-3">Selected services</p>
+          <div id="settlement-selected-list" class="mt-3 space-y-2 text-sm text-white/85"><p class="text-white/50">No services selected yet.</p></div>
+          <div class="border-t border-white/15 mt-6 pt-5 flex items-end justify-between gap-3">
+            <span class="text-sm text-white/70">Estimated subtotal</span>
+            <strong id="settlement-estimate-total" class="text-3xl tracking-tight">$0.00</strong>
+          </div>
+          <p class="text-[11px] leading-relaxed text-white/55 mt-4">표시 금액은 주거 지원 서비스 수수료입니다. 임대료, 보증금, 중개보수, 공과금, 법률·행정기관 수수료 및 기타 제3자 비용은 포함되지 않습니다. 현장 방문 가능 여부와 최종 범위는 별도 확인 후 확정합니다.</p>
+          <button type="button" id="settlement-save-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Save Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
+        </aside>
+      </div>
+    </section>
+      <section id="custom-service-builder" class="hidden rounded-[28px] border border-neutral-200 bg-white p-6 sm:p-10 shadow-sm">
+        <div class="detail-section-heading">
+          <span>04 / BUILD YOUR SERVICE</span>
+          <h2>Select the Support You Need</h2>
+          <p>필요한 세부 서비스를 선택하면 예시 기준 가격이 표시됩니다. 실제 금액은 요청 범위와 일정 확인 후 IEUM이 최종 안내합니다.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_.8fr] gap-8 mt-8">
+          <div id="custom-service-options" class="space-y-3"></div>
+          <aside class="rounded-3xl bg-neutral-950 text-white p-6 sm:p-8 h-fit">
+            <p class="text-xs font-mono tracking-[.2em] text-amber-300">YOUR ESTIMATE</p>
+            <p class="text-sm text-white/65 mt-3">Selected services</p>
+            <div id="custom-selected-list" class="mt-3 space-y-2 text-sm text-white/85"><p class="text-white/50">No services selected yet.</p></div>
+            <div class="border-t border-white/15 mt-6 pt-5 flex items-end justify-between gap-3">
+              <span class="text-sm text-white/70">Indicative subtotal</span>
+              <strong id="custom-estimate-total" class="text-2xl tracking-tight">Custom Quote</strong>
+            </div>
+            <p class="text-[11px] leading-relaxed text-white/55 mt-4">표시 금액은 초기 검토용 예시 가격이며 확정 결제 금액이 아닙니다. 서비스 범위, 소요 시간, 문서 분량 및 외부 비용에 따라 변경될 수 있습니다.</p>
+            <button type="button" id="custom-save-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Save Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
+          </aside>
+        </div>
+      </section>
+      <section id="find-your-quote" class="rounded-[28px] border border-neutral-200 bg-neutral-50 p-6 sm:p-10 shadow-sm">
+        <div class="detail-section-heading">
+          <span>05 / FIND YOUR QUOTE</span>
+          <h2>Your Journey, Your Services.</h2>
+          <p>Review your selected services and estimated total before proceeding. Your selection updates automatically as you build your service.</p>
+        </div>
+        <div class="mt-8 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-end">
+          <div class="rounded-2xl border border-neutral-200 bg-white p-5 sm:p-7">
+            <div class="flex items-center justify-between gap-3 border-b border-neutral-200 pb-4">
+              <div><p class="text-xs font-mono tracking-[.18em] text-neutral-400">QUOTE SUMMARY</p><h3 id="find-quote-service-title" class="mt-1 text-lg font-bold text-neutral-900">Select a service to begin</h3></div>
+              <span id="find-quote-item-count" class="rounded-full bg-neutral-100 px-3 py-1 text-[11px] font-semibold text-neutral-500">0 ITEMS</span>
+            </div>
+            <div id="find-quote-lines" class="min-h-[72px] space-y-3 py-4 text-sm text-neutral-600"><p class="text-neutral-400">Your selected services will appear here.</p></div>
+            <div class="flex items-center justify-between gap-4 border-t border-neutral-200 pt-4"><span class="text-sm font-semibold text-neutral-500">Estimated Total</span><strong id="find-quote-total" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-950">$0.00 USD</strong></div>
+            <p id="find-quote-disclaimer" class="mt-4 text-[11px] leading-relaxed text-neutral-400">Final pricing may vary depending on your requirements and service conditions.</p>
+          </div>
+          <div class="space-y-3 lg:min-w-[220px]">
+            <button type="button" id="find-quote-proceed" class="w-full rounded-full bg-neutral-950 px-8 py-4 text-sm font-bold tracking-wide text-white transition hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-35" disabled>Review Your Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            <p class="max-w-xs text-center text-[11px] leading-relaxed text-neutral-400">Review your selected services, then send an inquiry to IEUM.</p>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </section>
@@ -699,6 +834,35 @@ We provide comprehensive settlement services for international students and glob
           </span>
         </a>
       </div>
+    </section>
+
+
+    <section class="w-full bg-white p-8 sm:p-12 rounded-3xl border border-neutral-200 shadow-xl space-y-7" aria-labelledby="quote-request-heading">
+      <div class="space-y-2">
+        <p class="text-xs font-mono tracking-widest text-amber-700 uppercase">QUOTE REQUEST</p>
+        <h3 class="text-xl sm:text-2xl font-bold text-black" id="quote-request-heading">Send Your Inquiry</h3>
+        <p class="text-sm text-neutral-500 leading-relaxed">Please confirm your contact details. Your selected services and estimated total will be sent to IEUM for review. No payment is collected at this stage.</p>
+      </div>
+      <form id="ieum-quote-request-form" class="space-y-5" action="https://formsubmit.co/ajax/ieumcorporation@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="[IEUM] New Quote Request">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="Request Type" value="Website quote request">
+        <input type="hidden" name="Selected Services" id="ieum-form-selected-services" value="">
+        <input type="hidden" name="Estimated Subtotal (USD)" id="ieum-form-estimated-total" value="">
+        <input type="hidden" name="Quote Details" id="ieum-form-quote-details" value="">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Name *</span><input required name="Name" autocomplete="name" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="Your name"></label>
+          <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Email *</span><input required type="email" name="Email" autocomplete="email" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="name@example.com"></label>
+          <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Phone / WhatsApp *</span><input required name="Phone / WhatsApp" autocomplete="tel" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="+82 ..."></label>
+          <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Country</span><input name="Country" autocomplete="country-name" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="Your country"></label>
+        </div>
+        <label class="block space-y-2"><span class="text-sm font-semibold text-neutral-800">Additional message</span><textarea name="Additional Message" rows="4" class="w-full rounded-xl border border-neutral-300 px-4 py-3 text-sm outline-none focus:border-black" placeholder="Tell us about your schedule, needs, or any questions."></textarea></label>
+        <p class="text-xs leading-relaxed text-neutral-500 bg-neutral-50 border border-neutral-200 rounded-xl p-4">This form is an inquiry only. No payment is collected now. IEUM will review your selected services and contact you with the final quotation and next steps.</p>
+         <p id="ieum-quote-form-status" class="text-sm text-neutral-600" role="status" aria-live="polite"></p>
+        <button id="ieum-quote-form-submit" type="submit" class="w-full rounded-full bg-black text-white px-6 py-4 text-sm font-bold hover:bg-neutral-800 transition">Submit Inquiry <i class="fa-solid fa-arrow-right ml-2"></i></button>
+        <p class="text-xs leading-relaxed text-neutral-400">Your information will be used only to review and respond to this inquiry. Final pricing and service availability are confirmed separately by IEUM.</p>
+      </form>
     </section>
 
     <section class="space-y-6" aria-labelledby="faq-heading">
@@ -778,6 +942,32 @@ We provide comprehensive settlement services for international students and glob
 
  function closeMobileMenu() {
  mobileMenu.classList.add('hidden');
+ }
+
+ // Business Area submenu is available on hover, keyboard focus, and touch/click.
+ const businessAreaDropdown = document.getElementById('business-area-dropdown');
+ const businessAreaTrigger = document.getElementById('nav-services');
+ if (businessAreaDropdown && businessAreaTrigger) {
+   businessAreaTrigger.addEventListener('click', event => {
+     if (window.matchMedia('(hover: none)').matches) {
+       event.preventDefault();
+       const opened = businessAreaDropdown.classList.toggle('is-open');
+       businessAreaTrigger.setAttribute('aria-expanded', String(opened));
+     }
+   });
+   document.addEventListener('click', event => {
+     if (!businessAreaDropdown.contains(event.target)) {
+       businessAreaDropdown.classList.remove('is-open');
+       businessAreaTrigger.setAttribute('aria-expanded', 'false');
+     }
+   });
+   document.addEventListener('keydown', event => {
+     if (event.key === 'Escape') {
+       businessAreaDropdown.classList.remove('is-open');
+       businessAreaTrigger.setAttribute('aria-expanded', 'false');
+       businessAreaTrigger.focus();
+     }
+   });
  }
 
  function filterServiceCategory(category, scroll) {
@@ -951,76 +1141,172 @@ We provide comprehensive settlement services for international students and glob
       title: 'Consulting Service',
       intro: '한국 진출을 준비하는 글로벌 기업과 한국 유학을 계획하는 해외 학생·교육기관을 위해 상황에 맞는 전략과 실행 방향을 함께 설계합니다.',
       offerings: [
-        ['Global Business & Partnership', '한국 시장 진출 방향을 검토하고 현지 기업·교육기관·에이전시 등 잠재 파트너 발굴과 협력 구조 수립을 지원합니다.'],
-        ['University Admissions Consulting', '희망 전공과 학력, 한국어 능력, 예산 및 일정 등을 확인해 학부·대학원 진학 방향과 지원 준비를 안내합니다.'],
-        ['Application Preparation', '지원 일정과 제출 서류를 점검하고 학교별 요구사항에 맞춰 지원 절차를 체계적으로 정리합니다.'],
-        ['Professional Network Connection', '비자·노무·법률 등 전문적인 검토가 필요한 사안은 관련 제휴 전문가와의 상담 연결을 지원합니다.']
+        ['Business Consulting', '한국 시장 진출과 현지 파트너십 구축 방향을 함께 검토합니다.'],
+        ['University Admissions', '한국 대학·대학원 선택과 지원 준비를 안내합니다.'],
+        ['Application & Expert Connection', '지원 서류와 일정을 점검하고 필요한 전문 상담을 연결합니다.']
       ],
       process: [
-        ['Initial Consultation', '목표와 현재 상황, 필요한 지원 범위를 확인합니다.'],
-        ['Needs Analysis', '학교·시장·파트너 조건과 일정, 준비사항을 함께 검토합니다.'],
-        ['Action Plan', '우선순위와 실행 단계, 담당 범위를 정리해 맞춤 계획을 제안합니다.'],
-        ['Follow-up Support', '진행 상황을 확인하고 다음 단계에 필요한 실무 지원을 이어갑니다.']
+        ['Consultation', '목표와 필요한 지원을 확인합니다.'],
+        ['Plan', '상황에 맞는 진행 방법과 일정을 정리합니다.'],
+        ['Support', '합의한 범위에 따라 실행을 지원합니다.']
       ],
-      scope: ['기업의 한국 시장 진출 및 사업 협력 방향 상담', '해외 교육기관·유학 파트너와의 협력 구조 검토', '한국 대학 학부·대학원 진학 방향 및 지원 절차 안내', '전문 자문이 필요한 사안의 제휴 전문가 연결']
+      scope: ['한국 시장 진출 및 사업 파트너십 상담', '한국 대학·대학원 진학 및 지원 준비', '지원 서류 점검과 관련 전문가 상담 연결']
     },
     settlement: {
-      title: 'Settlement & Housing',
-      intro: '한국에 처음 도착하는 유학생과 글로벌 임직원이 낯선 환경에서도 안정적으로 생활을 시작할 수 있도록 주거 탐색부터 초기 정착까지 필요한 과정을 지원합니다.',
+      title: 'Settlement Service',
+      intro: '한국에서 거주할 공간을 찾는 고객을 위해 조건별 매물 탐색, 비교 리포트, 현장 확인과 계약·입주 준비를 단계별로 지원합니다.',
       offerings: [
-        ['Housing Search', '희망 지역, 예산, 거주 기간과 생활 조건을 확인해 단기·장기 임대 주택, 원룸 및 서비스드 아파트 탐색을 돕습니다.'],
-        ['Move-in Preparation', '매물 확인 시 고려할 사항과 계약 전 확인 항목을 안내하고 입주 일정에 맞춰 준비 과정을 정리합니다.'],
-        ['SIM & Banking Guidance', '외국인 휴대전화 개통과 국내 은행 계좌 개설에 필요한 기본 절차 및 준비사항을 안내합니다.'],
-        ['Airport Pick-up & Orientation', '요청 일정에 맞춘 인천공항 미팅·픽업과 교통, 주변 편의시설 등 초기 생활 오리엔테이션을 지원합니다.']
+        ['Basic', '예산, 희망 지역, 거주 기간과 생활 조건을 확인하고 공개 매물 출처를 바탕으로 맞춤형 주거 탐색 리포트를 제공합니다.'],
+        ['Standard Property Search', '여러 매물 플랫폼과 독립·개인 등록 매물을 함께 탐색하고 선택한 매물의 실제 상태와 주변 환경을 현장에서 확인합니다.'],
+        ['Premium & Contract Guidance', '계약 주요 내용의 언어 안내, 입주 체크리스트, 계약 후 초기 정착 및 ARC 주소 변경 절차 안내를 제공합니다.'],
+        ['1-Year Housing Care', '입주일로부터 12개월간 주거 및 생활 정착 관련 문의에 대한 안내, 주거 관련 문제 발생 시 대응 방향 안내, 필요한 관리업체·서비스 연결 지원을 제공합니다. 긴급 출동·상시 대기 및 비용이 발생하는 외부 서비스는 포함되지 않습니다.']
       ],
       process: [
-        ['Pre-arrival Check', '입국일, 체류 기간, 예산, 희망 지역과 요청 서비스를 확인합니다.'],
-        ['Options & Planning', '조건에 맞는 주거 및 정착 지원 항목과 예상 일정을 정리합니다.'],
-        ['On-site Assistance', '합의된 범위에 따라 주거 탐색, 입주 준비, 픽업 및 초기 정착을 지원합니다.'],
-        ['Settlement Check', '서비스 완료 후 추가로 필요한 생활 정보를 확인하고 후속 안내를 제공합니다.']
+        ['Housing Brief', '예산, 희망 지역, 입주 희망일, 거주 기간과 주거 유형을 확인합니다.'],
+        ['Search & Comparison', '요청 조건에 맞는 매물을 탐색하고 출처·비용·주요 조건을 비교합니다.'],
+        ['Property Check', '선택한 매물의 방문 가능 여부를 확인하고 합의된 범위에서 현장 및 주변 환경을 살펴봅니다.'],
+        ['Contract & Move-in Guidance', '계약 주요 내용과 입주 준비사항, 필요한 후속 절차를 안내합니다.'],
+        ['12-Month Follow-up Care', '입주 후 1년 동안 주거 관련 문의와 생활 정착 상황을 확인하고, 필요한 정보 및 관련 서비스 연결을 지원합니다.']
       ],
-      scope: ['단기·장기 주거 옵션 탐색 및 정보 제공', '입주 전 확인사항과 초기 생활 준비 안내', '외국인 SIM 개통 및 은행 업무 절차 안내', '공항 미팅·픽업과 한국 생활 오리엔테이션']
+      scope: ['단기·장기 임대 매물 탐색 및 조건별 비교 리포트', '매물 출처와 임대료·보증금·관리비 등 비용 정보 정리', '선택 매물 현장 상태 및 주변 환경 확인(플랜별 제공)', '계약 주요 내용 언어 안내와 입주·주소 변경 절차 안내']
     },
     concierge: {
       title: 'Concierge Service',
-      intro: '한국에서의 일상과 특별한 일정이 보다 편리하고 원활하게 이어지도록 고객의 요청과 선호에 맞춘 개인별 컨시어지 지원을 제공합니다.',
+      intro: '한국 도착부터 일상생활까지 고객이 필요한 이동·통신·은행·생활 편의 지원을 요청에 맞춰 연결하고 조율합니다.',
       offerings: [
-        ['Personal Assistance', '고객의 요청 사항을 접수하고 일정·장소·필요 서비스를 확인해 적합한 지원 방법을 안내합니다.'],
-        ['Lifestyle Curation', '식사와 문화생활, 방문 장소 등 고객의 취향과 목적에 맞는 선택지를 조사하고 예약 관련 절차를 지원합니다.'],
-        ['Interpretation Support', '병원 방문이나 생활 현장 등 의사소통이 필요한 상황에서 통역 지원을 조율합니다.'],
-        ['Schedule & Visit Coordination', '방문 일정과 이동 동선, 현장 요청사항을 사전에 확인해 일정이 원활히 진행되도록 돕습니다.']
+        ['Airport Pickup & Meeting', '공항 도착 미팅과 지정 장소까지 픽업을 지원합니다. 차량 운임은 별도입니다.'],
+        ['SIM & eSIM Setup', '외국인 고객의 유심·eSIM 개통과 기기 초기 설정을 지원합니다.'],
+        ['Bank Assistance', '은행 계좌 개설 안내와 은행 방문 1시간 동행을 포함합니다.'],
+        ['Administrative Support', '한국 생활에 필요한 기본 행정 절차와 방문 일정·예약을 안내하고 조율합니다.'],
+        ['Personal Assistance', '월 6시간 생활 업무 동행과 통역·개별 요청 지원을 제공합니다.']
       ],
       process: [
-        ['Request', '필요한 서비스, 희망 일정, 장소와 선호사항을 전달합니다.'],
-        ['Confirmation', '가능 여부와 지원 범위, 일정 및 비용을 확인합니다.'],
-        ['Coordination', '예약·통역·현장 지원 등 확정된 내용을 준비하고 조율합니다.'],
-        ['Service & Review', '약속된 일정에 맞춰 지원하고 추가 요청이나 피드백을 확인합니다.']
+        ['Request', '필요한 지원 항목과 희망 일정 및 장소를 알려주세요.'],
+        ['Confirmation', '지원 가능 여부, 서비스 범위, 일정과 외부 비용을 확인합니다.'],
+        ['Coordination', '공항·통신·은행·행정 및 생활 지원 일정을 조율합니다.'],
+        ['Assistance', '확정된 일정에 맞춰 현장 지원과 후속 안내를 제공합니다.']
       ],
-      scope: ['개인별 일정 및 생활 편의 지원', '식음·문화·방문 장소 정보 탐색 및 예약 지원', '병원 방문 등 상황별 통역 지원 조율', '방문 일정과 이동·현장 요청사항 조정']
+      scope: ['공항 미팅·픽업 및 차량 예약 조율', '외국인 SIM/eSIM 개통 및 초기 설정', '은행 계좌 개설 준비 및 방문 절차 안내', '생활 관련 행정 절차·방문 일정·예약 지원', '통역 및 개인별 생활 편의 지원']
     },
     education: {
       title: 'Education & Translation',
       intro: '한국 유학과 학업, 글로벌 커뮤니케이션에 필요한 언어 역량을 키울 수 있도록 한국어 교육·TOPIK 및 진학 준비, 전문 번역 서비스를 연결합니다.',
       offerings: [
-        ['Korean Language & TOPIK', '학습자의 현재 수준과 목표 급수에 따라 한국어 학습 방향을 설정하고 TOPIK 시험 준비를 지원합니다.'],
-        ['University Preparation', '한국 대학 진학을 목표로 하는 학생에게 학교 및 전공 탐색, 지원 일정과 준비 과정에 대한 안내를 제공합니다.'],
-        ['Overseas Education Network', '아시아 지역 교육기관 및 파트너 네트워크를 통해 교육 협력과 학생 상담·연계 기회를 모색합니다.'],
-        ['Professional Translation', '번역 목적과 문서 종류, 언어 및 납기를 확인한 뒤 적합한 번역·검수 절차를 진행합니다.']
+        ['Korean & TOPIK', '목표 수준에 맞춘 한국어 수업과 TOPIK 시험 준비를 지원합니다.'],
+        ['Study in Korea', '학교·전공 탐색과 한국 대학 지원 준비를 안내합니다.'],
+        ['Translation', '문서와 비즈니스 목적에 맞는 번역 및 검수를 제공합니다.']
       ],
       process: [
-        ['Level & Needs Check', '학습 수준, 목표 시험·진학 계획 또는 번역 목적과 자료를 확인합니다.'],
-        ['Learning / Work Plan', '학습 계획이나 번역 범위, 일정과 진행 방식을 협의합니다.'],
-        ['Delivery', '수업·진학 준비 또는 번역 작업을 합의한 일정과 방식에 따라 진행합니다.'],
-        ['Feedback & Next Step', '학습 피드백이나 번역 검수 의견을 반영하고 후속 계획을 안내합니다.']
+        ['Needs Check', '학습 목표, 진학 계획 또는 번역 요청을 확인합니다.'],
+        ['Plan', '서비스 범위와 일정, 진행 방식을 정합니다.'],
+        ['Delivery', '합의한 계획에 따라 교육·진학 준비 또는 번역을 진행합니다.']
       ],
-      scope: ['한국어 학습 및 TOPIK 목표별 준비', '한국 대학 진학 준비 관련 정보와 절차 안내', '해외 교육기관과의 교육 협력 및 학생 연계', '문서 목적에 맞춘 전문 번역과 검수']
+      scope: ['한국어 교육 및 TOPIK 준비', '한국 대학 진학 정보와 지원 안내', '문서·비즈니스 번역 및 검수']
     }
   };
+
+  // Saved selections are kept by service area, so moving between areas never
+  // overwrites another area's quote. Saving again replaces only that area's items.
+  window.__ieumSavedQuotes = window.__ieumSavedQuotes || {};
+  const quoteAreaNames = {
+    settlement: 'Settlement Service',
+    consulting: 'Consulting Service',
+    concierge: 'Concierge Service',
+    education: 'Education & Translation'
+  };
+  function getSavedQuoteBundle() {
+    const areas = Object.entries(window.__ieumSavedQuotes || {}).filter(([, quote]) => quote && quote.services && quote.services.length);
+    const services = areas.flatMap(([key, quote]) => quote.services.map(item => ({...item, area:key, areaTitle:quoteAreaNames[key] || key})));
+    return {
+      areas,
+      services,
+      subtotal: services.reduce((sum, item) => sum + Number(item.amount || 0), 0),
+      currency: 'USD'
+    };
+  }
+  function renderSavedFindYourQuote() {
+    const title=document.getElementById('find-quote-service-title');
+    const lines=document.getElementById('find-quote-lines');
+    const count=document.getElementById('find-quote-item-count');
+    const total=document.getElementById('find-quote-total');
+    const note=document.getElementById('find-quote-disclaimer');
+    const proceed=document.getElementById('find-quote-proceed');
+    if(!title||!lines||!count||!total||!proceed)return;
+    const bundle=getSavedQuoteBundle();
+    const areaCount=bundle.areas.length;
+    title.textContent=areaCount ? (areaCount===1 ? bundle.areas[0][1].title || quoteAreaNames[bundle.areas[0][0]] : `${areaCount} Service Areas Selected`) : 'Select a service to begin';
+    count.textContent=`${bundle.services.length} ITEM${bundle.services.length===1?'':'S'}`;
+    lines.innerHTML=bundle.services.length ? bundle.areas.map(([key, quote]) => {
+      const areaItems=quote.services.map(item=>`<div class="flex items-start justify-between gap-3 border-b border-dashed border-neutral-100 pb-3"><div class="min-w-0"><p>${item.name}${Number(item.quantity)>1?` <span class="text-neutral-400">× ${item.quantity}</span>`:''}</p></div><div class="flex shrink-0 items-center gap-3"><strong class="text-neutral-900">$${Number(item.amount).toFixed(2)}</strong><button type="button" class="remove-quote-item inline-flex h-7 w-7 items-center justify-center rounded-full border border-neutral-200 text-neutral-400 transition hover:border-red-300 hover:bg-red-50 hover:text-red-600" data-area-key="${key}" data-item-key="${item.key}" aria-label="Remove ${item.name}" title="Remove item"><i class="fa-solid fa-xmark text-xs" aria-hidden="true"></i></button></div></div>`).join('');
+      return `<div class="pt-2 first:pt-0"><p class="mb-3 text-[10px] font-bold uppercase tracking-[.16em] text-neutral-400">${quoteAreaNames[key] || key}</p><div class="space-y-3">${areaItems}</div></div>`;
+    }).join('') : '<p class="text-neutral-400">Choose services in any category, then select Save Quote. Your saved selections will appear here together.</p>';
+    total.textContent=bundle.services.length?`$${bundle.subtotal.toFixed(2)} USD`:'$0.00 USD';
+    note.textContent='Your saved selections from all service areas are combined here. Prices are indicative only; IEUM will review your requirements and confirm the final quotation.';
+    proceed.disabled=!bundle.services.length;
+    window.__ieumFindQuoteType='saved';
+  }
+  // Remove an individual saved service and recalculate the combined estimate.
+  document.getElementById('find-quote-lines')?.addEventListener('click', event => {
+    const button = event.target.closest('.remove-quote-item');
+    if (!button) return;
+    const areaKey = button.dataset.areaKey;
+    const itemKey = button.dataset.itemKey;
+    const quote = window.__ieumSavedQuotes[areaKey];
+    if (!quote) return;
+    quote.services = quote.services.filter(item => String(item.key) !== String(itemKey));
+    if (!quote.services.length) delete window.__ieumSavedQuotes[areaKey];
+    else quote.subtotal = quote.services.reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+    // Keep the currently open service builder in sync with the saved quote.
+    if (window.__ieumCurrentServiceKey === areaKey) {
+      const selector = areaKey === 'settlement'
+        ? `#settlement-price-builder input[data-price-item="${CSS.escape(itemKey)}"]`
+        : `#custom-service-options input[data-custom-item="${CSS.escape(itemKey)}"]`;
+      const sourceInput = document.querySelector(selector);
+      if (sourceInput) {
+        sourceInput.checked = false;
+        if (areaKey === 'settlement') updateSettlementEstimate();
+        else updateCustomEstimate();
+      }
+    }
+    renderSavedFindYourQuote();
+  });
+
+  function saveCurrentQuote(areaKey, quote) {
+    if(!quote || !quote.services || !quote.services.length) return;
+    window.__ieumSavedQuotes[areaKey] = {
+      title: quoteAreaNames[areaKey] || areaKey,
+      services: quote.services.map(item=>({...item})),
+      subtotal: Number(quote.subtotal || 0),
+      currency: 'USD',
+      isCustom: areaKey !== 'settlement'
+    };
+    renderSavedFindYourQuote();
+    const findQuote=document.getElementById('find-your-quote');
+    findQuote?.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  document.getElementById('find-quote-proceed')?.addEventListener('click',()=>{
+    const bundle=getSavedQuoteBundle();
+    if(!bundle.services.length) return;
+    showIEUMSelectionReceipt(bundle, 'All Selected Service Areas', bundle.areas.some(([,quote])=>quote.isCustom));
+  });
+  renderSavedFindYourQuote();
 
   const openDetail = (key) => {
     const data = serviceDetails[key];
     if (!data) return;
     document.getElementById('service-detail-title').textContent = data.title;
+    const settlementBuilder = document.getElementById('settlement-price-builder');
+    const customBuilder = document.getElementById('custom-service-builder');
+    if (settlementBuilder) settlementBuilder.classList.toggle('hidden', key !== 'settlement');
+    if (customBuilder) customBuilder.classList.toggle('hidden', !['consulting','concierge','education'].includes(key));
+    if (key === 'settlement') {
+      window.__ieumQuoteDraft = null;
+      updateSettlementEstimate();
+    } else {
+      window.__ieumQuoteDraft = null;
+      renderCustomServiceOptions(key);
+    }
     document.getElementById('service-detail-intro').textContent = data.intro;
     document.getElementById('service-detail-offerings').innerHTML = data.offerings.map((item, i) =>
       `<article class="detail-offer-card"><span class="offer-no">SERVICE 0${i+1}</span><h3>${item[0]}</h3><p>${item[1]}</p></article>`
@@ -1034,6 +1320,178 @@ We provide comprehensive settlement services for international students and glob
     navigateTo('service-detail');
     history.replaceState({page:'service-detail', service:key}, '', '#service-' + key);
   };
+
+  // Draft indicative catalogues for the other service areas. Prices are editable placeholders.
+  const customCatalog = {
+    consulting: [
+      ['business_strategy','Business & Partnership Consulting','한국 시장 진출 및 현지 파트너십 상담',199,'/ project'],
+      ['university_admissions','University Admissions Consulting','한국 대학·대학원 선택 및 진학 상담',89,'/ session'],
+      ['application_support','Application & Expert Support','지원 서류·일정 점검 및 필요 전문가 연결',59,'/ application']
+    ],
+    concierge: [
+      ['airport_pickup','Airport Pickup & Meeting','공항 도착 미팅 및 지정 장소까지 픽업 지원 · 차량 운임 별도',119.9,'/ arrival'],
+      ['sim_setup','SIM & eSIM Setup','3개월 유심 개통 및 셋업 비용 포함(5G 무료 수신전화/문자 가능)',66.6,'/ 3 months'],
+      ['banking','Bank Assistance','은행 계좌 개설 안내 및 은행 방문 1시간 동행 포함',49.9,'/ case'],
+      ['administrative_support','Administrative Support','생활 관련 기본 행정 절차·방문 일정·예약 지원',39,'/ request'],
+      ['personal_assistance','Personal Assistance','월 6시간 생활 업무 동행 및 통역·개별 요청 지원 포함',199.9,'/ month']
+    ],
+    education: [
+      ['korean_topik','Korean Language & TOPIK','목표 수준별 한국어 수업 및 TOPIK 준비',29,'/ session'],
+      ['university_preparation','Study in Korea Support','학교·전공 탐색 및 대학 지원 안내',79,'/ case'],
+      ['translation','Professional Translation','문서·비즈니스 번역 및 검수 · 최종 비용 별도 협의',30,'/ from']
+    ]
+  };
+  const customServiceTitles = {consulting:'Consulting Service',concierge:'Concierge Service',education:'Education & Translation'};
+  function renderCustomServiceOptions(key) {
+    const host = document.getElementById('custom-service-options');
+    const list = customCatalog[key] || [];
+    if (!host) return;
+    host.innerHTML = list.map(item => `<label class="settlement-price-option"><input type="checkbox" data-custom-item="${item[0]}" data-price="${item[3]}" data-name="${item[1]}"><span class="settlement-option-copy"><strong>${item[1]}</strong><small>${item[2]}</small></span><b>$${item[3]} <small>${item[4]}</small></b></label>`).join('');
+    document.getElementById('custom-selected-list').innerHTML = '<p class="text-white/50">No services selected yet.</p>';
+    document.getElementById('custom-estimate-total').textContent = 'Custom Quote';
+    document.getElementById('custom-save-quote').disabled = true;
+    window.__ieumCustomQuote = null;
+    window.__ieumCurrentServiceKey = key;
+    renderSavedFindYourQuote();
+  }
+  function updateCustomEstimate() {
+    const selected = [...document.querySelectorAll('#custom-service-options input[data-custom-item]:checked')];
+    const services = selected.map(input => ({key:input.dataset.customItem,name:input.dataset.name,quantity:1,amount:Number(input.dataset.price)}));
+    const total = services.reduce((sum,item)=>sum+item.amount,0);
+    document.getElementById('custom-selected-list').innerHTML = services.length ? services.map(item=>`<div class="flex justify-between gap-3"><span>${item.name}</span><strong class="whitespace-nowrap">$${item.amount.toFixed(2)}</strong></div>`).join('') : '<p class="text-white/50">No services selected yet.</p>';
+    document.getElementById('custom-estimate-total').textContent = services.length ? `$${total.toFixed(2)}*` : 'Custom Quote';
+    document.getElementById('custom-save-quote').disabled = !services.length;
+    window.__ieumCustomQuote = {serviceKey:window.__ieumCurrentServiceKey,services,subtotal:total,currency:'USD'};
+    document.getElementById('custom-save-quote').disabled = !services.length;
+  }
+  document.addEventListener('change',event=>{if(event.target.closest('#custom-service-options')) updateCustomEstimate();});
+  document.getElementById('custom-save-quote')?.addEventListener('click',event=>{
+    event.preventDefault(); event.stopPropagation();
+    const quote=window.__ieumCustomQuote; if(!quote || !quote.services.length) return;
+    saveCurrentQuote(quote.serviceKey, quote);
+  },true);
+
+  const settlementLabels = {
+    home_brief: 'Basic',
+    core_plus: 'Standard',
+    full_care: 'Premium'
+  };
+  function updateSettlementEstimate() {
+    const panel = document.getElementById('settlement-price-builder');
+    if (!panel) return;
+    const selected = [...panel.querySelectorAll('input[data-price-item]:checked')];
+    const hours = 1;
+    let total = 0;
+    const lines = selected.map(input => {
+      const key = input.dataset.priceItem;
+      const amount = Number(input.dataset.price);
+      total += amount;
+      return `<div class="flex justify-between gap-3"><span>${settlementLabels[key]}</span><strong class="whitespace-nowrap">$${amount.toFixed(2)}</strong></div>`;
+    });
+    document.getElementById('settlement-selected-list').innerHTML = lines.length ? lines.join('') : '<p class="text-white/50">No services selected yet.</p>';
+    document.getElementById('settlement-estimate-total').textContent = `$${total.toFixed(2)}`;
+    document.getElementById('settlement-save-quote').disabled = selected.length === 0;
+    window.__ieumSettlementQuote = {
+      services: selected.map(input => ({key: input.dataset.priceItem, name: settlementLabels[input.dataset.priceItem],
+        quantity: 1,
+        amount: Number(input.dataset.price)})),
+      subtotal: total,
+      currency: 'USD'
+    };
+    document.getElementById('settlement-save-quote').disabled = selected.length === 0;
+  }
+  document.addEventListener('change', event => {
+    if (event.target.closest('#settlement-price-builder')) updateSettlementEstimate();
+  });
+  function showIEUMSelectionReceipt(quote, serviceTitle, isCustom) {
+    window.__ieumQuoteDraft = null;
+    let receiptOverlay = document.getElementById('settlement-receipt-modal');
+    if (!receiptOverlay) {
+      receiptOverlay = document.createElement('div');
+      receiptOverlay.id = 'settlement-receipt-modal';
+      receiptOverlay.className = 'fixed inset-0 z-[9999] hidden items-center justify-center bg-black/60 p-3 sm:p-6';
+      receiptOverlay.setAttribute('role','dialog'); receiptOverlay.setAttribute('aria-modal','true');
+      receiptOverlay.setAttribute('aria-labelledby','settlement-receipt-title');
+      receiptOverlay.innerHTML='<div class="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white shadow-2xl"><button type="button" id="settlement-receipt-close" aria-label="Close receipt" class="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"><i class="fa-solid fa-xmark"></i></button><section id="settlement-selection-receipt" class="overflow-hidden rounded-3xl"></section></div>';
+      document.body.appendChild(receiptOverlay);
+      receiptOverlay.addEventListener('click',e=>{if(e.target===receiptOverlay) closeIEUMReceipt();});
+      receiptOverlay.querySelector('#settlement-receipt-close').addEventListener('click',closeIEUMReceipt);
+    }
+    const receipt=document.getElementById('settlement-selection-receipt');
+    const receiptDate=new Date().toLocaleString(undefined,{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    const receiptNo='IEUM-'+new Date().toISOString().replace(/[-:T.Z]/g,'').slice(0,14);
+    const rows=quote.services.map(item=>`<div class="grid grid-cols-[minmax(0,1fr)_auto_auto] items-start gap-3 border-b border-dashed border-neutral-200 py-4 text-sm"><div class="min-w-0"><p class="text-[10px] font-bold uppercase tracking-wider text-neutral-400">${item.areaTitle || serviceTitle}</p><p class="mt-1 font-semibold text-neutral-900">${item.name}</p><p class="mt-1 text-xs text-neutral-500">$${(Number(item.amount)/Math.max(1,Number(item.quantity||1))).toFixed(2)} × ${Number(item.quantity||1)}</p></div><span class="whitespace-nowrap text-xs text-neutral-500">${Number(item.quantity||1)}</span><strong class="whitespace-nowrap text-neutral-900">$${Number(item.amount).toFixed(2)}</strong></div>`).join('');
+    receipt.innerHTML=`<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-neutral-950 px-6 py-6 sm:px-8 text-white"><div><p class="text-[10px] font-mono tracking-[.24em] text-amber-300">IEUM · SERVICE SELECTION</p><h3 id="settlement-receipt-title" class="mt-2 text-2xl font-bold tracking-tight">Selection Receipt</h3><p class="mt-1 text-xs text-white/55">${serviceTitle}</p></div><div class="text-left sm:text-right text-xs text-white/65"><p>Receipt No. <span class="text-white">${receiptNo}</span></p><p class="mt-1">${receiptDate}</p></div></div><div class="px-6 py-6 sm:px-8"><div class="grid grid-cols-[minmax(0,1fr)_auto_auto] gap-3 border-b border-neutral-300 pb-3 text-[10px] font-bold uppercase tracking-wider text-neutral-400"><span>Selected service</span><span>Qty</span><span>Amount</span></div>${rows}<div class="ml-auto mt-6 max-w-sm space-y-2"><div class="flex justify-between text-sm text-neutral-500"><span>Estimated subtotal</span><span>$${quote.subtotal.toFixed(2)}</span></div><div class="flex justify-between border-t border-neutral-200 pt-4 text-lg font-extrabold text-neutral-950"><span>Estimated Total (USD)</span><span>$${quote.subtotal.toFixed(2)} USD</span></div></div><div class="mt-6 rounded-xl bg-neutral-50 p-4 text-xs leading-relaxed text-neutral-500">This is an inquiry summary of all saved services and indicative prices. It is not a payment receipt, confirmed quotation, or booking confirmation. IEUM will review your requirements and confirm the final quotation.</div><div class="mt-5 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3"><p class="text-[11px] text-neutral-400">Thank you for choosing IEUM.</p><button type="button" id="settlement-edit-selection" class="rounded-full bg-neutral-950 px-7 py-3 text-xs font-bold tracking-wide text-white hover:bg-neutral-700 transition">Continue to Inquiry <i class="fa-solid fa-arrow-right ml-2"></i></button></div></div>`;
+    receiptOverlay.classList.remove('hidden'); receiptOverlay.classList.add('flex'); document.body.classList.add('overflow-hidden');
+    document.getElementById('settlement-edit-selection')?.addEventListener('click',()=>{
+      closeIEUMReceipt();
+      const details=quote.services.map(item=>`${item.areaTitle || serviceTitle} — ${item.name} x ${Number(item.quantity||1)}: $${Number(item.amount).toFixed(2)}`).join('\n');
+      const message=document.querySelector('#ieum-quote-request-form textarea[name="Additional Message"]');
+      if(message) message.value=`Selected service areas: ${[...new Set(quote.services.map(item=>item.areaTitle || serviceTitle))].join(', ')}\nAll selected services:\n${details}\nIndicative subtotal: $${Number(quote.subtotal).toFixed(2)} USD\nPlease review and provide the final quotation.`;
+      const selected=document.getElementById('ieum-form-selected-services'); if(selected) selected.value=quote.services.map(item=>`${item.areaTitle || serviceTitle}: ${item.name}`).join('; ');
+      const total=document.getElementById('ieum-form-estimated-total'); if(total) total.value=`Indicative only: $${Number(quote.subtotal).toFixed(2)} USD`;
+      const detail=document.getElementById('ieum-form-quote-details'); if(detail) detail.value=details;
+      const submit=document.getElementById('ieum-quote-form-submit'); if(submit) submit.innerHTML='Submit Quote Request <i class="fa-solid fa-arrow-right ml-2"></i>';
+      window.__ieumQuoteDraft=null;
+      if(typeof navigateTo==='function') navigateTo('contact');
+      setTimeout(()=>{const target=document.getElementById('ieum-quote-request-form')||document.getElementById('contact');target?.scrollIntoView({behavior:'smooth',block:'start'});},120);
+    },{once:true});
+    document.getElementById('settlement-receipt-close')?.focus();
+  }
+  function closeIEUMReceipt(){const modal=document.getElementById('settlement-receipt-modal');if(modal){modal.classList.add('hidden');modal.classList.remove('flex');}document.body.classList.remove('overflow-hidden');}
+  document.getElementById('settlement-save-quote')?.addEventListener('click',event=>{
+    event.preventDefault();event.stopPropagation();
+    const quote=window.__ieumSettlementQuote;if(!quote||!quote.services.length)return;
+    saveCurrentQuote('settlement', quote);
+  },true);
+  document.addEventListener('keydown', (event) => {
+    const modal = document.getElementById('settlement-receipt-modal');
+    if (event.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+    }
+  });
+
+
+  // All selected service plans are inquiry-only for now. Payment integration will be added after the website is finalized.
+  const ieumQuoteForm = document.getElementById('ieum-quote-request-form');
+  if (ieumQuoteForm) {
+    ieumQuoteForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const status = document.getElementById('ieum-quote-form-status');
+      const submit = document.getElementById('ieum-quote-form-submit');
+      const data = new FormData(ieumQuoteForm);
+      submit.disabled = true;
+      submit.textContent = 'Sending...';
+      status.textContent = 'Sending your inquiry to IEUM...';
+      status.className = 'text-sm text-neutral-600';
+      try {
+        const response = await fetch(ieumQuoteForm.action, {
+          method: 'POST',
+          body: data,
+          headers: {'Accept': 'application/json'}
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.success === 'false' || result.success === false) {
+          throw new Error(result.message || 'The form service did not accept the request.');
+        }
+        status.textContent = 'Your inquiry has been submitted. IEUM will contact you after reviewing your request.';
+        status.className = 'text-sm text-green-700';
+        ieumQuoteForm.reset();
+        window.__ieumQuoteDraft = null;
+        submit.innerHTML = 'Submit Inquiry <i class="fa-solid fa-arrow-right ml-2"></i>';
+      } catch (error) {
+        console.error('IEUM quote submission error:', error);
+        status.textContent = error.message || 'We could not submit your request. Please try again or email ieumcorporation@gmail.com.';
+        status.className = 'text-sm text-red-700';
+      } finally {
+        submit.disabled = false;
+        submit.innerHTML = 'Submit Inquiry <i class="fa-solid fa-arrow-right ml-2"></i>';
+      }
+    });
+  }
+
   window.openIEUMServiceDetail = openDetail;
 
   document.querySelectorAll('#page-services #svc-grid .svc-card[data-hero]:not(.overview)').forEach(card => {
