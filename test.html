@@ -1024,7 +1024,7 @@ html:has(#page-home.active) { scroll-snap-type: y proximity; scroll-padding-top:
 <button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none inline-flex items-center gap-2" id="nav-services" type="button" aria-haspopup="true" aria-expanded="false" onclick="navigateTo('services')">Business Area <i class="fa-solid fa-chevron-down text-[9px] transition-transform" aria-hidden="true"></i></button>
 <div class="nav-dropdown-menu" role="menu" aria-label="Business Area services">
 <button type="button" role="menuitem" onclick="openIEUMServiceDetail('consulting')"><span>Consulting Service</span><small>Business &amp; university consulting</small></button>
-<button type="button" role="menuitem" onclick="showIEUMSettlementTable()"><span>Settlement Service</span><small>Housing and daily-life support</small></button>
+<button type="button" role="menuitem" onclick="openIEUMServiceDetail('settlement')"><span>Settlement Service</span><small>Housing and daily-life support</small></button>
 <button type="button" role="menuitem" onclick="openIEUMServiceDetail('concierge')"><span>Concierge Service</span><small>Personal assistance in Korea</small></button>
 <button type="button" role="menuitem" onclick="openIEUMServiceDetail('education')"><span>Education &amp; Translation</span><small>Language learning and translation</small></button>
 </div></div><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-global" onclick="navigateTo('global')">Global Network</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-contact" onclick="navigateTo('contact')">Q&amp;A</button></nav><div class="flex items-center space-x-3 sm:space-x-4"><button id="ieum-plan-open" type="button" onclick="IEUMProposal.open()">My IEUM Plan <span id="ieum-plan-count">(0)</span></button><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('services'); closeMobileMenu();">Business Area</button>
@@ -2365,4 +2365,88 @@ function closeIEUMSettlementTable(){
  function attach(){document.querySelectorAll('#ieum-settlement-inline-panel,#ieum-other-inline-panel,#ieum-detail-comparison').forEach(el=>{if(el.querySelector('.ieum-make-quote-btn'))return;const b=document.createElement('button');b.type='button';b.className='ieum-make-quote-btn';b.textContent='Make My Quote →';b.onclick=()=>{let area='settlement';if(el.id==='ieum-other-inline-panel'){const title=document.getElementById('ieum-inline-title')?.textContent||'';area=title.includes('Consulting')?'consulting':title.includes('Concierge')?'concierge':'education'}else if(el.id==='ieum-detail-comparison'){area=el.dataset.area||location.hash.match(/service-(consulting|settlement|concierge|education)/)?.[1]||'settlement'}window.openIEUMQuote(area)};el.append(b)});}
  document.addEventListener('DOMContentLoaded',()=>{attach();render();const header=document.getElementById('ieum-plan-open');if(header){const b=document.createElement('button');b.type='button';b.textContent='Make My Quote';b.className='ieum-header-quote';b.style.cssText='margin-right:12px;color:#e0bc7f;font-size:12px;font-weight:700';b.onclick=()=>window.openIEUMQuote();header.before(b)}const mo=new MutationObserver(()=>attach());mo.observe(document.getElementById('ieum-detail-comparison'),{childList:true});});
 })();
-</script></body></html>
+</script>
+<style id="ieum-navigation-repair-css">
+/* Keep the comparison panels visible after Explore; hide only plan selectors on Home. */
+#page-home.active #ieum-settlement-inline-panel:not(.hidden),
+#page-home.active #ieum-other-inline-panel:not(.hidden){display:block!important;visibility:visible!important;opacity:1!important;}
+#page-home #ieum-settlement-inline-panel.hidden,
+#page-home #ieum-other-inline-panel.hidden{display:none!important;}
+#page-home .ieum-card-link{position:relative;z-index:5;pointer-events:auto;}
+</style>
+<script id="ieum-navigation-repair">
+(function(){
+  function scrollToComparison(panel){
+    if(!panel)return;
+    panel.classList.remove('hidden');
+    panel.style.removeProperty('display');
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      const top=panel.getBoundingClientRect().top+window.scrollY-105;
+      window.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+    });});
+  }
+  // Homepage Explore buttons should reveal the existing comparison tables, not the quote form.
+  window.showIEUMSettlementTable=function(){
+    const panel=document.getElementById('ieum-settlement-inline-panel');
+    document.getElementById('ieum-other-inline-panel')?.classList.add('hidden');
+    scrollToComparison(panel);
+  };
+  const showOther=window.showIEUMServicePlans;
+  if(typeof showOther==='function'){
+    window.showIEUMServicePlans=function(key){
+      try{showOther(key)}catch(err){console.error('Comparison rendering:',err)}
+      scrollToComparison(document.getElementById('ieum-other-inline-panel'));
+    };
+  }
+  // Route Settlement using the same service-detail entry point as the other cards.
+  // The window capture listener runs before card-level handlers and avoids competing listeners.
+  function openSettlementSafely(){
+    try {
+      if (typeof window.openIEUMServiceDetail === 'function') {
+        window.openIEUMServiceDetail('settlement');
+      }
+    } catch (error) {
+      console.error('Settlement detail initialization:', error);
+    }
+    // Navigation must not depend on legacy pricing/quote widgets.
+    const detail=document.getElementById('page-service-detail');
+    if (!detail) return;
+    document.querySelectorAll('.page-view').forEach(p=>p.classList.toggle('active',p===detail));
+    document.querySelectorAll('.nav-link').forEach(a=>a.classList.remove('active'));
+    try {
+      if (typeof history.replaceState === 'function')
+        history.replaceState({page:'service-detail',service:'settlement'},'','#service-settlement');
+    } catch (_) {}
+    const source=document.querySelector('#ieum-settlement-inline-panel table');
+    const target=document.getElementById('ieum-detail-comparison');
+    if(target && source && target.dataset.area!=='settlement'){
+      target.innerHTML='<div class="detail-section-heading"><span>04 / SERVICE PLANS</span><h2>Compare Our Plans</h2></div>';
+      const wrap=document.createElement('div');
+      wrap.className='mt-7 overflow-x-auto rounded-2xl border border-neutral-200';
+      wrap.appendChild(source.cloneNode(true));
+      target.appendChild(wrap);
+      target.dataset.area='settlement';
+    }
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('click',function(event){
+    const target=event.target;
+    if(!(target instanceof Element))return;
+    const card=target.closest('#page-services #svc-grid .svc-card.settlement');
+    if(!card)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    openSettlementSafely();
+  },true);
+  window.addEventListener('keydown',function(event){
+    const target=event.target;
+    if(!(target instanceof Element))return;
+    const card=target.closest('#page-services #svc-grid .svc-card.settlement');
+    if(!card || event.target!==card || !['Enter',' '].includes(event.key))return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    openSettlementSafely();
+  },true);
+})();
+</script>
+</body></html>
