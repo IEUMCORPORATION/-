@@ -1034,7 +1034,36 @@ table.ieum-price-clarity tbody tr:not(:first-child) > * { border-bottom:1px soli
 </style>
 <style id="ieum-account-language-style">
 .ieum-utility{display:flex;align-items:center;gap:8px}.ieum-utility select,.ieum-login-btn{background:#171717;color:#fff;border:1px solid #68604f;border-radius:5px;padding:8px;font-size:12px;cursor:pointer}.ieum-login-btn:hover{border-color:#c8a96a}.ieum-auth-backdrop{position:fixed;inset:0;background:#000a;z-index:99999;display:none;align-items:center;justify-content:center;padding:16px}.ieum-auth-backdrop.open{display:flex}.ieum-auth-panel{background:#fff;color:#171717;border-radius:12px;padding:28px;width:min(420px,100%);box-shadow:0 15px 60px #0006}.ieum-auth-panel input{display:block;width:100%;border:1px solid #ccc;padding:12px;margin:10px 0;border-radius:5px;color:#111}.ieum-auth-panel button{cursor:pointer}.ieum-auth-primary{background:#1a1a1a;color:#fff;width:100%;padding:12px;border-radius:5px;margin-top:12px}.ieum-auth-note{font-size:12px;color:#666;line-height:1.6;margin-top:12px}.ieum-auth-link{color:#88692f;text-decoration:underline;font-size:13px}.ieum-auth-error{font-size:13px;color:#a22;min-height:18px;margin-top:8px}@media(max-width:767px){.ieum-utility select,.ieum-login-btn{padding:6px;font-size:11px}.ieum-utility{gap:4px}}
-</style></head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><div class="nav-dropdown relative" id="business-area-dropdown">
+</style><style id="ieum-education-table-layout">
+/* Two-service comparison: three balanced columns, same visual language as other plans. */
+#page-home table.ieum-education-table, #page-service-detail table.ieum-education-table {
+  width:100%!important; min-width:690px!important; table-layout:fixed!important;
+  border-collapse:separate!important; border-spacing:0!important; font-size:14px!important;
+}
+#page-home table.ieum-education-table tr > :first-child,
+#page-service-detail table.ieum-education-table tr > :first-child {width:26%!important;}
+#page-home table.ieum-education-table tr > :nth-child(2),
+#page-home table.ieum-education-table tr > :nth-child(3),
+#page-service-detail table.ieum-education-table tr > :nth-child(2),
+#page-service-detail table.ieum-education-table tr > :nth-child(3) {width:37%!important;}
+#page-home table.ieum-education-table th, #page-home table.ieum-education-table td,
+#page-service-detail table.ieum-education-table th, #page-service-detail table.ieum-education-table td {
+  padding:18px 22px!important; line-height:1.65!important; overflow-wrap:break-word!important;
+  word-break:normal!important; white-space:normal!important; vertical-align:middle!important;
+}
+#page-home table.ieum-education-table thead th,
+#page-service-detail table.ieum-education-table thead th {background:#f6f2e9!important; color:#25211c!important; font-weight:750!important;}
+#page-home table.ieum-education-table tbody tr:nth-child(even) td,
+#page-service-detail table.ieum-education-table tbody tr:nth-child(even) td {background:#fcfaf6!important;}
+#page-home table.ieum-education-table tbody tr:first-child > *,
+#page-service-detail table.ieum-education-table tbody tr:first-child > * {background:#f8f2e7!important;}
+@media(max-width:767px){
+ #page-home table.ieum-education-table,#page-service-detail table.ieum-education-table{min-width:690px!important;font-size:13px!important;}
+ #page-home table.ieum-education-table th,#page-home table.ieum-education-table td,
+ #page-service-detail table.ieum-education-table th,#page-service-detail table.ieum-education-table td{padding:15px 16px!important;}
+}
+</style>
+</head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><div class="nav-dropdown relative" id="business-area-dropdown">
 <button aria-expanded="false" aria-haspopup="true" class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none inline-flex items-center gap-2" id="nav-services" onclick="navigateTo('home'); setTimeout(()=&gt;document.getElementById('ieum-home-services')?.scrollIntoView({behavior:'smooth'}),90)" type="button">Our Services<i aria-hidden="true" class="fa-solid fa-chevron-down text-[9px] transition-transform"></i></button>
 <div aria-label="Our Services navigation" class="nav-dropdown-menu" role="menu">
 <button onclick="openIEUMServiceDetail('consulting')" role="menuitem" type="button"><span>Consulting Service</span><small>Business &amp; university consulting</small></button>
@@ -1162,7 +1191,7 @@ table.ieum-price-clarity tbody tr:not(:first-child) > * { border-bottom:1px soli
 <th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-800 sm:px-7">Property &amp; area check</th>
 <td class="px-4 py-4 text-neutral-300">—</td>
 <td class="px-4 py-4">Visits to 3 selected properties and checks of their surrounding areas</td>
-<td class="px-4 py-4">Accompanied visits to all properties selected by the client<br/><b class="mt-1 block text-neutral-800">Maximum 4 hours of accompaniment</b></td>
+<td class="px-4 py-4">We analyze your budget and present suitable properties ranked by their suitability.<br/><b class="mt-1 block text-neutral-800">Up to 4 hours of accompaniment included upon request</b></td>
 </tr>
 <tr>
 <th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-800 sm:px-7">Move-in preparation</th>
@@ -1188,7 +1217,7 @@ table.ieum-price-clarity tbody tr:not(:first-child) > * { border-bottom:1px soli
 </div>
 <div class="mt-5 flex flex-col gap-3 rounded-2xl border border-[#dfd4bf] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
 <div><p class="text-[10px] font-bold uppercase tracking-[.16em] text-[#a77d3e]">Optional Add-on</p><p class="mt-1 text-sm font-semibold text-neutral-800">Additional Accompaniment · 1 Hour</p><p class="mt-1 text-xs leading-relaxed text-neutral-500">One additional hour of in-person housing assistance. Select this option in the detailed quote builder.</p></div>
-<strong class="whitespace-nowrap text-xl text-neutral-900">$14.90 <span class="text-xs font-normal text-neutral-400">/ hour</span></strong>
+<strong class="whitespace-nowrap text-xl text-neutral-900">$19.90 <span class="text-xs font-normal text-neutral-400">/ hour</span></strong>
 </div>
 <div class="mt-3 flex flex-col gap-3 rounded-2xl border border-[#dfd4bf] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
 <div><p class="text-[10px] font-bold uppercase tracking-[.16em] text-[#a77d3e]">Optional Add-on</p><p class="mt-1 text-sm font-semibold text-neutral-800">Move-in Cleaning Service</p><p class="mt-1 text-xs leading-relaxed text-neutral-500">Move-in cleaning assistance for your new home. Service scope and scheduling are confirmed before booking.</p></div>
@@ -1289,7 +1318,7 @@ We help international students and global professionals find suitable housing th
 </label>
 <label class="settlement-price-option">
 <input data-price="199.9" data-price-item="full_care" name="housing_plan" type="radio"/>
-<span class="settlement-option-copy"><strong>Premium</strong><small>Includes Standard, accompanied visits to all client-selected properties (up to 4 hours total), unlimited property searches, key contract guidance, a move-in checklist, initial settlement support, ARC address-change guidance, and 12 months of housing follow-up care</small></span>
+<span class="settlement-option-copy"><strong>Premium</strong><small>Includes Standard, budget-based property recommendations ranked by suitability, up to 4 hours of accompaniment upon request, unlimited property searches, key contract guidance, a move-in checklist, initial settlement support, ARC address-change guidance, and 12 months of housing follow-up care</small></span>
 <b>$199.90 <small>/ plan</small></b>
 </label>
 <div class="mt-5 rounded-2xl border border-amber-200 bg-[#fcfaf6] p-4">
@@ -1858,9 +1887,8 @@ We help international students and global professionals find suitable housing th
       ['concierge_esim','eSIM Setup · 3 Months','Includes three months of SIM activation and setup; free incoming calls and text messages on 5G service',66.6,'/ 3 months']
     ],
     education:[
-      ['education_basic','Basic Education & Translation','One 50-minute lesson, level check and TOPIK guidance',29.9,'/ package'],
-      ['education_standard','Standard Education & Translation','Three lessons, study plan, practice review and up to 200 words translation',89.9,'/ package'],
-      ['education_premium','Premium Education & Translation','Eight lessons, progress review, two practice reviews and up to 500 words translation',199.9,'/ package']
+      ['education_language','Language','Online language education; scope and schedule confirmed by consultation',0,'/ custom quote'],
+      ['education_translation','Translation','Document translation; quote based on language pair and length',0,'/ custom quote']
     ]
   };
   const customServiceTitles = {consulting:'Consulting Service',concierge:'Concierge Service',education:'Education & Translation'};
@@ -2079,26 +2107,23 @@ We help international students and global professionals find suitable housing th
 const ieumTierPlans = {
  consulting:{title:'Consulting Services',unit:'/ package',prices:[39.9,99.9,199.9],rows:[
  ['Best for','Quick guidance','University application planning','Comprehensive application support'],
- ['Initial consultation','30-minute online session','60-minute online session','Two 60-minute sessions'],
- ['University / business pathway','General direction and next steps','Up to 3 suitable options','Up to 5 options with comparison'],
- ['Document & timeline review','—','One checklist and timeline review','Up to 2 document and timeline reviews'],
- ['Follow-up support','Email summary','7-day email follow-up','30-day email follow-up'] ],note:'Admissions decisions, legal advice, visa processing and third-party fees are not included.'},
+ ['Initial consultation','Chat consultation','30-minute online consultation','60-minute online consultation'],
+ ['University admissions','Basic admissions consultation','University selection consultation','Undergraduate and other academic pathway consultation'],
+ ['Document & timeline review','—','Required documents checklist provided','Dormitory move-in and required documents review'],
+ ['Follow-up support','One-time consultation','7 days of chat support','30 days of chat support'] ],note:'Admissions decisions, legal advice, visa processing and third-party fees are not included.'},
  concierge:{title:'Concierge Service',unit:'/ package',prices:[49.9,119.9,299.9],rows:[
  ['Best for','One essential task','Arrival-day assistance','Ongoing personal assistance'],
- ['Airport pickup & meeting','—','One arrival meeting and pickup coordination','One arrival meeting and pickup coordination'],
+ ['Airport pickup & meeting','—','Arrival meeting and pickup','Arrival meeting and pickup'],
  ['Bank assistance','1-hour bank visit accompaniment','1-hour bank visit accompaniment','1-hour bank visit accompaniment'],
- ['Personal assistance','—','—','6 hours of accompaniment within 30 days'],
- ['Scheduling & coordination','One appointment','Up to 2 appointments','Up to 5 appointments'],
- ['Support period','Single appointment','7 days','30 days'],
+ ['Personal assistance','Basic chat consultation','Chat consultation and booking assistance','All Standard support plus 4 hours of accompaniment within 30 days'],
+ ['Support period','One-time support','7 days of chat support','30 days of chat support'],
  ['Welcome gift','—','Included','Included'],
  ['eSIM support · 3 months','—','—','Included: eSIM activation and setup'] ],note:'Vehicle fares, transportation, bank charges and other third-party costs are separate. Premium includes eSIM activation and setup support; carrier plan fees are separate. Airport pickup is subject to location and scheduling.'},
- education:{title:'Education & Translation',unit:'/ package',prices:[29.9,89.9,199.9],rows:[
- ['Best for','One learning need','Short-term preparation','Structured learning support','Document translation'],
- ['Language lessons','One 50-minute online lesson','Three 50-minute online lessons','Eight 50-minute online lessons','—'],
- ['Learning plan','Brief level check','Personalized study plan','Personalized plan with progress review','—'],
- ['TOPIK preparation','General exam guidance','One practice review','Two practice reviews','—'],
- ['Translation assistance','—','—','—','Translation and review based on document type and length'],
- ['Support period','—','—','—','Based on project scope'] ],note:'Translation covers general non-certified text only; specialized, certified or notarized translation is quoted separately. Lessons depend on instructor availability.'}
+ education:{title:'Education & Translation',unit:'/ service',prices:[],rows:[
+ ['Service','Language','Translation'],
+ ['Description','Online language lessons and learning support','Document translation and review'],
+ ['Available languages','Korean, English, Japanese, Thai','Korean, English, Japanese, Thai'],
+ ['Service scope','Lesson schedule and learning objectives confirmed before booking','Language pair, document length and delivery schedule confirmed before booking'] ],note:'Both services are quoted individually based on the requested scope and availability.'}
 };
 function showIEUMServicePlans(key){
  const panel=document.getElementById('ieum-other-inline-panel');const plan=ieumTierPlans[key];
@@ -2107,9 +2132,11 @@ function showIEUMServicePlans(key){
  document.getElementById('ieum-inline-title').textContent=plan.title+' · Compare our plans';
  const isEducation=key==='education';
  const cells=plan.rows.map(([label,...vals])=>`<tr><th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-900">${label}</th>${vals.map((v,i)=>`<td class="px-4 py-4 leading-relaxed ${i===1?'bg-[#fcfaf5]':''}">${v}</td>`).join('')}</tr>`).join('');
- document.getElementById('ieum-inline-rows').innerHTML=`<tr class="bg-[#f5f0e6]"><th class="px-5 py-4 text-neutral-900">Plan price</th>${plan.prices.map((v,i)=>`<td class="px-4 py-4 ${i===1?'bg-[#eee5d4]':''}"><strong class="text-xl text-neutral-900">$${v.toFixed(2)}</strong><span class="block text-xs text-neutral-500">${plan.unit}</span></td>`).join('')}${isEducation?'<td class="px-4 py-4"><strong class="text-base text-neutral-900">Custom Quote</strong><span class="block text-xs text-neutral-500">/ project</span></td>':''}</tr>`+cells;
- const table=panel.querySelector('table');table.classList.add('ieum-tier-table','ieum-price-clarity');
- table.querySelector('thead').innerHTML='<tr class="bg-[#f6f2e9] text-neutral-900"><th class="px-5 py-4">Service details</th><th class="px-4 py-4">Basic</th><th class="px-4 py-4 bg-[#eee5d4]">Standard</th><th class="px-4 py-4">Premium</th>'+(isEducation?'<th class="px-4 py-4">Translation</th>':'')+'</tr>'; 
+ document.getElementById('ieum-inline-rows').innerHTML=isEducation
+ ? '<tr class="bg-[#f5f0e6]"><th class="px-5 py-4">Plan price</th><td class="px-4 py-4">$19.9 / hour</td><td class="px-4 py-4">Custom Quote</td></tr>'+plan.rows.slice(1).map(([label,...vals])=>`<tr><th class="bg-neutral-50 px-5 py-4">${label}</th>${vals.map(v=>`<td class="px-4 py-4">${v}</td>`).join('')}</tr>`).join('')
+ : `<tr class="bg-[#f5f0e6]"><th class="px-5 py-4 text-neutral-900">Plan price</th>${plan.prices.map((v,i)=>`<td class="px-4 py-4 ${i===1?'bg-[#eee5d4]':''}"><strong class="text-xl text-neutral-900">$${v.toFixed(2)}</strong><span class="block text-xs text-neutral-500">${plan.unit}</span></td>`).join('')}</tr>`+cells;
+ const table=panel.querySelector('table');table.classList.add('ieum-tier-table','ieum-price-clarity');table.classList.toggle('ieum-education-table',isEducation);
+ table.querySelector('thead').innerHTML=isEducation?'<tr class="bg-[#f6f2e9] text-neutral-900"><th class="px-5 py-4">Service details</th><th class="px-4 py-4">Language</th><th class="px-4 py-4">Translation</th></tr>':'<tr class="bg-[#f6f2e9] text-neutral-900"><th class="px-5 py-4">Service details</th><th class="px-4 py-4">Basic</th><th class="px-4 py-4 bg-[#eee5d4]">Standard</th><th class="px-4 py-4">Premium</th></tr>'; 
  panel.querySelector('.ieum-concierge-addon')?.remove();
  if(key==='concierge'){
    const addon=document.createElement('div');
@@ -2311,9 +2338,9 @@ window.IEUMPromo={
   const old=panel.querySelector('.ieum-select-row');old?.remove();
   const bar=document.createElement('div');bar.className='ieum-select-row';
   const caption=document.createElement('div');caption.className='w-full text-xs font-bold text-[#a77d3e]';caption.textContent='Select :';bar.append(caption);
-  const options=['Basic','Standard','Premium'];
-  options.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.textContent='Select '+name+' · '+money(ieumTierPlans[area].prices[i]);b.onclick=()=>add(area,name,ieumTierPlans[area].prices[i]);bar.append(b)});
-  if(area==='education'){const b=document.createElement('button');b.textContent='Select Translation · Request Quote';b.onclick=()=>add(area,'Translation',null);bar.append(b)}
+  const options=area==='education'?['Language','Translation']:['Basic','Standard','Premium'];
+  options.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.textContent=area==='education'?'Select '+name+' · Custom Quote':'Select '+name+' · '+money(ieumTierPlans[area].prices[i]);b.onclick=()=>add(area,name,area==='education'?null:ieumTierPlans[area].prices[i]);bar.append(b)});
+  
   panel.querySelector('.overflow-x-auto')?.after(bar);
   panel.querySelector('.ieum-concierge-optional-select')?.remove();
   if(area==='concierge'){
@@ -2386,12 +2413,12 @@ window.IEUMPromo={
      const plan=window.ieumTierPlans?.[key]||(typeof ieumTierPlans!=='undefined'?ieumTierPlans[key]:null);
      if(!plan)return;
      prices=plan.prices;translation=key==='education';
-     const table=document.createElement('table');table.classList.add('ieum-price-clarity');
+     const table=document.createElement('table');table.classList.add('ieum-price-clarity');if(translation)table.classList.add('ieum-education-table');
      const thead=document.createElement('thead');const hrow=document.createElement('tr');
-     ['Service details',...labels,...(translation?['Translation']:[])].forEach((name,i)=>{const th=document.createElement('th');th.textContent=name;if(i===3)th.className='premium-cell';hrow.append(th)});thead.append(hrow);table.append(thead);
+     (translation?['Service details','Language','Translation']:['Service details',...labels]).forEach((name,i)=>{const th=document.createElement('th');th.textContent=name;if(i===3&&!translation)th.className='premium-cell';hrow.append(th)});thead.append(hrow);table.append(thead);
      const tbody=document.createElement('tbody');
-     const all=[['Plan price',...prices.map(money),...(translation?['Custom Quote']:[])],...plan.rows];
-     all.forEach(row=>{const tr=document.createElement('tr');row.forEach((value,i)=>{const cell=document.createElement(i===0?'th':'td');cell.textContent=value??'—';if(i===3)cell.className='premium-cell';tr.append(cell)});tbody.append(tr)});
+     const all=translation?[['Plan price','$19.9 / hour','Custom Quote'],...plan.rows.slice(1)]:[['Plan price',...prices.map(money)],...plan.rows];
+     all.forEach(row=>{const tr=document.createElement('tr');row.forEach((value,i)=>{const cell=document.createElement(i===0?'th':'td');cell.textContent=value??'—';if(i===3&&!translation)cell.className='premium-cell';tr.append(cell)});tbody.append(tr)});
      table.append(tbody);holder.append(table);
      const note=document.createElement('p');note.className='mt-3 text-xs leading-relaxed text-neutral-500';note.textContent=plan.note;root.append(note);
    }
@@ -2407,7 +2434,7 @@ window.IEUMPromo={
 })();
 </script><script>
 (function(){
- const catalog={settlement:{title:'Settlement Service',prices:[9.9,99.9,199.9],extras:[{key:'optional_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One extra hour of in-person housing assistance.',price:14.9},{key:'optional_move_in_cleaning',name:'Move-in Cleaning Service',description:'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',price:189.9}]},concierge:{title:'Concierge Service',prices:[49.9,119.9,299.9],extras:[{key:'optional_concierge_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One additional hour of accompaniment.',price:14.9},{key:'optional_esim_3months',name:'eSIM Setup · 3 Months',description:'SIM/eSIM activation and setup assistance. Carrier charges may be separate.',price:66.6}]},consulting:{title:'Consulting Services',prices:[39.9,99.9,199.9],extras:[]},education:{title:'Education & Translation',prices:[29.9,89.9,199.9],extras:[
+ const catalog={settlement:{title:'Settlement Service',prices:[9.9,99.9,199.9],extras:[{key:'optional_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One extra hour of in-person housing assistance.',price:14.9},{key:'optional_move_in_cleaning',name:'Move-in Cleaning Service',description:'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',price:189.9}]},concierge:{title:'Concierge Service',prices:[49.9,119.9,299.9],extras:[{key:'optional_concierge_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One additional hour of accompaniment.',price:14.9},{key:'optional_esim_3months',name:'eSIM Setup · 3 Months',description:'SIM/eSIM activation and setup assistance. Carrier charges may be separate.',price:66.6}]},consulting:{title:'Consulting Services',prices:[39.9,99.9,199.9],extras:[]},education:{title:'Education & Translation',prices:[],extras:[
 {key:'education_language_korean',name:'Korean',description:'Preferred language for education or translation requests.',price:0},
 {key:'education_language_english',name:'English',description:'Preferred language for education or translation requests.',price:0},
 {key:'education_language_japanese',name:'Japanese',description:'Preferred language for education or translation requests.',price:0},
@@ -2421,21 +2448,15 @@ window.IEUMPromo={
  function saveItem(area,item){const q=saved()[area]||{title:catalog[area].title,services:[],currency:'USD'};q.services=q.services.filter(x=>x.key!==item.key);if(item.quantity>0)q.services.push(item);q.subtotal=q.services.reduce((v,x)=>v+Number(x.amount||0)*Number(x.quantity||1),0);if(q.services.length)saved()[area]=q;else delete saved()[area];window.IEUMProposal?.refresh?.();render();}
  function render(){const plan=catalog[active],tabs=document.getElementById('ieum-quote-tabs'),plans=document.getElementById('ieum-quote-plan-grid'),extras=document.getElementById('ieum-quote-option-grid');if(!tabs)return;
  tabs.replaceChildren();Object.entries(catalog).forEach(([key,v])=>{const b=document.createElement('button');b.type='button';b.textContent=v.title;b.className=key===active?'active':'';b.setAttribute('aria-pressed',String(key===active));b.onclick=()=>{active=key;render()};tabs.append(b)});
- const items=getItems();plans.replaceChildren();['Basic','Standard','Premium'].forEach((name,i)=>{const price=plan.prices[i],selected=items.some(x=>x.area===active&&x.key==='proposal_'+name.toLowerCase());const b=document.createElement('button');b.type='button';b.className='ieum-quote-plan'+(i===2?' premium':'')+(selected?' selected':'');b.innerHTML='<span>'+name+'</span><strong>'+money(price)+'</strong><small>'+(selected?'✓ Selected':'Select plan →')+'</small>';b.onclick=()=>{const q=saved()[active]||{title:plan.title,services:[],currency:'USD'};q.services=q.services.filter(x=>!x.key.startsWith('proposal_'));q.services.push({key:'proposal_'+name.toLowerCase(),name,amount:price,quantity:1,custom:false});q.subtotal=q.services.reduce((n,x)=>n+Number(x.amount||0)*Number(x.quantity||1),0);saved()[active]=q;render()};plans.append(b)});
- if(active==='education'){
- const chosen=items.some(x=>x.area==='education'&&x.key==='proposal_translation');
- const b=document.createElement('button');b.type='button';
- b.className='ieum-quote-plan'+(chosen?' selected':'');
- b.innerHTML='<span>Translation</span><strong style="font-size:16px">Custom Quote</strong><small>'+(chosen?'✓ Selected':'Request a quote →')+'</small>';
- b.onclick=()=>{
-  const q=saved().education||{title:plan.title,services:[],currency:'USD'};
-  q.services=q.services.filter(x=>!x.key.startsWith('proposal_'));
-  q.services.push({key:'proposal_translation',name:'Translation',amount:0,quantity:1,custom:true});
-  q.subtotal=q.services.reduce((n,x)=>n+Number(x.amount||0)*Number(x.quantity||1),0);
-  saved().education=q;render();
- };
- plans.append(b);
-}
+ const items=getItems();plans.replaceChildren();(active==='education'?['Language','Translation']:['Basic','Standard','Premium']).forEach((name,i)=>{
+ const isCustom=active==='education',price=plan.prices[i],key='proposal_'+name.toLowerCase();
+ const selected=items.some(x=>x.area===active&&x.key===key);
+ const b=document.createElement('button');b.type='button';b.className='ieum-quote-plan'+(!isCustom&&i===2?' premium':'')+(selected?' selected':'');
+ b.innerHTML='<span>'+name+'</span><strong>'+(isCustom?'Custom Quote':money(price))+'</strong><small>'+(selected?'✓ Selected':isCustom?'Request a quote →':'Select plan →')+'</small>';
+ b.onclick=()=>{const q=saved()[active]||{title:plan.title,services:[],currency:'USD'};
+ q.services=q.services.filter(x=>!x.key.startsWith('proposal_'));
+ q.services.push({key,name,amount:isCustom?0:price,quantity:1,custom:isCustom});
+ q.subtotal=q.services.reduce((n,x)=>n+Number(x.amount||0)*Number(x.quantity||1),0);saved()[active]=q;render()};plans.append(b)});
  extras.replaceChildren();if(!plan.extras.length){const p=document.createElement('p');p.textContent='No optional services are currently listed for this service.';p.style.cssText='font-size:13px;color:#777;padding:15px 0';extras.append(p)}
  plan.extras.forEach(extra=>{const current=items.find(x=>x.area===active&&x.key===extra.key),qty=Number(current?.quantity||0);const card=document.createElement('article');card.className='ieum-quote-option';const info=document.createElement('div');const title=document.createElement('h3');title.textContent=extra.name;const desc=document.createElement('p');desc.textContent=extra.description;info.append(title,desc);const side=document.createElement('div');const price=document.createElement('strong');price.textContent=extra.price===0?'Select Language':money(extra.price)+(extra.key.includes('accompaniment')?' / hour':'');const picker=document.createElement('div');picker.className='ieum-quote-qty';const minus=document.createElement('button');minus.type='button';minus.textContent='−';minus.disabled=qty===0;minus.setAttribute('aria-label','Decrease '+extra.name);const count=document.createElement('output');count.textContent=String(qty);const plus=document.createElement('button');plus.type='button';plus.textContent='+';plus.setAttribute('aria-label','Increase '+extra.name);minus.onclick=()=>saveItem(active,{key:extra.key,name:extra.name,amount:extra.price,quantity:Math.max(0,qty-1),custom:false});plus.onclick=()=>saveItem(active,{key:extra.key,name:extra.name,amount:extra.price,quantity:Math.min(99,qty+1),custom:false});picker.append(minus,count,plus);side.append(price,picker);card.append(info,side);extras.append(card)});
  const summary=document.getElementById('ieum-quote-summary-lines');summary.replaceChildren();if(!items.length){const p=document.createElement('p');p.textContent='No services selected yet.';p.style.cssText='color:#888;font-size:12px;margin-top:22px';summary.append(p)}items.forEach(item=>{const row=document.createElement('div');row.className='ieum-quote-summary-line';const left=document.createElement('span');left.textContent=(catalog[item.area]?.title||item.area)+' · '+item.name+(Number(item.quantity)>1?' × '+item.quantity:'');const right=document.createElement('strong');right.textContent=item.custom?'Custom Quote':money(Number(item.amount||0)*Number(item.quantity||1));const actions=document.createElement('div');actions.className='ieum-quote-summary-actions';const remove=document.createElement('button');remove.type='button';remove.className='ieum-quote-remove';remove.textContent='Remove';remove.setAttribute('aria-label','Remove '+item.name+' from estimate');remove.onclick=()=>removeEstimateItem(item.area,item.key);actions.append(right,remove);row.append(left,actions);summary.append(row)});const subtotal=items.reduce((n,x)=>n+Number(x.amount||0)*Number(x.quantity||1),0);document.getElementById('ieum-quote-total').textContent=money(window.IEUMPromo.total(subtotal));const discountLine=document.getElementById('ieum-quote-discount-line');discountLine.hidden=!window.IEUMPromo.code;document.getElementById('ieum-quote-discount').textContent='−'+money(window.IEUMPromo.discount(subtotal));
