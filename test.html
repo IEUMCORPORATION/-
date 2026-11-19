@@ -901,6 +901,19 @@ header.glass-nav .font-serif{color:#151515!important}
 #ieum-settlement-inline-panel table thead th:nth-child(4){background:#f4e7cc!important;border-top:3px solid #c49a51!important;border-left:2px solid #c49a51!important;border-right:2px solid #c49a51!important}
 #ieum-settlement-inline-panel table tbody td:nth-child(4){background:#fffbf3!important;border-left:2px solid #c49a51!important;border-right:2px solid #c49a51!important}
 #ieum-settlement-inline-panel table tbody tr:last-child td:nth-child(4){border-bottom:2px solid #c49a51!important}
+</style><style id="ieum-proposal-style">
+#ieum-plan-open{border:1px solid #b99b67;color:#e7d4b2;padding:10px 15px;border-radius:3px;font-size:12px;font-weight:700;white-space:nowrap}
+#ieum-plan-open:hover{background:#e7d4b2;color:#111820}
+#ieum-proposal-overlay{position:fixed;inset:0;z-index:110;background:rgba(7,12,19,.72);display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(5px)}
+#ieum-proposal-overlay.open{display:flex}
+#ieum-proposal-box{background:#faf9f6;color:#19212a;width:min(780px,100%);max-height:92vh;overflow:auto;border-radius:5px;box-shadow:0 24px 90px #0005;padding:clamp(22px,5vw,46px)}
+.ieum-proposal-kicker{font-size:10px;letter-spacing:.22em;color:#987b4d;font-weight:700}
+.ieum-proposal-row{display:flex;justify-content:space-between;gap:15px;padding:17px 0;border-bottom:1px solid #e6e3db;align-items:center}
+.ieum-proposal-row button{font-size:12px;color:#9c6b3b;text-decoration:underline}
+.ieum-select-row{display:flex;gap:8px;flex-wrap:wrap;padding:15px 8px 8px}
+.ieum-select-row button{border:1px solid #cbb891;padding:10px 14px;border-radius:3px;font-size:12px;font-weight:700;color:#222}
+.ieum-select-row button:hover{background:#e9dfcd}
+@media print{body>*:not(#ieum-proposal-overlay){display:none!important}#ieum-proposal-overlay{display:block!important;position:static;background:white;padding:0}#ieum-proposal-box{max-height:none;overflow:visible;box-shadow:none;width:100%}.ieum-proposal-actions,.ieum-proposal-row button{display:none!important}}
 </style></head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><div class="nav-dropdown relative" id="business-area-dropdown">
 <button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none inline-flex items-center gap-2" id="nav-services" type="button" aria-haspopup="true" aria-expanded="false" onclick="navigateTo('services')">Business Area <i class="fa-solid fa-chevron-down text-[9px] transition-transform" aria-hidden="true"></i></button>
 <div class="nav-dropdown-menu" role="menu" aria-label="Business Area services">
@@ -908,7 +921,7 @@ header.glass-nav .font-serif{color:#151515!important}
 <button type="button" role="menuitem" onclick="showIEUMSettlementTable()"><span>Settlement Service</span><small>Housing and daily-life support</small></button>
 <button type="button" role="menuitem" onclick="openIEUMServiceDetail('concierge')"><span>Concierge Service</span><small>Personal assistance in Korea</small></button>
 <button type="button" role="menuitem" onclick="openIEUMServiceDetail('education')"><span>Education &amp; Translation</span><small>Language learning and translation</small></button>
-</div></div><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-global" onclick="navigateTo('global')">Global Network</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-contact" onclick="navigateTo('contact')">Q&amp;A</button></nav><div class="flex items-center space-x-3 sm:space-x-4"><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('services'); closeMobileMenu();">Business Area</button>
+</div></div><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-global" onclick="navigateTo('global')">Global Network</button><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-contact" onclick="navigateTo('contact')">Q&amp;A</button></nav><div class="flex items-center space-x-3 sm:space-x-4"><button id="ieum-plan-open" type="button" onclick="IEUMProposal.open()">My IEUM Plan <span id="ieum-plan-count">(0)</span></button><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('services'); closeMobileMenu();">Business Area</button>
 <div class="grid grid-cols-1 gap-1 border-b border-neutral-800 pb-3 pl-4">
 <button class="mobile-service-link" onclick="openIEUMServiceDetail('consulting'); closeMobileMenu();">Consulting Service <i class="fa-solid fa-arrow-right"></i></button>
 <button class="mobile-service-link" onclick="openIEUMServiceDetail('settlement'); closeMobileMenu();">Settlement Service <i class="fa-solid fa-arrow-right"></i></button>
@@ -1053,7 +1066,7 @@ header.glass-nav .font-serif{color:#151515!important}
       </div>
       <div class="mt-5 flex flex-col gap-3 rounded-2xl border border-[#dfd4bf] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
         <div><p class="text-[10px] font-bold uppercase tracking-[.16em] text-[#a77d3e]">Optional Add-on</p><p class="mt-1 text-sm font-semibold text-neutral-800">Additional Accompaniment · 1 Hour</p><p class="mt-1 text-xs leading-relaxed text-neutral-500">One additional hour of in-person housing assistance. Select this option in the detailed quote builder.</p></div>
-        <strong class="whitespace-nowrap text-xl text-neutral-900">$14.99 <span class="text-xs font-normal text-neutral-400">/ hour</span></strong>
+        <strong class="whitespace-nowrap text-xl text-neutral-900">$9.90 <span class="text-xs font-normal text-neutral-400">/ hour</span></strong>
       </div>
     </div>
   </section>
@@ -1141,6 +1154,8 @@ We help international students and global professionals find suitable housing th
         <ul id="service-detail-scope" class="mt-7 space-y-4"></ul>
       </div>
 
+      <section id="ieum-detail-comparison" class="rounded-[28px] bg-white py-3"></section>
+
       <section id="settlement-price-builder" class="hidden rounded-[28px] border border-neutral-200 bg-white p-6 sm:p-10 shadow-sm">
       <div class="detail-section-heading">
         <span>04 / BUILD YOUR SERVICE</span>
@@ -1168,23 +1183,23 @@ We help international students and global professionals find suitable housing th
           <div class="mt-5 rounded-2xl border border-amber-200 bg-[#fcfaf6] p-4">
             <p class="mb-3 text-xs font-bold uppercase tracking-widest text-[#99743d]">Optional Add-on</p>
             <label class="settlement-price-option">
-              <input type="checkbox" data-price-item="extra_accompaniment" data-price="14.99">
+              <input type="checkbox" data-price-item="extra_accompaniment" data-price="9.9">
               <span class="settlement-option-copy"><strong>Additional Accompaniment · 1 Hour</strong><small>Add one extra hour of in-person assistance to your housing support plan.</small></span>
-              <b>$14.99 <small>/ hour</small></b>
+              <b>$9.90 <small>/ hour</small></b>
             </label>
           </div>
           <p class="mt-3 text-[11px] leading-relaxed text-neutral-500">Property visits depend on location, landlord, and agent availability. Brokerage, legal representation, contract execution, deposits, and rent are excluded.</p>
         </div>
         <aside class="rounded-3xl bg-neutral-950 text-white p-6 sm:p-8 h-fit">
           <p class="text-xs font-mono tracking-[.2em] text-amber-300">YOUR ESTIMATE</p>
-          <p class="text-sm text-white/65 mt-3">Selected services</p>
+          <p class="text-sm text-white/65 mt-3">Your service selection</p>
           <div id="settlement-selected-list" class="mt-3 space-y-2 text-sm text-white/85"><p class="text-white/50">No services selected yet.</p></div>
           <div class="border-t border-white/15 mt-6 pt-5 flex items-end justify-between gap-3">
             <span class="text-sm text-white/70">Estimated subtotal</span>
             <strong id="settlement-estimate-total" class="text-3xl tracking-tight">$0.00</strong>
           </div>
           <p class="text-[11px] leading-relaxed text-white/55 mt-4">Prices cover IEUM housing support only. Rent, deposits, brokerage fees, utilities, government or legal fees, and other third-party charges are excluded. Property visits and final service scope require confirmation.</p>
-          <button type="button" id="settlement-save-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Save Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
+          <button type="button" id="settlement-save-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Save to My Plan <i class="fa-solid fa-arrow-right ml-2"></i></button>
         </aside>
       </div>
     </section>
@@ -1198,39 +1213,18 @@ We help international students and global professionals find suitable housing th
           <div id="custom-service-options" class="space-y-3"></div>
           <aside class="rounded-3xl bg-neutral-950 text-white p-6 sm:p-8 h-fit">
             <p class="text-xs font-mono tracking-[.2em] text-amber-300">YOUR ESTIMATE</p>
-            <p class="text-sm text-white/65 mt-3">Selected services</p>
+            <p class="text-sm text-white/65 mt-3">Your service selection</p>
             <div id="custom-selected-list" class="mt-3 space-y-2 text-sm text-white/85"><p class="text-white/50">No services selected yet.</p></div>
             <div class="border-t border-white/15 mt-6 pt-5 flex items-end justify-between gap-3">
               <span class="text-sm text-white/70">Indicative subtotal</span>
               <strong id="custom-estimate-total" class="text-2xl tracking-tight">Custom Quote</strong>
             </div>
             <p class="text-[11px] leading-relaxed text-white/55 mt-4">Displayed prices are estimates, not confirmed payment amounts. Final prices may vary with service scope, duration, document length, and third-party costs.</p>
-            <button type="button" id="custom-save-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Save Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            <button type="button" id="custom-save-quote" class="mt-6 w-full rounded-full bg-white text-black px-6 py-4 text-sm font-bold hover:bg-amber-300 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Save to My Plan <i class="fa-solid fa-arrow-right ml-2"></i></button>
           </aside>
         </div>
       </section>
-      <section id="find-your-quote" class="rounded-[28px] border border-neutral-200 bg-neutral-50 p-6 sm:p-10 shadow-sm">
-        <div class="detail-section-heading">
-          <span>05 / FIND YOUR QUOTE</span>
-          <h2>Your Journey, Your Services.</h2>
-          <p>Review your selected services and estimated total before proceeding. Your selection updates automatically as you build your service.</p>
-        </div>
-        <div class="mt-8 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-end">
-          <div class="rounded-2xl border border-neutral-200 bg-white p-5 sm:p-7">
-            <div class="flex items-center justify-between gap-3 border-b border-neutral-200 pb-4">
-              <div><p class="text-xs font-mono tracking-[.18em] text-neutral-400">QUOTE SUMMARY</p><h3 id="find-quote-service-title" class="mt-1 text-lg font-bold text-neutral-900">Select a service to begin</h3></div>
-              <span id="find-quote-item-count" class="rounded-full bg-neutral-100 px-3 py-1 text-[11px] font-semibold text-neutral-500">0 ITEMS</span>
-            </div>
-            <div id="find-quote-lines" class="min-h-[72px] space-y-3 py-4 text-sm text-neutral-600"><p class="text-neutral-400">Your selected services will appear here.</p></div>
-            <div class="flex items-center justify-between gap-4 border-t border-neutral-200 pt-4"><span class="text-sm font-semibold text-neutral-500">Estimated Total</span><strong id="find-quote-total" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-950">$0.00 USD</strong></div>
-            <p id="find-quote-disclaimer" class="mt-4 text-[11px] leading-relaxed text-neutral-400">Final pricing may vary depending on your requirements and service conditions.</p>
-          </div>
-          <div class="space-y-3 lg:min-w-[220px]">
-            <button type="button" id="find-quote-proceed" class="w-full rounded-full bg-neutral-950 px-8 py-4 text-sm font-bold tracking-wide text-white transition hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-35" disabled>Review Your Quote <i class="fa-solid fa-arrow-right ml-2"></i></button>
-            <p class="max-w-xs text-center text-[11px] leading-relaxed text-neutral-400">Review your selected services, then send an inquiry to IEUM.</p>
-          </div>
-        </div>
-      </section>
+
     </div>
   </div>
 </section>
@@ -1741,8 +1735,8 @@ We help international students and global professionals find suitable housing th
     document.getElementById('service-detail-title').textContent = data.title;
     const settlementBuilder = document.getElementById('settlement-price-builder');
     const customBuilder = document.getElementById('custom-service-builder');
-    if (settlementBuilder) settlementBuilder.classList.toggle('hidden', key !== 'settlement');
-    if (customBuilder) customBuilder.classList.toggle('hidden', !['consulting','concierge','education'].includes(key));
+    if (settlementBuilder) settlementBuilder.classList.add('hidden');
+    if (customBuilder) customBuilder.classList.add('hidden');
     if (key === 'settlement') {
       window.__ieumQuoteDraft = null;
       updateSettlementEstimate();
@@ -1825,13 +1819,19 @@ We help international students and global professionals find suitable housing th
     const selected = [...panel.querySelectorAll('input[data-price-item]:checked')];
     const hasPlan = selected.some(input => input.name === 'housing_plan');
     let total = 0;
-    const lines = selected.map(input => {
-      const key = input.dataset.priceItem;
+    const plan = selected.find(input => input.name === 'housing_plan');
+    const optional = selected.filter(input => input.name !== 'housing_plan');
+    const renderSelection = (input, label) => {
       const amount = Number(input.dataset.price);
       total += amount;
-      return `<div class="flex justify-between gap-3"><span>${settlementLabels[key]}</span><strong class="whitespace-nowrap">$${amount.toFixed(2)}</strong></div>`;
-    });
-    document.getElementById('settlement-selected-list').innerHTML = lines.length ? lines.join('') : '<p class="text-white/50">No services selected yet.</p>';
+      return `<div class="flex justify-between gap-3"><span><span class="text-amber-300 font-semibold">${label} :</span> ${settlementLabels[input.dataset.priceItem]}</span><strong class="whitespace-nowrap">$${amount.toFixed(2)}</strong></div>`;
+    };
+    const lines = [];
+    if (plan) lines.push(renderSelection(plan, 'Select Service'));
+    optional.forEach(input => lines.push(renderSelection(input, 'Optional')));
+    if (!optional.length) lines.push('<div class="text-white/50"><span class="text-amber-300 font-semibold">Optional :</span> None selected</div>');
+    if (!plan) lines.unshift('<div class="text-white/50"><span class="text-amber-300 font-semibold">Select Service :</span> Choose Basic, Standard, or Premium</div>');
+    document.getElementById('settlement-selected-list').innerHTML = lines.join('');
     document.getElementById('settlement-estimate-total').textContent = `$${total.toFixed(2)}`;
     document.getElementById('settlement-save-quote').disabled = !hasPlan;
     window.__ieumSettlementQuote = {
@@ -1998,6 +1998,10 @@ function showIEUMServicePlans(key){
   const addon=document.createElement('div');
   addon.className='ieum-concierge-addon mt-5 rounded-2xl border border-neutral-200 bg-white px-5 py-5 sm:px-7';
   addon.innerHTML='<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><div><p class="text-[10px] font-bold uppercase tracking-[.16em] text-[#a77d3e]">Optional add-on</p><p class="mt-1 text-sm font-semibold text-neutral-800">eSIM setup · 3 months</p><p class="mt-1 text-xs leading-relaxed text-neutral-500">Includes three months of SIM activation and setup; free incoming calls and text messages on 5G service</p></div><strong class="text-xl text-neutral-900">$66.60 <span class="text-xs font-normal text-neutral-400">/ 3 months</span></strong></div>';
+  const addonActions=document.createElement('div');
+  addonActions.className='mt-4 flex flex-wrap items-center gap-3';
+  addonActions.innerHTML='<span class="text-xs font-semibold text-neutral-500">Optional :</span><button type="button" class="ieum-esim-select rounded border border-[#c9aa70] px-4 py-3 text-xs font-bold text-neutral-900 hover:bg-[#f6f0e5]">Select eSIM Setup · $66.60 / 3 months</button>';
+  addon.append(addonActions);
   table.closest('.overflow-x-auto').after(addon);
  }
  panel.querySelector('.ieum-plan-note')?.remove();
@@ -2024,4 +2028,167 @@ function closeIEUMSettlementTable(){
   document.querySelector('#page-home .ieum-section-heading')?.scrollIntoView({behavior:'smooth',block:'start'});
 }
 </script>
-</body></html>
+<style>#ieum-proposal-items .ieum-proposal-row{align-items:flex-start!important}#ieum-proposal-items .ieum-proposal-row>div:first-child{min-width:0;flex:1}.ieum-invoice-scope{padding:3px 0 7px}@media print{#ieum-proposal-box{max-width:none!important}#ieum-proposal-items .ieum-proposal-row{break-inside:avoid;page-break-inside:avoid}.ieum-invoice-scope li{break-inside:avoid}}</style>
+<div id="ieum-proposal-overlay" role="dialog" aria-modal="true" aria-labelledby="ieum-proposal-title">
+ <div id="ieum-proposal-box">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:15px"><span class="ieum-proposal-kicker">IEUM / PRO FORMA INVOICE</span><button type="button" onclick="IEUMProposal.close()" aria-label="Close proposal" style="font-size:25px">&times;</button></div>
+  <h2 id="ieum-proposal-title" style="font-size:clamp(30px,5vw,44px);font-weight:500;letter-spacing:-.045em;margin:20px 0 8px">Your Service Invoice</h2>
+  <p style="color:#6b7280;font-size:13px;line-height:1.8">A detailed breakdown of your selected plans, included services and estimated charges.</p>
+  <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px;padding:14px 0;border-top:1px solid #ddd6c9;border-bottom:1px solid #ddd6c9;font-size:11px;color:#666"><div><strong style="color:#111820">ISSUED BY</strong><br>IEUM Corporation<br>ieumcorporation@gmail.com</div><div style="text-align:right"><strong style="color:#111820">DOCUMENT</strong><br>Pro Forma Invoice · USD<br><span id="ieum-invoice-date"></span></div></div><div id="ieum-proposal-items" style="margin-top:24px"></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid #d8d1c4"><strong>Estimated Total (USD)</strong><strong id="ieum-proposal-total" style="font-size:28px">$0.00</strong></div>
+  <p style="font-size:11px;color:#777;line-height:1.7">Indicative pricing only. IEUM will confirm service availability, final scope and price before payment. Custom-quote services are excluded from the numeric total.</p>
+  <div class="ieum-proposal-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px">
+   <button type="button" onclick="IEUMProposal.close()" style="padding:14px 18px;border:1px solid #aaa;font-size:12px">Continue Selecting</button>
+   <button type="button" onclick="IEUMProposal.print()" style="padding:14px 18px;border:1px solid #aaa;font-size:12px">Print / Save PDF</button>
+   <button id="ieum-proposal-proceed" type="button" onclick="IEUMProposal.proceed()" style="padding:14px 22px;background:#111820;color:#e6d0a7;font-size:12px;font-weight:700">Check Out →</button>
+  </div>
+ </div>
+</div>
+<script>
+(function(){
+ const labels={consulting:'Consulting Services',settlement:'Settlement Service',concierge:'Concierge Service',education:'Education & Translation'};
+ const money=n=>'$'+Number(n||0).toFixed(2);
+ const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
+ function scopeFor(item){
+  const tier=['Basic','Standard','Premium','Translation'].indexOf(item.name);
+  if(tier<0)return [];
+  if(item.area==='settlement'){
+   const rows=[...document.querySelectorAll('#ieum-settlement-inline-panel table tbody tr')].slice(1);
+   return rows.map(tr=>{const c=tr.children[tier+1];return {label:clean(tr.children[0]?.textContent),detail:clean(c?.textContent)}}).filter(x=>x.detail&&x.detail!=='—');
+  }
+  const plan=window.ieumTierPlans?.[item.area] || (typeof ieumTierPlans!=='undefined'?ieumTierPlans[item.area]:null);
+  return (plan?.rows||[]).map(row=>({label:row[0],detail:clean(row[tier+1])})).filter(x=>x.detail&&x.detail!=='—'&&x.label!=='Best for');
+ }
+ function scopeText(item){return scopeFor(item).map(x=>'  • '+x.label+': '+x.detail).join('\n') || 'Scope to be confirmed by IEUM.';}
+
+ const saved=()=>window.__ieumSavedQuotes||(window.__ieumSavedQuotes={});
+ const entries=()=>Object.entries(saved()).flatMap(([area,q])=>(q.services||[]).map(item=>({...item,area})));
+ function refresh(){
+  const items=entries(); const root=document.getElementById('ieum-proposal-items');
+  document.getElementById('ieum-plan-count').textContent='('+items.length+')';
+  root.replaceChildren();document.getElementById('ieum-invoice-date').textContent=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  if(!items.length){const empty=document.createElement('p');empty.textContent='No services selected yet. Explore a service and select your preferred plan.';empty.style.cssText='padding:30px 0;color:#6b7280;font-size:13px';root.append(empty)}
+  items.forEach(item=>{
+   const row=document.createElement('div');row.className='ieum-proposal-row';
+   const info=document.createElement('div');const title=document.createElement('strong');title.textContent=labels[item.area]||item.area;
+   const desc=document.createElement('p');desc.textContent=item.name+(Number(item.quantity)>1?' × '+item.quantity:'');desc.style.cssText='font-size:12px;color:#777;margin-top:5px';info.append(title,desc);
+   const scope=document.createElement('div');scope.className='ieum-invoice-scope';
+   const scopeTitle=document.createElement('div');scopeTitle.textContent='INCLUDED SERVICE SCOPE';scopeTitle.style.cssText='font-size:10px;font-weight:800;letter-spacing:.12em;color:#a77d3e;margin:13px 0 7px';scope.append(scopeTitle);
+   const details=item.key==='optional_esim_3months'?[{label:'Service',detail:'SIM/eSIM activation and initial setup assistance for 3 months; carrier fees and third-party charges may apply.'}]:scopeFor(item);
+   if(details.length){const list=document.createElement('ul');list.style.cssText='list-style:none;padding:0;margin:0;display:grid;gap:7px';details.forEach(x=>{const li=document.createElement('li');li.style.cssText='font-size:11px;line-height:1.6;color:#4b5563';const label=document.createElement('strong');label.textContent=x.label+' — ';li.append(label,document.createTextNode(x.detail));list.append(li)});scope.append(list)}
+   else {const p=document.createElement('p');p.textContent='Scope and deliverables to be confirmed by IEUM.';p.style.cssText='font-size:11px;color:#777';scope.append(p)}
+   info.append(scope);
+   const side=document.createElement('div');side.style.cssText='text-align:right;flex-shrink:0';
+   const price=document.createElement('strong');price.textContent=item.custom?'Custom Quote':money(item.amount);
+   const remove=document.createElement('button');remove.type='button';remove.textContent='Remove';remove.style.display='block';remove.style.marginLeft='auto';remove.onclick=()=>{const q=saved()[item.area];if(q){q.services=q.services.filter(x=>x.key!==item.key);if(!q.services.length)delete saved()[item.area]}refresh()};
+   side.append(price,remove);row.append(info,side);root.append(row);
+  });
+  document.getElementById('ieum-proposal-total').textContent=money(items.reduce((n,x)=>n+Number(x.amount||0),0));
+  document.getElementById('ieum-proposal-proceed').disabled=!items.length;
+  document.getElementById('ieum-proposal-proceed').style.opacity=items.length?'1':'.4';
+ }
+ function add(area,name,price){
+  const q=saved()[area]||{title:labels[area],services:[],currency:'USD'};
+  q.services=q.services.filter(x=>!x.key.startsWith('proposal_'));
+  q.services.push({key:'proposal_'+name.toLowerCase().replace(/\W+/g,'_'),name,amount:price||0,quantity:1,custom:price===null});
+  q.subtotal=q.services.reduce((n,x)=>n+Number(x.amount||0),0);saved()[area]=q;refresh();open();
+ }
+ function addOptional(area,name,price){
+  const q=saved()[area]||{title:labels[area],services:[],currency:'USD'};
+  const key='optional_esim_3months';
+  q.services=q.services.filter(x=>x.key!==key);
+  q.services.push({key,name,amount:price,quantity:1,custom:false});
+  q.subtotal=q.services.reduce((n,x)=>n+Number(x.amount||0),0);
+  saved()[area]=q;refresh();open();
+ }
+ function open(){refresh();document.getElementById('ieum-proposal-overlay').classList.add('open');document.body.style.overflow='hidden'}
+ function close(){document.getElementById('ieum-proposal-overlay').classList.remove('open');document.body.style.overflow=''}
+ window.IEUMProposal={open,close,add,addOptional,print:()=>window.print(),proceed:()=>{
+  if(!entries().length)return;
+  const summary=entries().map(x=>(labels[x.area]||x.area)+' — '+x.name+': '+(x.custom?'Custom Quote':money(x.amount))+'\n'+scopeText(x)).join('\n\n');
+  const total=entries().reduce((n,x)=>n+Number(x.amount||0),0);
+  close();window.__ieumQuoteDraft={proposal:summary,total};
+  navigator.clipboard?.writeText('IEUM Pro Forma Invoice\n'+summary+'\nEstimated total: '+money(total)).catch(()=>{});
+  const subject=encodeURIComponent('IEUM Pro Forma Invoice / Final Proposal Request');
+  const body=encodeURIComponent('Hello IEUM,\n\nI would like to request a final proposal for:\n\n'+summary+'\n\nEstimated total: '+money(total)+'\n\nName:\nContact:\nAdditional requirements:\n');
+  window.location.href='mailto:ieumcorporation@gmail.com?subject='+subject+'&body='+body;
+ }};
+ // Buttons beneath existing comparison tables; no alteration to package prices.
+ function injectButtons(){
+  const panel=document.getElementById('ieum-other-inline-panel');if(!panel||panel.classList.contains('hidden'))return;
+  const heading=document.getElementById('ieum-inline-title')?.textContent||'';
+  const area=heading.includes('Consulting')?'consulting':heading.includes('Concierge')?'concierge':'education';
+  const old=panel.querySelector('.ieum-select-row');old?.remove();
+  const bar=document.createElement('div');bar.className='ieum-select-row';
+  const caption=document.createElement('div');caption.className='w-full text-xs font-bold text-[#a77d3e]';caption.textContent='Select Service :';bar.append(caption);
+  const options=['Basic','Standard','Premium'];
+  options.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.textContent='Select '+name+' · '+money(ieumTierPlans[area].prices[i]);b.onclick=()=>add(area,name,ieumTierPlans[area].prices[i]);bar.append(b)});
+  if(area==='education'){const b=document.createElement('button');b.textContent='Select Translation · Request Quote';b.onclick=()=>add(area,'Translation',null);bar.append(b)}
+  panel.querySelector('.overflow-x-auto')?.after(bar);
+  const esim=panel.querySelector('.ieum-esim-select');if(esim)esim.onclick=()=>addOptional('concierge','eSIM Setup · 3 Months',66.6);
+ }
+ const original=window.showIEUMServicePlans;
+ if(typeof original==='function')window.showIEUMServicePlans=function(k){original(k);injectButtons()};
+ const settlement=document.getElementById('ieum-settlement-inline-panel');
+ if(settlement){const bar=document.createElement('div');bar.className='ieum-select-row';[['Basic',9.9],['Standard',99.9],['Premium',259.9]].forEach(([name,price])=>{const b=document.createElement('button');b.type='button';b.textContent='Select '+name+' · '+money(price);b.onclick=()=>add('settlement',name,price);bar.append(b)});settlement.append(bar)}
+ // Keep proposal count synchronized with the pre-existing Save Quote controls.
+ document.addEventListener('click',e=>{if(e.target.closest('#settlement-save-quote,#custom-save-quote,.remove-quote-item'))setTimeout(refresh,50)});
+ document.getElementById('ieum-proposal-overlay').addEventListener('click',e=>{if(e.target.id==='ieum-proposal-overlay')close()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+ refresh();
+})();
+</script><style>
+#ieum-detail-comparison{scroll-margin-top:110px}#ieum-detail-comparison table{min-width:760px;width:100%;border-collapse:collapse;font-size:13px}#ieum-detail-comparison th,#ieum-detail-comparison td{padding:16px;text-align:left;vertical-align:top;border:1px solid #e8e5df;line-height:1.65}#ieum-detail-comparison tbody th{background:#fafafa;font-weight:650}#ieum-detail-comparison .premium-cell{background:#fffbf3;border-left:2px solid #c49a51;border-right:2px solid #c49a51}#ieum-detail-comparison thead .premium-cell{border-top:3px solid #c49a51;background:#f4e7cc}#ieum-detail-comparison tbody tr:last-child .premium-cell{border-bottom:2px solid #c49a51}#ieum-detail-comparison .detail-select-button{border:1px solid #c9aa70;padding:12px 18px;border-radius:5px;font-size:12px;font-weight:700;background:white;color:#171717}#ieum-detail-comparison .detail-select-button:hover{background:#f6f0e5}
+</style>
+<script>
+(function(){
+ const money=n=>'$'+Number(n).toFixed(2);
+ const labels=['Basic','Standard','Premium'];
+ function makeButtons(parent,key,prices,translation){
+   const wrap=document.createElement('div');wrap.className='mt-5 flex flex-wrap gap-3 items-center';
+   const caption=document.createElement('p');caption.className='w-full text-xs font-bold text-[#a77d3e]';caption.textContent='Select Service :';wrap.append(caption);
+   labels.forEach((name,i)=>{const btn=document.createElement('button');btn.type='button';btn.className='detail-select-button';btn.textContent='Select '+name+' · '+money(prices[i]);btn.addEventListener('click',()=>window.IEUMProposal.add(key,name,prices[i]));wrap.append(btn)});
+   if(translation){const btn=document.createElement('button');btn.type='button';btn.className='detail-select-button';btn.textContent='Select Translation · Custom Quote';btn.onclick=()=>window.IEUMProposal.add(key,'Translation',null);wrap.append(btn)}
+   parent.append(wrap);
+ }
+ function render(key){
+   const root=document.getElementById('ieum-detail-comparison');if(!root)return;
+   root.replaceChildren();
+   const head=document.createElement('div');head.className='detail-section-heading';head.innerHTML='<span>04 / SERVICE PLANS</span><h2>Compare Our Plans</h2><p>The same services, scope and prices shown on our homepage.</p>';root.append(head);
+   const holder=document.createElement('div');holder.className='mt-7 overflow-x-auto rounded-2xl border border-neutral-200';root.append(holder);
+   let prices,translation=false;
+   if(key==='settlement'){
+     const source=document.querySelector('#ieum-settlement-inline-panel table');
+     if(source){const table=source.cloneNode(true);table.removeAttribute('id');holder.append(table)}
+     prices=[9.9,99.9,259.9];
+   }else{
+     const plan=window.ieumTierPlans?.[key]||(typeof ieumTierPlans!=='undefined'?ieumTierPlans[key]:null);
+     if(!plan)return;
+     prices=plan.prices;translation=key==='education';
+     const table=document.createElement('table');
+     const thead=document.createElement('thead');const hrow=document.createElement('tr');
+     ['Service details',...labels,...(translation?['Translation']:[])].forEach((name,i)=>{const th=document.createElement('th');th.textContent=name;if(i===3)th.className='premium-cell';hrow.append(th)});thead.append(hrow);table.append(thead);
+     const tbody=document.createElement('tbody');
+     const all=[['Plan price',...prices.map(money),...(translation?['Custom Quote']:[])],...plan.rows];
+     all.forEach(row=>{const tr=document.createElement('tr');row.forEach((value,i)=>{const cell=document.createElement(i===0?'th':'td');cell.textContent=value??'—';if(i===3)cell.className='premium-cell';tr.append(cell)});tbody.append(tr)});
+     table.append(tbody);holder.append(table);
+     const note=document.createElement('p');note.className='mt-3 text-xs leading-relaxed text-neutral-500';note.textContent=plan.note;root.append(note);
+   }
+   makeButtons(root,key,prices,translation);
+   if(key==='settlement'||key==='concierge'){
+     const optional=document.createElement('div');optional.className='mt-7 rounded-2xl border border-neutral-200 bg-[#fcfaf6] p-5';
+     const isSettlement=key==='settlement';
+     const name=isSettlement?'Additional Accompaniment · 1 Hour':'eSIM Setup · 3 Months';const price=isSettlement?9.9:66.6;
+     optional.innerHTML='<p class="text-xs font-bold text-[#a77d3e]">Optional :</p><p class="mt-2 font-semibold">'+name+'</p><p class="mt-1 text-xs text-neutral-500">'+(isSettlement?'Additional in-person accompaniment for housing support.':'SIM/eSIM activation and setup assistance; carrier fees may be separate.')+'</p>';
+     const btn=document.createElement('button');btn.className='detail-select-button mt-3';btn.textContent='Select '+name+' · '+money(price);btn.onclick=()=>{
+       if(isSettlement){window.IEUMProposal.add('settlement',name,price)}else{window.IEUMProposal.addOptional('concierge',name,price)}
+     };optional.append(btn);root.append(optional);
+   }
+ }
+ const original=window.openIEUMServiceDetail;
+ if(typeof original==='function')window.openIEUMServiceDetail=function(key){original(key);render(key)};
+ // Cards and header links may call the original local handler; update the comparison on navigation too.
+ document.addEventListener('click',()=>{const page=document.getElementById('page-service-detail');if(!page?.classList.contains('active'))return;const hash=location.hash.match(/^#service-(consulting|settlement|concierge|education)$/);if(hash&&document.getElementById('ieum-detail-comparison')?.dataset.area!==hash[1]){render(hash[1]);document.getElementById('ieum-detail-comparison').dataset.area=hash[1]}},true);
+ const oldRender=render;render=function(key){oldRender(key);document.getElementById('ieum-detail-comparison').dataset.area=key};
+})();
+</script></body></html>
