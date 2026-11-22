@@ -41,19 +41,11 @@
   background-repeat: no-repeat;
 }
 
- /* SPA Page view transition */
- .page-view {
- display: none;
- opacity: 0;
- transform: translateY(8px);
- transition: opacity 0.35s ease-out, transform 0.35s ease-out;
- }
- 
- .page-view.active {
- display: block;
- opacity: 1;
- transform: translateY(0);
- }
+ /* Seamless page switching: avoid animating display:none and scrolling the old page. */
+ .page-view { display:none; opacity:1; transform:none; }
+ .page-view.active { display:block; animation:ieum-page-enter .32s cubic-bezier(.2,.8,.2,1) both; }
+ @keyframes ieum-page-enter { from {opacity:.72; transform:translate3d(0,7px,0)} to {opacity:1;transform:translate3d(0,0,0)} }
+ @media(prefers-reduced-motion:reduce){ .page-view.active{animation:none} }
 
  .light-card {
  background: #FFFFFF;
@@ -918,33 +910,11 @@ header.glass-nav .font-serif{color:#151515!important}
 .ieum-select-row button:hover{background:#e9dfcd}
 @media print{html,body{height:auto!important;overflow:visible!important;scroll-snap-type:none!important}body>*:not(#ieum-proposal-overlay){display:none!important}#ieum-proposal-overlay{display:block!important;position:static!important;inset:auto!important;background:white!important;padding:0!important;backdrop-filter:none!important}#ieum-proposal-box{max-height:none!important;overflow:visible!important;box-shadow:none!important;width:100%!important}.ieum-proposal-actions,.ieum-proposal-row button{display:none!important}}
 </style><style id="ieum-home-section-snap">
-/* Section-by-section scrolling only on the homepage. Other pages remain unchanged. */
-html:has(#page-home.active) { scroll-snap-type: y proximity; scroll-padding-top: 80px; }
-#page-home.active .ieum-editorial-hero,
-#page-home.active .ieum-editorial-services,
-#page-home.active .ieum-audience-section,
-#page-home.active .ieum-how-section,
-#page-home.active .ieum-editorial-cta {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  scroll-margin-top: 80px;
-}
-/* Sections feel like distinct panels, but can expand naturally for long tables. */
-@media (min-width: 768px) {
- #page-home .ieum-editorial-services,
- #page-home .ieum-audience-section,
- #page-home .ieum-how-section { min-height: calc(100svh - 80px); }
-}
-/* Small screens need unrestricted scrolling through long comparison tables. */
-@media (max-width: 767px) {
- html:has(#page-home.active) { scroll-snap-type: y proximity; }
- #page-home.active .ieum-editorial-services,
- #page-home.active .ieum-audience-section,
- #page-home.active .ieum-how-section { scroll-snap-stop: normal; }
-}
-@media (prefers-reduced-motion: reduce) {
- html:has(#page-home.active) { scroll-behavior: auto !important; }
-}
+/* Native continuous scrolling: no section snapping or forced stops. */
+html, html:has(#page-home.active) { scroll-snap-type:none !important; }
+#page-home *, #page-home.active * { scroll-snap-align:none !important; scroll-snap-stop:normal !important; }
+#page-home .ieum-editorial-services, #page-home .ieum-audience-section,
+#page-home .ieum-how-section, #page-home .ieum-editorial-cta { scroll-margin-top:80px; }
 </style>
 <style id="ieum-full-viewport-sections">
 /* Each homepage panel occupies at least one complete viewport below the fixed-height header. */
@@ -955,7 +925,7 @@ html:has(#page-home.active) { scroll-snap-type: y proximity; scroll-padding-top:
 #page-home .ieum-editorial-cta {
   box-sizing: border-box;
   min-height: calc(100vh - 80px) !important;
-  min-height: calc(100svh - 80px) !important;
+  min-height: 0;
   scroll-margin-top: 80px;
 }
 #page-home .ieum-first-screen {
@@ -979,7 +949,7 @@ html:has(#page-home.active) { scroll-snap-type: y proximity; scroll-padding-top:
 }
 /* Preserve the original grid layout of the process section. */
 #page-home .ieum-how-section { display: grid; align-content: center; }
-#page-home.active .ieum-first-screen { scroll-snap-align: start; scroll-snap-stop: always; }
+#page-home.active .ieum-first-screen { scroll-snap-align: none; scroll-snap-stop: normal; }
 /* Long comparison tables must remain fully scrollable rather than clipped. */
 #page-home .ieum-editorial-services { height: auto; overflow: visible; }
 @media (max-width: 767px) {
@@ -1064,7 +1034,51 @@ table.ieum-price-clarity tbody tr:not(:first-child) > * { border-bottom:1px soli
 </style>
 <style id="ieum-account-language-style">
 .ieum-utility{display:flex;align-items:center;gap:8px}.ieum-utility select,.ieum-login-btn{background:#171717;color:#fff;border:1px solid #68604f;border-radius:5px;padding:8px;font-size:12px;cursor:pointer}.ieum-login-btn:hover{border-color:#c8a96a}.ieum-auth-backdrop{position:fixed;inset:0;background:#000a;z-index:99999;display:none;align-items:center;justify-content:center;padding:16px}.ieum-auth-backdrop.open{display:flex}.ieum-auth-panel{background:#fff;color:#171717;border-radius:12px;padding:28px;width:min(420px,100%);box-shadow:0 15px 60px #0006}.ieum-auth-panel input{display:block;width:100%;border:1px solid #ccc;padding:12px;margin:10px 0;border-radius:5px;color:#111}.ieum-auth-panel button{cursor:pointer}.ieum-auth-primary{background:#1a1a1a;color:#fff;width:100%;padding:12px;border-radius:5px;margin-top:12px}.ieum-auth-note{font-size:12px;color:#666;line-height:1.6;margin-top:12px}.ieum-auth-link{color:#88692f;text-decoration:underline;font-size:13px}.ieum-auth-error{font-size:13px;color:#a22;min-height:18px;margin-top:8px}@media(max-width:767px){.ieum-utility select,.ieum-login-btn{padding:6px;font-size:11px}.ieum-utility{gap:4px}}
-</style></head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><div class="nav-dropdown relative" id="business-area-dropdown">
+</style><style id="ieum-education-table-layout">
+/* Two-service comparison: three balanced columns, same visual language as other plans. */
+#page-home table.ieum-education-table, #page-service-detail table.ieum-education-table {
+  width:100%!important; min-width:690px!important; table-layout:fixed!important;
+  border-collapse:separate!important; border-spacing:0!important; font-size:14px!important;
+}
+#page-home table.ieum-education-table tr > :first-child,
+#page-service-detail table.ieum-education-table tr > :first-child {width:26%!important;}
+#page-home table.ieum-education-table tr > :nth-child(2),
+#page-home table.ieum-education-table tr > :nth-child(3),
+#page-service-detail table.ieum-education-table tr > :nth-child(2),
+#page-service-detail table.ieum-education-table tr > :nth-child(3) {width:37%!important;}
+#page-home table.ieum-education-table th, #page-home table.ieum-education-table td,
+#page-service-detail table.ieum-education-table th, #page-service-detail table.ieum-education-table td {
+  padding:18px 22px!important; line-height:1.65!important; overflow-wrap:break-word!important;
+  word-break:normal!important; white-space:normal!important; vertical-align:middle!important;
+}
+#page-home table.ieum-education-table thead th,
+#page-service-detail table.ieum-education-table thead th {background:#f6f2e9!important; color:#25211c!important; font-weight:750!important;}
+#page-home table.ieum-education-table tbody tr:nth-child(even) td,
+#page-service-detail table.ieum-education-table tbody tr:nth-child(even) td {background:#fcfaf6!important;}
+#page-home table.ieum-education-table tbody tr:first-child > *,
+#page-service-detail table.ieum-education-table tbody tr:first-child > * {background:#f8f2e7!important;}
+@media(max-width:767px){
+ #page-home table.ieum-education-table,#page-service-detail table.ieum-education-table{min-width:690px!important;font-size:13px!important;}
+ #page-home table.ieum-education-table th,#page-home table.ieum-education-table td,
+ #page-service-detail table.ieum-education-table th,#page-service-detail table.ieum-education-table td{padding:15px 16px!important;}
+}
+</style>
+<style id="ieum-quote-selected-plan-details-style">
+.ieum-selected-plan-details{margin-top:20px;border:1px solid #e6dfd3;border-radius:12px;background:#fff;overflow:hidden}
+.ieum-plan-detail-hint{padding:20px;color:#777;font-size:12px;line-height:1.7;background:#faf9f6}
+.ieum-plan-detail-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 24px;background:#f8f5ef;border-bottom:1px solid #e9e3d9}
+.ieum-plan-detail-head span{font-size:10px;font-weight:800;letter-spacing:.14em;color:#a47c40}
+.ieum-plan-detail-head h3{font-size:19px;font-weight:800;margin-top:7px;color:#191919}
+.ieum-plan-detail-head strong{font-size:22px;color:#171717;white-space:nowrap}
+.ieum-plan-detail-rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px;padding:7px 24px}
+.ieum-plan-detail-rows>div{padding:16px 0;border-bottom:1px solid #f0ede8}
+.ieum-plan-detail-rows dt{font-size:11px;font-weight:800;color:#9a7642;margin-bottom:7px}
+.ieum-plan-detail-rows dd{font-size:12px;color:#333;line-height:1.7;white-space:pre-line}
+.ieum-plan-detail-rows dd.not-included{color:#aaa}
+.ieum-plan-detail-note{font-size:11px;line-height:1.75;color:#777;padding:15px 24px 20px}
+@media(max-width:600px){.ieum-plan-detail-head{padding:18px;align-items:flex-start}.ieum-plan-detail-head h3{font-size:16px}.ieum-plan-detail-head strong{font-size:16px}.ieum-plan-detail-rows{grid-template-columns:1fr;padding:3px 18px}.ieum-plan-detail-rows>div{padding:13px 0}.ieum-plan-detail-note{padding:13px 18px 18px}}
+</style>
+</head><body class="antialiased selection:bg-black selection:text-white flex flex-col min-h-screen"><header class="sticky top-0 z-50 glass-nav text-white border-b border-neutral-800"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"><button class="flex items-center space-x-3 text-left group focus:outline-none" onclick="navigateTo('home')"><span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-white group-hover:opacity-80 transition">IEUM</span><span class="text-xs text-neutral-400 font-mono tracking-wider border-l border-neutral-700 pl-3 py-1 hidden sm:inline-block"></span></button><nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs sm:text-sm tracking-wide font-medium"><button class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none" id="nav-home" onclick="navigateTo('home')">Home</button><div class="nav-dropdown relative" id="business-area-dropdown">
 <button aria-expanded="false" aria-haspopup="true" class="nav-link py-2 text-neutral-400 hover:text-white transition focus:outline-none inline-flex items-center gap-2" id="nav-services" onclick="navigateTo('home'); setTimeout(()=&gt;document.getElementById('ieum-home-services')?.scrollIntoView({behavior:'smooth'}),90)" type="button">Our Services<i aria-hidden="true" class="fa-solid fa-chevron-down text-[9px] transition-transform"></i></button>
 <div aria-label="Our Services navigation" class="nav-dropdown-menu" role="menu">
 <button onclick="openIEUMServiceDetail('consulting')" role="menuitem" type="button"><span>Consulting Service</span><small>Business &amp; university consulting</small></button>
@@ -1076,7 +1090,7 @@ table.ieum-price-clarity tbody tr:not(:first-child) > * { border-bottom:1px soli
 <div aria-label="Quote options" class="nav-dropdown-menu" role="menu">
 <button onclick="window.openIEUMQuote('settlement');document.getElementById('ieum-quote-dropdown').classList.remove('is-open')" role="menuitem" type="button"><span>Make Quote</span><small>Build a personalized estimate</small></button>
 <button onclick="IEUMProposal.open();document.getElementById('ieum-quote-dropdown').classList.remove('is-open')" role="menuitem" type="button"><span>Review Quote</span><small>Review selected services and total</small></button>
-</div></div><div class="ieum-utility" id="ieum-account-language"><label class="sr-only" for="ieum-language">Language</label><select aria-label="Website language" id="ieum-language"><option value="en">EN</option><option value="ko">한국어</option><option value="th">ไทย</option><option value="ja">日本語</option></select><button class="ieum-login-btn" id="ieum-login-trigger" onclick="IEUMAuth.open()" type="button">Log In</button></div><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); setTimeout(()=&gt;document.getElementById('ieum-home-services')?.scrollIntoView({behavior:'smooth'}),90); closeMobileMenu();">Our Services</button>
+</div></div><button class="md:hidden text-2xl text-white p-2 focus:outline-none" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button></div></div><div class="hidden md:hidden bg-brand-dark border-b border-neutral-800 px-6 py-6 space-y-4" id="mobile-menu"><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); closeMobileMenu();">Home</button><button class="block w-full text-left py-2.5 text-sm text-neutral-300 hover:text-white border-b border-neutral-800" onclick="navigateTo('home'); setTimeout(()=&gt;document.getElementById('ieum-home-services')?.scrollIntoView({behavior:'smooth'}),90); closeMobileMenu();">Our Services</button>
 <div class="grid grid-cols-1 gap-1 border-b border-neutral-800 pb-3 pl-4">
 <button class="mobile-service-link" onclick="openIEUMServiceDetail('consulting'); closeMobileMenu();">Consulting Service <i class="fa-solid fa-arrow-right"></i></button>
 <button class="mobile-service-link" onclick="openIEUMServiceDetail('settlement'); closeMobileMenu();">Settlement Service <i class="fa-solid fa-arrow-right"></i></button>
@@ -1192,7 +1206,7 @@ table.ieum-price-clarity tbody tr:not(:first-child) > * { border-bottom:1px soli
 <th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-800 sm:px-7">Property &amp; area check</th>
 <td class="px-4 py-4 text-neutral-300">—</td>
 <td class="px-4 py-4">Visits to 3 selected properties and checks of their surrounding areas</td>
-<td class="px-4 py-4">Accompanied visits to all properties selected by the client<br/><b class="mt-1 block text-neutral-800">Maximum 4 hours of accompaniment</b></td>
+<td class="px-4 py-4">We analyze your budget and present suitable properties ranked by their suitability.<br/><b class="mt-1 block text-neutral-800">Up to 4 hours of accompaniment included upon request</b></td>
 </tr>
 <tr>
 <th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-800 sm:px-7">Move-in preparation</th>
@@ -1218,7 +1232,7 @@ table.ieum-price-clarity tbody tr:not(:first-child) > * { border-bottom:1px soli
 </div>
 <div class="mt-5 flex flex-col gap-3 rounded-2xl border border-[#dfd4bf] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
 <div><p class="text-[10px] font-bold uppercase tracking-[.16em] text-[#a77d3e]">Optional Add-on</p><p class="mt-1 text-sm font-semibold text-neutral-800">Additional Accompaniment · 1 Hour</p><p class="mt-1 text-xs leading-relaxed text-neutral-500">One additional hour of in-person housing assistance. Select this option in the detailed quote builder.</p></div>
-<strong class="whitespace-nowrap text-xl text-neutral-900">$14.90 <span class="text-xs font-normal text-neutral-400">/ hour</span></strong>
+<strong class="whitespace-nowrap text-xl text-neutral-900">$19.90 <span class="text-xs font-normal text-neutral-400">/ hour</span></strong>
 </div>
 <div class="mt-3 flex flex-col gap-3 rounded-2xl border border-[#dfd4bf] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
 <div><p class="text-[10px] font-bold uppercase tracking-[.16em] text-[#a77d3e]">Optional Add-on</p><p class="mt-1 text-sm font-semibold text-neutral-800">Move-in Cleaning Service</p><p class="mt-1 text-xs leading-relaxed text-neutral-500">Move-in cleaning assistance for your new home. Service scope and scheduling are confirmed before booking.</p></div>
@@ -1319,7 +1333,7 @@ We help international students and global professionals find suitable housing th
 </label>
 <label class="settlement-price-option">
 <input data-price="199.9" data-price-item="full_care" name="housing_plan" type="radio"/>
-<span class="settlement-option-copy"><strong>Premium</strong><small>Includes Standard, accompanied visits to all client-selected properties (up to 4 hours total), unlimited property searches, key contract guidance, a move-in checklist, initial settlement support, ARC address-change guidance, and 12 months of housing follow-up care</small></span>
+<span class="settlement-option-copy"><strong>Premium</strong><small>Includes Standard, budget-based property recommendations ranked by suitability, up to 4 hours of accompaniment upon request, unlimited property searches, key contract guidance, a move-in checklist, initial settlement support, ARC address-change guidance, and 12 months of housing follow-up care</small></span>
 <b>$199.90 <small>/ plan</small></b>
 </label>
 <div class="mt-5 rounded-2xl border border-amber-200 bg-[#fcfaf6] p-4">
@@ -1377,7 +1391,7 @@ We help international students and global professionals find suitable housing th
 <section aria-label="Make My Quote" class="page-view" id="page-quote">
 <div class="ieum-quote-page"><div class="ieum-quote-eyebrow">IEUM / PERSONALIZED SERVICE</div><div class="ieum-quote-head"><div><h1>Make My Quote<span class="ieum-quote-dot">.</span></h1><p>Choose your service plan, customize optional support, and review your estimated total.</p></div><button class="ieum-quote-back" onclick="navigateTo('home')" type="button">← Back to Home</button></div>
 <div aria-label="Service area" class="ieum-quote-tabs" id="ieum-quote-tabs" role="group"></div>
-<div class="ieum-quote-body"><div class="ieum-quote-main"><div class="ieum-quote-section-title">01 / SELECT YOUR PLAN</div><div class="ieum-quote-plan-grid" id="ieum-quote-plan-grid"></div><div class="ieum-quote-section-title ieum-quote-opt-heading">02 / OPTIONAL SERVICES</div><div class="ieum-quote-option-grid" id="ieum-quote-option-grid"></div></div><aside class="ieum-quote-summary"><span class="ieum-quote-section-title">YOUR ESTIMATE</span><div id="ieum-quote-summary-lines"></div><div class="ieum-promo"><label for="ieum-promo-code">PROMO CODE</label><div class="ieum-promo-controls"><input autocomplete="off" id="ieum-promo-code" maxlength="40" placeholder="Enter discount code" type="text"/><button id="ieum-promo-apply" type="button">Apply</button></div><p aria-live="polite" id="ieum-promo-feedback" role="status"></p></div><div class="ieum-promo-discount" hidden="" id="ieum-quote-discount-line"><span>STUDYKR2027 · 10% off</span><strong id="ieum-quote-discount">−$0.00</strong></div><div class="ieum-quote-total"><span>Estimated total</span><strong id="ieum-quote-total">$0.00</strong></div><p>Final availability, scope, and third-party charges are confirmed before booking.</p><button class="ieum-quote-review" onclick="IEUMProposal.open()" type="button">Review My Quote →</button></aside></div></div></section>
+<div class="ieum-quote-body"><div class="ieum-quote-main"><div class="ieum-quote-section-title">01 / SELECT YOUR PLAN</div><div class="ieum-quote-plan-grid" id="ieum-quote-plan-grid"></div><section id="ieum-selected-plan-details" class="ieum-selected-plan-details" aria-live="polite"></section><div class="ieum-quote-section-title ieum-quote-opt-heading">02 / OPTIONAL SERVICES</div><div class="ieum-quote-option-grid" id="ieum-quote-option-grid"></div></div><aside class="ieum-quote-summary"><span class="ieum-quote-section-title">YOUR ESTIMATE</span><div id="ieum-quote-summary-lines"></div><div class="ieum-promo"><label for="ieum-promo-code">PROMO CODE</label><div class="ieum-promo-controls"><input autocomplete="off" id="ieum-promo-code" maxlength="40" placeholder="Enter discount code" type="text"/><button id="ieum-promo-apply" type="button">Apply</button></div><p aria-live="polite" id="ieum-promo-feedback" role="status"></p></div><div class="ieum-promo-discount" hidden="" id="ieum-quote-discount-line"><span>STUDYKR2027 · 10% off</span><strong id="ieum-quote-discount">−$0.00</strong></div><div class="ieum-quote-total"><span>Estimated total</span><strong id="ieum-quote-total">$0.00</strong></div><p>Final availability, scope, and third-party charges are confirmed before booking.</p><button class="ieum-quote-review" onclick="IEUMProposal.open()" type="button">Review My Quote →</button></aside></div></div></section>
 <section class="page-view" id="page-global"><div class="global-title-hero text-white py-16 px-4"><div class="max-w-7xl mx-auto space-y-2 relative z-10"><span class="text-xs font-mono text-white/80 uppercase tracking-widest">GLOBAL HUBS &amp; PARTNERS</span><h1 class="text-3xl sm:text-4xl font-extrabold text-white">Global Network</h1></div></div><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16"><div class="space-y-6"><div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2"><div><span class="text-xs font-mono uppercase text-amber-600 font-bold tracking-wider">GLOBAL NETWORK · HQ CONNECTIONS</span><h2 class="text-2xl font-bold text-black">Global Partner Country Network Map</h2><p class="text-sm text-neutral-500 mt-2">Displays an embedded world map image and partner hubs by country. </p></div><div class="text-xs font-mono text-neutral-700 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full font-bold">
  + 4 Partners
  </div></div><div class="ieum-atlas"><div class="ieum-atlas-scroll"><div class="ieum-atlas-stage"><img alt="IEUM global network map (Korea, Bangladesh, Thailand)" class="ieum-atlas-img" src="https://github.com/user-attachments/assets/33df62f4-578a-4067-8656-a0f2e00cfc67"/><span aria-hidden="true" class="ieum-atlas-tint"></span><span aria-hidden="true" class="ieum-hub" style="left:40.9%;top:45.22%;--d:0s"></span><span aria-hidden="true" class="ieum-hub" style="left:31.44%;top:50.66%;--d:1.2s"></span><span aria-hidden="true" class="ieum-hub" style="left:34.97%;top:55.92%;--d:2.4s"></span></div></div></div></div>
@@ -1464,28 +1478,25 @@ We help international students and global professionals find suitable housing th
  </div><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script><script>
 
  function navigateTo(pageId) {
- const pages = document.querySelectorAll('.page-view');
- const navLinks = document.querySelectorAll('.nav-link');
-
- pages.forEach(page => {
- page.classList.remove('active');
- });
-
- navLinks.forEach(link => {
- link.classList.remove('active');
- });
-
- const targetPage = document.getElementById(`page-${pageId}`);
- if (targetPage) {
- targetPage.classList.add('active');
- }
-
- const activeNav = document.getElementById(`nav-${pageId}`);
- if (activeNav) {
- activeNav.classList.add('active');
- }
-
- window.scrollTo({ top: 0, behavior: 'smooth' });
+   const targetPage = document.getElementById(`page-${pageId}`);
+   if (!targetPage) return;
+   const currentPage = document.querySelector('.page-view.active');
+   const isSamePage = currentPage === targetPage;
+   // Immediately reset the previous page's scroll before changing page layout.
+   // A smooth scroll here used to produce a long, visibly broken transition.
+   if (!isSamePage) {
+     const previousBehavior = document.documentElement.style.scrollBehavior;
+     document.documentElement.style.scrollBehavior = 'auto';
+     window.scrollTo(0, 0);
+     document.querySelectorAll('.page-view.active').forEach(page => page.classList.remove('active'));
+     targetPage.classList.add('active');
+     window.scrollTo(0, 0);
+     requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = previousBehavior; });
+   } else {
+     window.scrollTo({top:0,behavior:'smooth'});
+   }
+   document.querySelectorAll('.nav-link.active').forEach(link => link.classList.remove('active'));
+   document.getElementById(`nav-${pageId}`)?.classList.add('active');
  }
 
  const mobileToggle = document.getElementById('mobile-toggle');
@@ -1891,9 +1902,8 @@ We help international students and global professionals find suitable housing th
       ['concierge_esim','eSIM Setup · 3 Months','Includes three months of SIM activation and setup; free incoming calls and text messages on 5G service',66.6,'/ 3 months']
     ],
     education:[
-      ['education_basic','Basic Education & Translation','One 50-minute lesson, level check and TOPIK guidance',29.9,'/ package'],
-      ['education_standard','Standard Education & Translation','Three lessons, study plan, practice review and up to 200 words translation',89.9,'/ package'],
-      ['education_premium','Premium Education & Translation','Eight lessons, progress review, two practice reviews and up to 500 words translation',199.9,'/ package']
+      ['education_language','Language','Online language education; scope and schedule confirmed by consultation',0,'/ custom quote'],
+      ['education_translation','Translation','Document translation; quote based on language pair and length',0,'/ custom quote']
     ]
   };
   const customServiceTitles = {consulting:'Consulting Service',concierge:'Concierge Service',education:'Education & Translation'};
@@ -2112,26 +2122,23 @@ We help international students and global professionals find suitable housing th
 const ieumTierPlans = {
  consulting:{title:'Consulting Services',unit:'/ package',prices:[39.9,99.9,199.9],rows:[
  ['Best for','Quick guidance','University application planning','Comprehensive application support'],
- ['Initial consultation','30-minute online session','60-minute online session','Two 60-minute sessions'],
- ['University / business pathway','General direction and next steps','Up to 3 suitable options','Up to 5 options with comparison'],
- ['Document & timeline review','—','One checklist and timeline review','Up to 2 document and timeline reviews'],
- ['Follow-up support','Email summary','7-day email follow-up','30-day email follow-up'] ],note:'Admissions decisions, legal advice, visa processing and third-party fees are not included.'},
+ ['Initial consultation','Chat consultation','30-minute online consultation','60-minute online consultation'],
+ ['University admissions','Basic admissions consultation','University selection consultation','Undergraduate and other academic pathway consultation'],
+ ['Document & timeline review','—','Required documents checklist provided','Dormitory move-in and required documents review'],
+ ['Follow-up support','One-time consultation','7 days of chat support','30 days of chat support'] ],note:'Admissions decisions, legal advice, visa processing and third-party fees are not included.'},
  concierge:{title:'Concierge Service',unit:'/ package',prices:[49.9,119.9,299.9],rows:[
  ['Best for','One essential task','Arrival-day assistance','Ongoing personal assistance'],
- ['Airport pickup & meeting','—','One arrival meeting and pickup coordination','One arrival meeting and pickup coordination'],
+ ['Airport pickup & meeting','—','Arrival meeting and pickup','Arrival meeting and pickup'],
  ['Bank assistance','1-hour bank visit accompaniment','1-hour bank visit accompaniment','1-hour bank visit accompaniment'],
- ['Personal assistance','—','—','6 hours of accompaniment within 30 days'],
- ['Scheduling & coordination','One appointment','Up to 2 appointments','Up to 5 appointments'],
- ['Support period','Single appointment','7 days','30 days'],
+ ['Personal assistance','Basic chat consultation','Chat consultation and booking assistance','All Standard support plus 4 hours of accompaniment within 30 days'],
+ ['Support period','One-time support','7 days of chat support','30 days of chat support'],
  ['Welcome gift','—','Included','Included'],
  ['eSIM support · 3 months','—','—','Included: eSIM activation and setup'] ],note:'Vehicle fares, transportation, bank charges and other third-party costs are separate. Premium includes eSIM activation and setup support; carrier plan fees are separate. Airport pickup is subject to location and scheduling.'},
- education:{title:'Education & Translation',unit:'/ package',prices:[29.9,89.9,199.9],rows:[
- ['Best for','One learning need','Short-term preparation','Structured learning support','Document translation'],
- ['Language lessons','One 50-minute online lesson','Three 50-minute online lessons','Eight 50-minute online lessons','—'],
- ['Learning plan','Brief level check','Personalized study plan','Personalized plan with progress review','—'],
- ['TOPIK preparation','General exam guidance','One practice review','Two practice reviews','—'],
- ['Translation assistance','—','—','—','Translation and review based on document type and length'],
- ['Support period','—','—','—','Based on project scope'] ],note:'Translation covers general non-certified text only; specialized, certified or notarized translation is quoted separately. Lessons depend on instructor availability.'}
+ education:{title:'Education & Translation',unit:'/ service',prices:[],rows:[
+ ['Service','Language','Translation'],
+ ['Description','Online language lessons and learning support','Document translation and review'],
+ ['Available languages','Korean, English, Japanese, Thai','Korean, English, Japanese, Thai'],
+ ['Service scope','Lesson schedule and learning objectives confirmed before booking','Language pair, document length and delivery schedule confirmed before booking'] ],note:'Both services are quoted individually based on the requested scope and availability.'}
 };
 function showIEUMServicePlans(key){
  const panel=document.getElementById('ieum-other-inline-panel');const plan=ieumTierPlans[key];
@@ -2140,9 +2147,11 @@ function showIEUMServicePlans(key){
  document.getElementById('ieum-inline-title').textContent=plan.title+' · Compare our plans';
  const isEducation=key==='education';
  const cells=plan.rows.map(([label,...vals])=>`<tr><th class="bg-neutral-50 px-5 py-4 font-semibold text-neutral-900">${label}</th>${vals.map((v,i)=>`<td class="px-4 py-4 leading-relaxed ${i===1?'bg-[#fcfaf5]':''}">${v}</td>`).join('')}</tr>`).join('');
- document.getElementById('ieum-inline-rows').innerHTML=`<tr class="bg-[#f5f0e6]"><th class="px-5 py-4 text-neutral-900">Plan price</th>${plan.prices.map((v,i)=>`<td class="px-4 py-4 ${i===1?'bg-[#eee5d4]':''}"><strong class="text-xl text-neutral-900">$${v.toFixed(2)}</strong><span class="block text-xs text-neutral-500">${plan.unit}</span></td>`).join('')}${isEducation?'<td class="px-4 py-4"><strong class="text-base text-neutral-900">Custom Quote</strong><span class="block text-xs text-neutral-500">/ project</span></td>':''}</tr>`+cells;
- const table=panel.querySelector('table');table.classList.add('ieum-tier-table','ieum-price-clarity');
- table.querySelector('thead').innerHTML='<tr class="bg-[#f6f2e9] text-neutral-900"><th class="px-5 py-4">Service details</th><th class="px-4 py-4">Basic</th><th class="px-4 py-4 bg-[#eee5d4]">Standard</th><th class="px-4 py-4">Premium</th>'+(isEducation?'<th class="px-4 py-4">Translation</th>':'')+'</tr>'; 
+ document.getElementById('ieum-inline-rows').innerHTML=isEducation
+ ? '<tr class="bg-[#f5f0e6]"><th class="px-5 py-4">Plan price</th><td class="px-4 py-4">$19.9 / hour</td><td class="px-4 py-4">Custom Quote</td></tr>'+plan.rows.slice(1).map(([label,...vals])=>`<tr><th class="bg-neutral-50 px-5 py-4">${label}</th>${vals.map(v=>`<td class="px-4 py-4">${v}</td>`).join('')}</tr>`).join('')
+ : `<tr class="bg-[#f5f0e6]"><th class="px-5 py-4 text-neutral-900">Plan price</th>${plan.prices.map((v,i)=>`<td class="px-4 py-4 ${i===1?'bg-[#eee5d4]':''}"><strong class="text-xl text-neutral-900">$${v.toFixed(2)}</strong><span class="block text-xs text-neutral-500">${plan.unit}</span></td>`).join('')}</tr>`+cells;
+ const table=panel.querySelector('table');table.classList.add('ieum-tier-table','ieum-price-clarity');table.classList.toggle('ieum-education-table',isEducation);
+ table.querySelector('thead').innerHTML=isEducation?'<tr class="bg-[#f6f2e9] text-neutral-900"><th class="px-5 py-4">Service details</th><th class="px-4 py-4">Language</th><th class="px-4 py-4">Translation</th></tr>':'<tr class="bg-[#f6f2e9] text-neutral-900"><th class="px-5 py-4">Service details</th><th class="px-4 py-4">Basic</th><th class="px-4 py-4 bg-[#eee5d4]">Standard</th><th class="px-4 py-4">Premium</th></tr>'; 
  panel.querySelector('.ieum-concierge-addon')?.remove();
  if(key==='concierge'){
    const addon=document.createElement('div');
@@ -2344,9 +2353,9 @@ window.IEUMPromo={
   const old=panel.querySelector('.ieum-select-row');old?.remove();
   const bar=document.createElement('div');bar.className='ieum-select-row';
   const caption=document.createElement('div');caption.className='w-full text-xs font-bold text-[#a77d3e]';caption.textContent='Select :';bar.append(caption);
-  const options=['Basic','Standard','Premium'];
-  options.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.textContent='Select '+name+' · '+money(ieumTierPlans[area].prices[i]);b.onclick=()=>add(area,name,ieumTierPlans[area].prices[i]);bar.append(b)});
-  if(area==='education'){const b=document.createElement('button');b.textContent='Select Translation · Request Quote';b.onclick=()=>add(area,'Translation',null);bar.append(b)}
+  const options=area==='education'?['Language','Translation']:['Basic','Standard','Premium'];
+  options.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.textContent=area==='education'?'Select '+name+' · Custom Quote':'Select '+name+' · '+money(ieumTierPlans[area].prices[i]);b.onclick=()=>add(area,name,area==='education'?null:ieumTierPlans[area].prices[i]);bar.append(b)});
+  
   panel.querySelector('.overflow-x-auto')?.after(bar);
   panel.querySelector('.ieum-concierge-optional-select')?.remove();
   if(area==='concierge'){
@@ -2419,12 +2428,12 @@ window.IEUMPromo={
      const plan=window.ieumTierPlans?.[key]||(typeof ieumTierPlans!=='undefined'?ieumTierPlans[key]:null);
      if(!plan)return;
      prices=plan.prices;translation=key==='education';
-     const table=document.createElement('table');table.classList.add('ieum-price-clarity');
+     const table=document.createElement('table');table.classList.add('ieum-price-clarity');if(translation)table.classList.add('ieum-education-table');
      const thead=document.createElement('thead');const hrow=document.createElement('tr');
-     ['Service details',...labels,...(translation?['Translation']:[])].forEach((name,i)=>{const th=document.createElement('th');th.textContent=name;if(i===3)th.className='premium-cell';hrow.append(th)});thead.append(hrow);table.append(thead);
+     (translation?['Service details','Language','Translation']:['Service details',...labels]).forEach((name,i)=>{const th=document.createElement('th');th.textContent=name;if(i===3&&!translation)th.className='premium-cell';hrow.append(th)});thead.append(hrow);table.append(thead);
      const tbody=document.createElement('tbody');
-     const all=[['Plan price',...prices.map(money),...(translation?['Custom Quote']:[])],...plan.rows];
-     all.forEach(row=>{const tr=document.createElement('tr');row.forEach((value,i)=>{const cell=document.createElement(i===0?'th':'td');cell.textContent=value??'—';if(i===3)cell.className='premium-cell';tr.append(cell)});tbody.append(tr)});
+     const all=translation?[['Plan price','$19.9 / hour','Custom Quote'],...plan.rows.slice(1)]:[['Plan price',...prices.map(money)],...plan.rows];
+     all.forEach(row=>{const tr=document.createElement('tr');row.forEach((value,i)=>{const cell=document.createElement(i===0?'th':'td');cell.textContent=value??'—';if(i===3&&!translation)cell.className='premium-cell';tr.append(cell)});tbody.append(tr)});
      table.append(tbody);holder.append(table);
      const note=document.createElement('p');note.className='mt-3 text-xs leading-relaxed text-neutral-500';note.textContent=plan.note;root.append(note);
    }
@@ -2440,13 +2449,49 @@ window.IEUMPromo={
 })();
 </script><script>
 (function(){
- const catalog={settlement:{title:'Settlement Service',prices:[9.9,99.9,199.9],extras:[{key:'optional_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One extra hour of in-person housing assistance.',price:14.9},{key:'optional_move_in_cleaning',name:'Move-in Cleaning Service',description:'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',price:189.9}]},concierge:{title:'Concierge Service',prices:[49.9,119.9,299.9],extras:[{key:'optional_concierge_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One additional hour of accompaniment.',price:14.9},{key:'optional_esim_3months',name:'eSIM Setup · 3 Months',description:'SIM/eSIM activation and setup assistance. Carrier charges may be separate.',price:66.6}]},consulting:{title:'Consulting Services',prices:[39.9,99.9,199.9],extras:[]},education:{title:'Education & Translation',prices:[29.9,89.9,199.9],extras:[
+ const catalog={settlement:{title:'Settlement Service',prices:[9.9,99.9,199.9],extras:[{key:'optional_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One extra hour of in-person housing assistance.',price:14.9},{key:'optional_move_in_cleaning',name:'Move-in Cleaning Service',description:'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',price:189.9}]},concierge:{title:'Concierge Service',prices:[49.9,119.9,299.9],extras:[{key:'optional_concierge_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One additional hour of accompaniment.',price:14.9},{key:'optional_esim_3months',name:'eSIM Setup · 3 Months',description:'SIM/eSIM activation and setup assistance. Carrier charges may be separate.',price:66.6}]},consulting:{title:'Consulting Services',prices:[39.9,99.9,199.9],extras:[]},education:{title:'Education & Translation',prices:[],extras:[
 {key:'education_language_korean',name:'Korean',description:'Preferred language for education or translation requests.',price:0},
 {key:'education_language_english',name:'English',description:'Preferred language for education or translation requests.',price:0},
 {key:'education_language_japanese',name:'Japanese',description:'Preferred language for education or translation requests.',price:0},
 {key:'education_language_thai',name:'Thai',description:'Preferred language for education or translation requests.',price:0}
 ]}};
  const money=n=>'$'+Number(n||0).toFixed(2);let active='settlement';
+ // Use the existing service-comparison content as the source of truth for each tier.
+ function selectedPlanRows(area,index){
+   if(area==='settlement'){
+     const table=document.querySelector('#page-home .ieum-price-clarity');
+     if(table){return [...table.querySelectorAll('tbody tr')].slice(1).map(tr=>{
+       const cells=tr.querySelectorAll('th,td');
+       return [cells[0]?.textContent.trim()||'',cells[index+1]?.innerText?.trim()||cells[index+1]?.textContent.trim()||''];
+     });}
+   }
+   const source=window.ieumTierPlans || (typeof ieumTierPlans!=='undefined'?ieumTierPlans:null);
+   if(!source || !source[area])return [];
+   if(area==='education')return source[area].rows.slice(1).map(row=>[row[0],row[index+1]||'—']);
+   return source[area].rows.map(row=>[row[0],row[index+1]||'—']);
+ }
+ function renderSelectedPlanDetails(area,items){
+   const host=document.getElementById('ieum-selected-plan-details');if(!host)return;
+   host.replaceChildren();
+   const chosen=items.find(x=>x.area===area && String(x.key).startsWith('proposal_'));
+   if(!chosen){const hint=document.createElement('p');hint.className='ieum-plan-detail-hint';hint.textContent='Select a plan above to see its included services and full details.';host.append(hint);return;}
+   const options=area==='education'?['Language','Translation']:['Basic','Standard','Premium'];
+   const idx=options.findIndex(name=>name.toLowerCase()===String(chosen.name).toLowerCase());
+   if(idx<0)return;
+   const head=document.createElement('div');head.className='ieum-plan-detail-head';
+   const heading=document.createElement('div');const kicker=document.createElement('span');kicker.textContent='YOUR SELECTED PLAN';
+   const title=document.createElement('h3');title.textContent=catalog[area].title+' · '+chosen.name;
+   heading.append(kicker,title);
+   const price=document.createElement('strong');price.textContent=area==='education'?'Custom Quote':money(catalog[area].prices[idx]);
+   head.append(heading,price);host.append(head);
+   const rows=selectedPlanRows(area,idx);
+   if(rows.length){const grid=document.createElement('dl');grid.className='ieum-plan-detail-rows';
+     rows.forEach(([label,value])=>{const cell=document.createElement('div');const dt=document.createElement('dt');dt.textContent=label;const dd=document.createElement('dd');dd.textContent=value||'—';if((value||'').trim()==='—')dd.className='not-included';cell.append(dt,dd);grid.append(cell)});host.append(grid);
+   }
+   const note=area==='settlement'?'Property visits, accompaniment and housing support depend on the selected tier and availability.':(typeof ieumTierPlans!=='undefined'?ieumTierPlans[area]?.note:'');
+   if(note){const foot=document.createElement('p');foot.className='ieum-plan-detail-note';foot.textContent=note;host.append(foot)}
+ }
+
  function removeEstimateItem(area,key){const q=saved()[area];if(!q)return;q.services=(q.services||[]).filter(item=>item.key!==key);q.subtotal=q.services.reduce((sum,item)=>sum+Number(item.amount||0)*Number(item.quantity||1),0);if(!q.services.length)delete saved()[area];window.IEUMProposal?.refresh?.();render();}
 
  const saved=()=>window.__ieumSavedQuotes||(window.__ieumSavedQuotes={});
@@ -2454,21 +2499,15 @@ window.IEUMPromo={
  function saveItem(area,item){const q=saved()[area]||{title:catalog[area].title,services:[],currency:'USD'};q.services=q.services.filter(x=>x.key!==item.key);if(item.quantity>0)q.services.push(item);q.subtotal=q.services.reduce((v,x)=>v+Number(x.amount||0)*Number(x.quantity||1),0);if(q.services.length)saved()[area]=q;else delete saved()[area];window.IEUMProposal?.refresh?.();render();}
  function render(){const plan=catalog[active],tabs=document.getElementById('ieum-quote-tabs'),plans=document.getElementById('ieum-quote-plan-grid'),extras=document.getElementById('ieum-quote-option-grid');if(!tabs)return;
  tabs.replaceChildren();Object.entries(catalog).forEach(([key,v])=>{const b=document.createElement('button');b.type='button';b.textContent=v.title;b.className=key===active?'active':'';b.setAttribute('aria-pressed',String(key===active));b.onclick=()=>{active=key;render()};tabs.append(b)});
- const items=getItems();plans.replaceChildren();['Basic','Standard','Premium'].forEach((name,i)=>{const price=plan.prices[i],selected=items.some(x=>x.area===active&&x.key==='proposal_'+name.toLowerCase());const b=document.createElement('button');b.type='button';b.className='ieum-quote-plan'+(i===2?' premium':'')+(selected?' selected':'');b.innerHTML='<span>'+name+'</span><strong>'+money(price)+'</strong><small>'+(selected?'✓ Selected':'Select plan →')+'</small>';b.onclick=()=>{const q=saved()[active]||{title:plan.title,services:[],currency:'USD'};q.services=q.services.filter(x=>!x.key.startsWith('proposal_'));q.services.push({key:'proposal_'+name.toLowerCase(),name,amount:price,quantity:1,custom:false});q.subtotal=q.services.reduce((n,x)=>n+Number(x.amount||0)*Number(x.quantity||1),0);saved()[active]=q;render()};plans.append(b)});
- if(active==='education'){
- const chosen=items.some(x=>x.area==='education'&&x.key==='proposal_translation');
- const b=document.createElement('button');b.type='button';
- b.className='ieum-quote-plan'+(chosen?' selected':'');
- b.innerHTML='<span>Translation</span><strong style="font-size:16px">Custom Quote</strong><small>'+(chosen?'✓ Selected':'Request a quote →')+'</small>';
- b.onclick=()=>{
-  const q=saved().education||{title:plan.title,services:[],currency:'USD'};
-  q.services=q.services.filter(x=>!x.key.startsWith('proposal_'));
-  q.services.push({key:'proposal_translation',name:'Translation',amount:0,quantity:1,custom:true});
-  q.subtotal=q.services.reduce((n,x)=>n+Number(x.amount||0)*Number(x.quantity||1),0);
-  saved().education=q;render();
- };
- plans.append(b);
-}
+ const items=getItems();renderSelectedPlanDetails(active,items);plans.replaceChildren();(active==='education'?['Language','Translation']:['Basic','Standard','Premium']).forEach((name,i)=>{
+ const isCustom=active==='education',price=plan.prices[i],key='proposal_'+name.toLowerCase();
+ const selected=items.some(x=>x.area===active&&x.key===key);
+ const b=document.createElement('button');b.type='button';b.className='ieum-quote-plan'+(!isCustom&&i===2?' premium':'')+(selected?' selected':'');
+ b.innerHTML='<span>'+name+'</span><strong>'+(isCustom?'Custom Quote':money(price))+'</strong><small>'+(selected?'✓ Selected':isCustom?'Request a quote →':'Select plan →')+'</small>';
+ b.onclick=()=>{const q=saved()[active]||{title:plan.title,services:[],currency:'USD'};
+ q.services=q.services.filter(x=>!x.key.startsWith('proposal_'));
+ q.services.push({key,name,amount:isCustom?0:price,quantity:1,custom:isCustom});
+ q.subtotal=q.services.reduce((n,x)=>n+Number(x.amount||0)*Number(x.quantity||1),0);saved()[active]=q;render()};plans.append(b)});
  extras.replaceChildren();if(!plan.extras.length){const p=document.createElement('p');p.textContent='No optional services are currently listed for this service.';p.style.cssText='font-size:13px;color:#777;padding:15px 0';extras.append(p)}
  plan.extras.forEach(extra=>{const current=items.find(x=>x.area===active&&x.key===extra.key),qty=Number(current?.quantity||0);const card=document.createElement('article');card.className='ieum-quote-option';const info=document.createElement('div');const title=document.createElement('h3');title.textContent=extra.name;const desc=document.createElement('p');desc.textContent=extra.description;info.append(title,desc);const side=document.createElement('div');const price=document.createElement('strong');price.textContent=extra.price===0?'Select Language':money(extra.price)+(extra.key.includes('accompaniment')?' / hour':'');const picker=document.createElement('div');picker.className='ieum-quote-qty';const minus=document.createElement('button');minus.type='button';minus.textContent='−';minus.disabled=qty===0;minus.setAttribute('aria-label','Decrease '+extra.name);const count=document.createElement('output');count.textContent=String(qty);const plus=document.createElement('button');plus.type='button';plus.textContent='+';plus.setAttribute('aria-label','Increase '+extra.name);minus.onclick=()=>saveItem(active,{key:extra.key,name:extra.name,amount:extra.price,quantity:Math.max(0,qty-1),custom:false});plus.onclick=()=>saveItem(active,{key:extra.key,name:extra.name,amount:extra.price,quantity:Math.min(99,qty+1),custom:false});picker.append(minus,count,plus);side.append(price,picker);card.append(info,side);extras.append(card)});
  const summary=document.getElementById('ieum-quote-summary-lines');summary.replaceChildren();if(!items.length){const p=document.createElement('p');p.textContent='No services selected yet.';p.style.cssText='color:#888;font-size:12px;margin-top:22px';summary.append(p)}items.forEach(item=>{const row=document.createElement('div');row.className='ieum-quote-summary-line';const left=document.createElement('span');left.textContent=(catalog[item.area]?.title||item.area)+' · '+item.name+(Number(item.quantity)>1?' × '+item.quantity:'');const right=document.createElement('strong');right.textContent=item.custom?'Custom Quote':money(Number(item.amount||0)*Number(item.quantity||1));const actions=document.createElement('div');actions.className='ieum-quote-summary-actions';const remove=document.createElement('button');remove.type='button';remove.className='ieum-quote-remove';remove.textContent='Remove';remove.setAttribute('aria-label','Remove '+item.name+' from estimate');remove.onclick=()=>removeEstimateItem(item.area,item.key);actions.append(right,remove);row.append(left,actions);summary.append(row)});const subtotal=items.reduce((n,x)=>n+Number(x.amount||0)*Number(x.quantity||1),0);document.getElementById('ieum-quote-total').textContent=money(window.IEUMPromo.total(subtotal));const discountLine=document.getElementById('ieum-quote-discount-line');discountLine.hidden=!window.IEUMPromo.code;document.getElementById('ieum-quote-discount').textContent='−'+money(window.IEUMPromo.discount(subtotal));
@@ -2561,22 +2600,13 @@ window.IEUMPromo={
   },true);
 })();
 </script>
-<div aria-label="IEUM account" aria-modal="true" class="ieum-auth-backdrop" id="ieum-auth-backdrop" onclick="if(event.target===this)IEUMAuth.close()" role="dialog"><div class="ieum-auth-panel"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:24px;font-weight:600">IEUM Account</h2><button aria-label="Close" onclick="IEUMAuth.close()" type="button">✕</button></div><div style="display:flex;gap:18px;margin:20px 0"><button class="ieum-auth-link" onclick="IEUMAuth.mode('login')">Log In</button><button class="ieum-auth-link" onclick="IEUMAuth.mode('signup')">Sign Up</button></div><form id="ieum-auth-form"><input autocomplete="name" id="ieum-auth-name" placeholder="Full name" style="display:none" type="text"/><input autocomplete="email" id="ieum-auth-email" placeholder="Email address" required="" type="email"/><input autocomplete="current-password" id="ieum-auth-password" minlength="6" placeholder="Password (6+ characters)" required="" type="password"/><button class="ieum-auth-primary" id="ieum-auth-submit" type="submit">Log In</button></form><p class="ieum-auth-error" id="ieum-auth-error" role="status"></p><button class="ieum-auth-link" onclick="IEUMAuth.resetPassword()" type="button">Forgot password?</button><p class="ieum-auth-note" id="ieum-auth-note">Secure sign-in requires Firebase project configuration. Account creation is disabled until connected.</p></div></div><script id="ieum-auth-language-script">
+<script id="ieum-translation-cleanup">
 (function(){
-const dictionary={
-'Home':['홈','หน้าหลัก','ホーム'],'Our Services':['서비스 안내','บริการของเรา','サービス案内'],'Global Network':['글로벌 네트워크','เครือข่ายทั่วโลก','グローバルネットワーク'],'Q&A':['자주 묻는 질문','คำถามที่พบบ่อย','よくある質問'],'Contact':['문의하기','ติดต่อเรา','お問い合わせ'],'Contact Form':['문의 양식','แบบฟอร์มติดต่อ','お問い合わせフォーム'],'Log In':['로그인','เข้าสู่ระบบ','ログイン'],'Sign Up':['회원가입','สมัครสมาชิก','新規登録'],'Log Out':['로그아웃','ออกจากระบบ','ログアウト'],'Make Quote':['견적 만들기','สร้างใบเสนอราคา','見積もり作成'],'Review Quote':['견적 확인','ตรวจสอบใบเสนอราคา','見積もり確認'],'Explore':['자세히 보기','ดูเพิ่มเติม','詳細を見る'],'Consulting Service':['컨설팅 서비스','บริการให้คำปรึกษา','コンサルティング'],'Settlement Service':['정착 지원 서비스','บริการตั้งถิ่นฐาน','生活定着支援'],'Concierge Service':['컨시어지 서비스','บริการคอนเซียร์จ','コンシェルジュ'],'Education & Translation':['교육 및 번역','การศึกษาและการแปล','教育・翻訳'],'Ready to build your quote?':['맞춤 견적을 만들어 보세요','พร้อมสร้างใบเสนอราคาของคุณหรือยัง?','お見積もりを作成しませんか？'],'YOUR SERVICES, YOUR CHOICE':['원하는 서비스를 자유롭게 선택하세요','บริการของคุณ ทางเลือกของคุณ','あなたに合ったサービスを選択'],'Choose the services you need, review pricing, and keep everything in one place.':['필요한 서비스를 선택하고 가격과 견적을 한곳에서 확인하세요.','เลือกบริการที่ต้องการ ตรวจสอบราคา และจัดการทั้งหมดในที่เดียว','必要なサービスを選び、料金と見積もりをまとめて確認できます。'],'Basic':['베이직','พื้นฐาน','ベーシック'],'Standard':['스탠다드','มาตรฐาน','スタンダード'],'Premium':['프리미엄','พรีเมียม','プレミアム'],'Service Details':['서비스 상세','รายละเอียดบริการ','サービス詳細'],'Plan Price':['플랜 가격','ราคาแพ็กเกจ','プラン料金'],'Submit Inquiry':['문의 보내기','ส่งคำถาม','お問い合わせ送信'],'Full Name':['이름','ชื่อ-นามสกุล','氏名'],'Email Address':['이메일 주소','อีเมล','メールアドレス'],'Phone Number':['전화번호','หมายเลขโทรศัพท์','電話番号'],'Flight Number':['항공편명','หมายเลขเที่ยวบิน','便名'],'Arrival Date':['도착일','วันที่เดินทางถึง','到着日'],'Arrival Time':['도착 시간','เวลาที่เดินทางถึง','到着時間'],'Drop-off Address':['도착 목적지','ที่อยู่ปลายทาง','送迎先住所'],'Special Requests':['추가 요청사항','คำขอเพิ่มเติม','特別なご要望'],'Quote':['견적','ใบเสนอราคา','見積もり'],'Make My Quote':['내 견적 만들기','สร้างใบเสนอราคาของฉัน','見積もりを作成'],'Frequently Asked Questions':['자주 묻는 질문','คำถามที่พบบ่อย','よくあるご質問']
-};
-Object.assign(dictionary,{"Explore services": ["서비스 살펴보기", "สำรวจบริการ", "サービスを見る"], "Talk to our team": ["상담 문의하기", "พูดคุยกับทีมงาน", "スタッフに相談"], "OUR SERVICES / WHAT WE DO": ["서비스 안내 / 주요 사업", "บริการของเรา / สิ่งที่เราทำ", "サービス案内 / 事業内容"], "The right support.": ["필요한 지원을", "การสนับสนุนที่เหมาะสม", "最適なサポートを。"], "Without the complexity.": ["더욱 간편하게.", "โดยไม่ยุ่งยาก", "もっとシンプルに。"], "Four essential services. Explore the details, compare pricing and build your own quote.": ["네 가지 핵심 서비스를 살펴보고 가격을 비교해 맞춤 견적을 만드세요.", "สำรวจบริการหลักทั้งสี่ เปรียบเทียบราคาและสร้างใบเสนอราคาของคุณ", "4つの主要サービスを確認し、料金を比較してお見積もりを作成できます。"], "Explore consulting": ["컨설팅 살펴보기", "ดูบริการให้คำปรึกษา", "コンサルティングを見る"], "Explore settlement": ["정착 지원 살펴보기", "ดูบริการตั้งถิ่นฐาน", "定着支援を見る"], "Explore concierge": ["컨시어지 살펴보기", "ดูบริการคอนเซียร์จ", "コンシェルジュを見る"], "Explore education": ["교육 서비스 살펴보기", "ดูบริการการศึกษา", "教育サービスを見る"], "Consulting": ["컨설팅", "การให้คำปรึกษา", "コンサルティング"], "Concierge": ["컨시어지", "คอนเซียร์จ", "コンシェルジュ"], "Housing and daily-life support": ["주거 및 생활 지원", "การช่วยเหลือด้านที่พักและชีวิตประจำวัน", "住居・生活サポート"], "Personal assistance in Korea": ["한국 생활 맞춤 지원", "บริการช่วยเหลือส่วนบุคคลในเกาหลี", "韓国での個人サポート"], "Business & university consulting": ["기업 및 대학 진학 컨설팅", "ให้คำปรึกษาธุรกิจและมหาวิทยาลัย", "企業・大学進学コンサルティング"], "Language learning and translation": ["어학 교육 및 번역", "การเรียนภาษาและการแปล", "語学教育・翻訳"], "Clear guidance for your plans in Korea — for individuals, students and businesses.": ["개인, 학생, 기업을 위한 한국 진출 및 정착 안내.", "คำแนะนำสำหรับบุคคล นักเรียน และธุรกิจที่วางแผนมาเกาหลี", "個人・留学生・企業の韓国での計画を支援します。"], "Housing information and essential support to help you get comfortable in Korea.": ["한국 생활에 필요한 주거 정보와 필수 지원을 제공합니다.", "ข้อมูลที่พักและความช่วยเหลือที่จำเป็นสำหรับการใช้ชีวิตในเกาหลี", "韓国生活に必要な住居情報と基本サポートを提供します。"], "Practical, personal assistance for appointments, arrival and everyday tasks.": ["입국, 일정 및 일상 업무를 위한 맞춤 지원.", "ช่วยเหลือส่วนบุคคลสำหรับการเดินทางมาถึง การนัดหมาย และชีวิตประจำวัน", "入国・予約・日常の用事を個別にサポートします。"], "Language learning, test preparation and translation support.": ["어학 학습, 시험 준비 및 번역 지원.", "สนับสนุนการเรียนภาษา การเตรียมสอบ และการแปล", "語学学習・試験対策・翻訳を支援します。"], "IEUM / SERVICE PLANS": ["IEUM / 서비스 요금제", "IEUM / แพ็กเกจบริการ", "IEUM / サービスプラン"], "Compare services and choose the support you need.": ["서비스를 비교하고 필요한 지원을 선택하세요.", "เปรียบเทียบบริการและเลือกความช่วยเหลือที่ต้องการ", "サービスを比較し、必要なサポートを選択してください。"], "← Back to services": ["← 서비스 목록으로", "← กลับไปยังบริการ", "← サービス一覧へ"], "Service": ["서비스", "บริการ", "サービス"], "What's included": ["포함 사항", "สิ่งที่รวมอยู่", "含まれる内容"], "Price (USD)": ["가격 (USD)", "ราคา (USD)", "料金 (USD)"], "Prices are indicative and may change after scope and schedule confirmation. Third-party costs may be separate.": ["표시된 가격은 예상 금액이며 서비스 범위와 일정 확정 후 변경될 수 있습니다. 제3자 비용은 별도입니다.", "ราคาเป็นเพียงประมาณการและอาจเปลี่ยนแปลงเมื่อยืนยันขอบเขตและกำหนดการ ค่าใช้จ่ายของบุคคลที่สามอาจแยกต่างหาก", "表示料金は目安です。内容・日程確定後に変更される場合があり、第三者費用は別途発生することがあります。"], "Settlement Service · Plans & pricing": ["정착 지원 서비스 · 요금제 및 가격", "บริการตั้งถิ่นฐาน · แพ็กเกจและราคา", "定着支援 · プランと料金"], "Compare our plans": ["요금제 비교", "เปรียบเทียบแพ็กเกจ", "プランを比較"], "Clear service scope and pricing at a glance": ["서비스 범위와 가격을 한눈에 확인하세요", "ดูขอบเขตบริการและราคาได้อย่างชัดเจน", "サービス内容と料金を一目で確認"], "Service details": ["서비스 상세 내용", "รายละเอียดบริการ", "サービス詳細"], "Plan price": ["플랜 가격", "ราคาแพ็กเกจ", "プラン料金"], "Housing search & options": ["주거 탐색 및 선택지", "ค้นหาที่พักและตัวเลือก", "住居探し・候補"], "Property & area check": ["매물 및 주변 지역 확인", "ตรวจสอบที่พักและพื้นที่", "物件・周辺地域の確認"], "Move-in preparation": ["입주 준비", "การเตรียมย้ายเข้า", "入居準備"], "After-service care": ["사후 관리", "การดูแลหลังบริการ", "アフターケア"], "12-month care": ["12개월 관리", "ดูแล 12 เดือน", "12か月サポート"], "ARC address guidance": ["외국인등록증 주소 변경 안내", "คำแนะนำการเปลี่ยนที่อยู่ในบัตรผู้พำนัก", "外国人登録証の住所変更案内"], "Optional Add-on": ["선택 추가 서비스", "บริการเสริม", "オプションサービス"], "Additional Accompaniment · 1 Hour": ["추가 동행 · 1시간", "บริการติดตามเพิ่มเติม · 1 ชั่วโมง", "追加同行 · 1時間"], "Move-in Cleaning Service": ["입주 청소 서비스", "บริการทำความสะอาดก่อนย้ายเข้า", "入居清掃サービス"], "/ hour": ["/ 시간", "/ ชั่วโมง", "/ 時間"], "/ plan": ["/ 플랜", "/ แพ็กเกจ", "/ プラン"], "/ report": ["/ 보고서", "/ รายงาน", "/ レポート"], "Unlimited Search": ["무제한 탐색", "ค้นหาไม่จำกัด", "無制限検索"], "Up to 3 options": ["최대 3개 후보", "สูงสุด 3 ตัวเลือก", "最大3件"], "Up to 5 options": ["최대 5개 후보", "สูงสุด 5 ตัวเลือก", "最大5件"], "Housing-related inquiries and settlement follow-up": ["주거 관련 문의 및 정착 후속 지원", "ติดตามข้อสอบถามด้านที่พักและการตั้งถิ่นฐาน", "住居に関する相談・定着後のフォロー"], "Guidance on address-change procedures": ["주소 변경 절차 안내", "คำแนะนำขั้นตอนการเปลี่ยนที่อยู่", "住所変更手続きの案内"], "Key contract guidance, move-in checklist and initial settlement guidance": ["계약 핵심 안내, 입주 체크리스트 및 초기 정착 안내", "คำแนะนำสัญญา รายการตรวจสอบก่อนย้ายเข้า และคำแนะนำเริ่มต้น", "契約の重要事項、入居チェックリスト、初期定着案内"], "MADE FOR YOUR JOURNEY": ["당신의 여정을 위한 서비스", "ออกแบบเพื่อการเดินทางของคุณ", "あなたの旅路のために"], "Wherever you're coming from,": ["어디에서 오시든", "ไม่ว่าคุณจะมาจากที่ใด", "どこから来ても、"], "there's a clear way forward.": ["앞으로의 길을 함께합니다.", "มีเส้นทางที่ชัดเจนรออยู่", "次の一歩を明確に。"], "FOR INTERNATIONAL STUDENTS": ["유학생을 위한 서비스", "สำหรับนักเรียนต่างชาติ", "留学生向け"], "Your Korea journey,": ["한국에서의 여정을", "การเดินทางในเกาหลีของคุณ", "韓国での新生活を"], "made simpler.": ["더욱 간편하게.", "ง่ายยิ่งขึ้น", "もっとシンプルに。"], "Find student support": ["유학생 지원 살펴보기", "ดูบริการช่วยเหลือนักเรียน", "留学生サポートを見る"], "FOR GLOBAL PARTNERS": ["글로벌 파트너를 위한 서비스", "สำหรับพันธมิตรทั่วโลก", "グローバルパートナー向け"], "Let's create": ["함께 새로운", "มาร่วมสร้าง", "共に新しい"], "opportunities together.": ["기회를 만들어갑니다.", "โอกาสใหม่ ๆ", "機会を創出しましょう。"], "Discuss partnership": ["파트너십 문의", "ปรึกษาความร่วมมือ", "パートナーシップ相談"], "A SIMPLE WAY TO GET STARTED": ["간편한 시작 방법", "เริ่มต้นได้ง่าย ๆ", "簡単な始め方"], "From first question": ["첫 문의부터", "ตั้งแต่คำถามแรก", "最初の相談から"], "next step.": ["다음 단계까지.", "จนถึงขั้นตอนถัดไป", "次のステップまで。"], "Tell us your plan": ["계획을 알려주세요", "บอกแผนของคุณ", "ご計画をお聞かせください"], "Explore your options": ["선택지를 살펴보세요", "สำรวจตัวเลือกของคุณ", "選択肢を確認"], "Move forward": ["다음 단계로 나아가세요", "ก้าวต่อไป", "次のステップへ"], "Contact IEUM": ["IEUM에 문의하기", "ติดต่อ IEUM", "IEUMにお問い合わせ"], "ALL SERVICES": ["전체 서비스", "บริการทั้งหมด", "全サービス"], "All Services": ["전체 서비스", "บริการทั้งหมด", "全サービス"], "Overview": ["개요", "ภาพรวม", "概要"], "Key Offerings": ["주요 제공 서비스", "บริการหลัก", "主なサービス"], "Housing Search & Comparison": ["주거 탐색 및 비교", "ค้นหาและเปรียบเทียบที่พัก", "住居検索・比較"], "Airport Meeting & Pickup:": ["공항 미팅 및 픽업:", "บริการรับที่สนามบิน:", "空港送迎："], "Personal Assistance:": ["개인 맞춤 지원:", "ความช่วยเหลือส่วนบุคคล:", "個別サポート："], "Contact Form": ["문의 양식", "แบบฟอร์มติดต่อ", "お問い合わせフォーム"], "Submit Inquiry": ["문의 보내기", "ส่งคำถาม", "お問い合わせ送信"], "Name": ["이름", "ชื่อ", "氏名"], "Email": ["이메일", "อีเมล", "メール"], "Phone": ["전화번호", "โทรศัพท์", "電話番号"], "Message": ["문의 내용", "ข้อความ", "メッセージ"], "Select": ["선택", "เลือก", "選択"], "Select :": ["선택:", "เลือก:", "選択："], "Remove": ["삭제", "ลบ", "削除"], "Add": ["추가", "เพิ่ม", "追加"], "Total": ["합계", "รวม", "合計"], "Subtotal": ["소계", "ยอดรวมย่อย", "小計"], "Discount": ["할인", "ส่วนลด", "割引"], "Apply": ["적용", "ใช้", "適用"], "Payment": ["결제", "ชำระเงิน", "支払い"], "Save Quote": ["견적 저장", "บันทึกใบเสนอราคา", "見積もりを保存"], "Your Estimate": ["예상 견적", "ใบเสนอราคาโดยประมาณ", "概算見積もり"], "No services selected.": ["선택한 서비스가 없습니다.", "ยังไม่ได้เลือกบริการ", "サービスが選択されていません。"], "Print / Save PDF": ["인쇄 / PDF 저장", "พิมพ์ / บันทึก PDF", "印刷 / PDF保存"], "Request Final Quote": ["최종 견적 요청", "ขอใบเสนอราคาสุดท้าย", "最終見積もりを依頼"], "Continue": ["계속", "ดำเนินการต่อ", "続ける"], "Back": ["뒤로", "ย้อนกลับ", "戻る"], "Close": ["닫기", "ปิด", "閉じる"], "Cancel": ["취소", "ยกเลิก", "キャンセル"], "Required": ["필수", "จำเป็น", "必須"], "Optional": ["선택", "ไม่บังคับ", "任意"], "Arrival Airport": ["도착 공항", "สนามบินปลายทาง", "到着空港"], "Arrival Date": ["도착일", "วันที่เดินทางถึง", "到着日"], "Arrival Time": ["도착 시간", "เวลาที่เดินทางถึง", "到着時刻"], "Flight Number": ["항공편명", "หมายเลขเที่ยวบิน", "便名"], "Drop-off Address": ["목적지 주소", "ที่อยู่ปลายทาง", "送迎先住所"], "Special Requests": ["특별 요청사항", "คำขอพิเศษ", "特別なご要望"], "Preferred Move-in Date": ["희망 입주일", "วันที่ต้องการย้ายเข้า", "入居希望日"], "Monthly Housing Budget": ["월 주거 예산", "งบที่พักรายเดือน", "月額住居予算"], "Preferred School": ["희망 학교", "สถาบันที่ต้องการ", "希望学校"], "Preferred Start Date": ["희망 시작일", "วันที่ต้องการเริ่ม", "開始希望日"], "Booking Details": ["예약 정보", "รายละเอียดการจอง", "予約情報"], "Frequently Asked Questions": ["자주 묻는 질문", "คำถามที่พบบ่อย", "よくあるご質問"]});
-Object.assign(dictionary,{"Business & university consulting": ["기업 및 대학 컨설팅", "ให้คำปรึกษาธุรกิจและมหาวิทยาลัย", "企業・大学コンサルティング"], "Housing and daily-life support": ["주거 및 생활 정착 지원", "บริการที่พักและการใช้ชีวิต", "住居・生活サポート"], "Personal assistance in Korea": ["한국 내 개인 맞춤 지원", "บริการช่วยเหลือส่วนบุคคลในเกาหลี", "韓国での個別サポート"], "Language learning and translation": ["어학 교육 및 번역", "การเรียนภาษาและการแปล", "語学学習・翻訳"], "Build a personalized estimate": ["맞춤 견적 구성하기", "สร้างใบเสนอราคาที่เหมาะกับคุณ", "お見積もりを作成"], "Review selected services and total": ["선택 서비스 및 총액 확인", "ตรวจสอบบริการที่เลือกและยอดรวม", "選択したサービスと合計を確認"], "YOUR LIFE IN KOREA, CONNECTED": ["한국 생활의 모든 순간을 연결하다", "เชื่อมต่อทุกช่วงชีวิตของคุณในเกาหลี", "韓国での暮らしをつなぐ"], "Your move to Korea.": ["한국으로의 새로운 시작.", "การย้ายมาเกาหลีของคุณ", "韓国への新しい一歩。"], "Made simpler.": ["더욱 간편하게.", "ให้ง่ายยิ่งขึ้น", "もっとシンプルに。"], "Housing, education, consulting and everyday assistance in Korea. Clear services, transparent pricing and one reliable point of contact.": ["한국의 주거, 교육, 컨설팅과 일상 지원까지. 명확한 서비스와 투명한 가격, 하나의 믿을 수 있는 연락 창구를 제공합니다.", "บริการที่พัก การศึกษา คำปรึกษา และการใช้ชีวิตในเกาหลี พร้อมราคาที่โปร่งใสและช่องทางติดต่อเดียว", "韓国での住居・教育・コンサルティング・生活支援を、明確なサービスと透明な料金で提供します。"], "Explore services": ["서비스 살펴보기", "สำรวจบริการ", "サービスを見る"], "Talk to our team": ["상담 문의하기", "ติดต่อทีมงาน", "お問い合わせ"], "Based in Seoul, supporting global connections": ["서울을 기반으로 세계를 연결합니다", "ตั้งอยู่ในโซล เชื่อมต่อทั่วโลก", "ソウルを拠点に世界をつなぐ"], "WELCOME TO YOUR NEXT CHAPTER": ["새로운 시작을 환영합니다", "ยินดีต้อนรับสู่บทใหม่ของคุณ", "新たな一歩へようこそ"], "One partner.": ["하나의 파트너.", "พันธมิตรหนึ่งเดียว", "ひとつのパートナー。"], "Clearer next steps.": ["더 명확한 다음 단계.", "ก้าวต่อไปที่ชัดเจนยิ่งขึ้น", "次の一歩をより明確に。"], "SUPPORT THAT CONNECTS THE DETAILS": ["모든 과정을 연결하는 지원", "การสนับสนุนที่เชื่อมทุกรายละเอียด", "細部までつなぐサポート"], "SETTLE IN": ["한국 생활 정착", "เริ่มต้นชีวิตใหม่", "生活を始める"], "STUDY IN KOREA": ["한국 유학", "เรียนต่อเกาหลี", "韓国留学"], "GROW YOUR BUSINESS": ["비즈니스 성장", "ขยายธุรกิจของคุณ", "ビジネスを成長させる"], "OUR SERVICES / WHAT WE DO": ["서비스 안내 / 사업 분야", "บริการของเรา / สิ่งที่เราทำ", "サービス / 事業内容"], "Key Offerings": ["주요 제공 서비스", "บริการหลัก", "主なサービス"], "YOUR ESTIMATE": ["예상 견적", "ใบเสนอราคาโดยประมาณ", "お見積もり"], "No services selected yet.": ["아직 선택한 서비스가 없습니다.", "ยังไม่ได้เลือกบริการ", "サービスがまだ選択されていません。"], "Save to My Plan": ["내 견적에 저장", "บันทึกลงแผนของฉัน", "見積もりに保存"], "Your service selection": ["선택한 서비스", "บริการที่คุณเลือก", "選択したサービス"], "Select the Support You Need": ["필요한 서비스 선택", "เลือกบริการที่ต้องการ", "必要なサービスを選択"], "04 / BUILD YOUR SERVICE": ["04 / 서비스 구성", "04 / จัดบริการของคุณ", "04 / サービスを選択"], "Official Partners": ["공식 파트너", "พันธมิตรอย่างเป็นทางการ", "公式パートナー"], "Log In": ["로그인", "เข้าสู่ระบบ", "ログイン"], "Make Quote": ["견적 만들기", "สร้างใบเสนอราคา", "見積もり作成"], "Review Quote": ["견적 확인", "ตรวจสอบใบเสนอราคา", "見積もり確認"], "Language": ["언어", "ภาษา", "言語"], "Explore": ["자세히 보기", "ดูเพิ่มเติม", "詳しく見る"], "Plan price": ["플랜 가격", "ราคาแพ็กเกจ", "プラン料金"], "Service details": ["서비스 상세 내용", "รายละเอียดบริการ", "サービス詳細"], "Contact Form": ["문의 양식", "แบบฟอร์มติดต่อ", "お問い合わせフォーム"], "YOUR SERVICES, YOUR CHOICE": ["필요한 서비스를 직접 선택하세요", "บริการของคุณ ทางเลือกของคุณ", "あなたに合ったサービスを選択"], "Ready to build your quote?": ["견적을 구성할 준비가 되셨나요?", "พร้อมสร้างใบเสนอราคาแล้วหรือยัง?", "お見積もりを作成しますか？"], "Choose the services you need, review pricing, and keep everything in one place.": ["필요한 서비스를 선택하고 가격을 확인한 뒤 한곳에서 견적을 관리하세요.", "เลือกบริการที่ต้องการ ตรวจสอบราคา และจัดการทุกอย่างในที่เดียว", "必要なサービスを選び、料金を確認して一か所で管理できます。"], "YOUR NEXT STEP": ["다음 단계", "ขั้นตอนต่อไป", "次のステップ"], "Contact our team": ["문의하기", "ติดต่อทีมงาน", "お問い合わせ"], "No services selected.": ["선택한 서비스가 없습니다.", "ยังไม่ได้เลือกบริการ", "サービスが選択されていません。"], "Additional Accompaniment": ["추가 동행", "บริการติดตามเพิ่มเติม", "追加同行"], "Select plan": ["플랜 선택", "เลือกแพ็กเกจ", "プランを選択"], "Optional services": ["선택 추가 서비스", "บริการเสริม", "オプションサービス"], "Incheon International Airport (ICN)": ["인천국제공항 (ICN)", "สนามบินนานาชาติอินชอน (ICN)", "仁川国際空港 (ICN)"], "Gimpo International Airport (GMP)": ["김포국제공항 (GMP)", "สนามบินนานาชาติกิมโป (GMP)", "金浦国際空港 (GMP)"]});
-const languages=['en','ko','th','ja'];let current='en',busy=false;const originals=new WeakMap(),originalAttrs=new WeakMap();
-function translate(){if(busy)return;busy=true;try{document.querySelectorAll('body *').forEach(el=>{if(el.closest('script,style,svg,select,textarea,#ieum-auth-backdrop'))return;for(const node of el.childNodes){if(node.nodeType!==3||!node.nodeValue.trim())continue;if(!originals.has(node))originals.set(node,node.nodeValue);const original=originals.get(node);const trimmed=original.trim();const normalized=trimmed.replace(/\s+/g," ").trim();const values=dictionary[trimmed]||dictionary[normalized];if(values){const ix=languages.indexOf(current)-1;const target=original.replace(trimmed,ix<0?trimmed:values[ix]);if(node.nodeValue!==target)node.nodeValue=target;}}});document.querySelectorAll('input[placeholder],textarea[placeholder],button[aria-label],input[aria-label],option').forEach(el=>{if(!originalAttrs.has(el))originalAttrs.set(el,{});const cache=originalAttrs.get(el);for(const attr of ['placeholder','aria-label']){if(!el.hasAttribute(attr))continue;if(!(attr in cache))cache[attr]=el.getAttribute(attr);const value=cache[attr],match=dictionary[value];if(match)el.setAttribute(attr,current==='en'?value:match[languages.indexOf(current)-1]);}});document.documentElement.lang=current;}finally{busy=false;}}
-const sel=document.getElementById('ieum-language');current=languages.includes(localStorage.getItem('ieum-language'))?localStorage.getItem('ieum-language'):'en';sel.value=current;sel.addEventListener('change',()=>{current=sel.value;localStorage.setItem('ieum-language',current);translate()});translate();let pending=false;new MutationObserver(()=>{if(pending||busy)return;pending=true;requestAnimationFrame(()=>{pending=false;translate()})}).observe(document.body,{childList:true,subtree:true,characterData:true});
-const config=window.IEUM_FIREBASE_CONFIG||null;let auth=null,ready=false,mode='login';const backdrop=document.getElementById('ieum-auth-backdrop');const err=document.getElementById('ieum-auth-error');const note=document.getElementById('ieum-auth-note');
-function message(v){err.textContent=v||''}function render(){document.getElementById('ieum-auth-name').style.display=mode==='signup'?'block':'none';document.getElementById('ieum-auth-submit').textContent=mode==='signup'?'Create Account':'Log In';document.getElementById('ieum-auth-password').autocomplete=mode==='signup'?'new-password':'current-password';message('')}
-window.IEUMAuth={open(){backdrop.classList.add('open');render()},close(){backdrop.classList.remove('open')},mode(v){mode=v;render()},async resetPassword(){if(!ready){message('Firebase configuration is required first.');return}const email=document.getElementById('ieum-auth-email').value.trim();if(!email){message('Enter your email address first.');return}try{await auth.sendPasswordResetEmail(email);message('Password reset email sent.')}catch(e){message(e.message)}},async logout(){if(auth)await auth.signOut()}};
-document.getElementById('ieum-auth-form').addEventListener('submit',async e=>{e.preventDefault();if(!ready){message('Sign-in is not yet connected. Add Firebase configuration to activate it.');return}const email=document.getElementById('ieum-auth-email').value.trim(),password=document.getElementById('ieum-auth-password').value;try{if(mode==='signup'){const user=await auth.createUserWithEmailAndPassword(email,password);const name=document.getElementById('ieum-auth-name').value.trim();if(name)await user.user.updateProfile({displayName:name})}else await auth.signInWithEmailAndPassword(email,password);IEUMAuth.close()}catch(e){message(e.message)}});
-if(config&&config.apiKey&&config.projectId&&config.authDomain){const sc=document.createElement('script');sc.src='https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js';sc.onload=()=>{const ac=document.createElement('script');ac.src='https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js';ac.onload=()=>{try{const app=firebase.apps.length?firebase.app():firebase.initializeApp(config);auth=app.auth();ready=true;note.textContent='Your account is securely managed through Firebase Authentication.';auth.onAuthStateChanged(user=>{const b=document.getElementById('ieum-login-trigger');b.textContent=user?'Log Out':'Log In';b.onclick=user?()=>IEUMAuth.logout():()=>IEUMAuth.open()})}catch(e){message('Firebase setup error: '+e.message)}};document.head.appendChild(ac)};document.head.appendChild(sc)}
+  try { localStorage.removeItem('ieum-language'); } catch(e) {}
+  for (const domain of ['', ';domain='+location.hostname, ';domain=.'+location.hostname.replace(/^www\./,'')]) {
+    document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/'+domain;
+  }
+  document.documentElement.lang='en';
 })();
 </script>
-&lt;!-- To activate real authentication, add window.IEUM_FIREBASE_CONFIG = {apiKey:"...",authDomain:"...",projectId:"...",appId:"..."} before ieum-auth-language-script and enable Email/Password in Firebase Authentication. --&gt;
 </body></html>
