@@ -2455,7 +2455,7 @@ window.IEUMPromo={
 {key:'education_language_japanese',name:'Japanese',description:'Preferred language for education or translation requests.',price:0},
 {key:'education_language_thai',name:'Thai',description:'Preferred language for education or translation requests.',price:0}
 ]}};
- const money=n=>'$'+Number(n||0).toFixed(2);let active='settlement';
+ const money=n=>'$'+Number(n||0).toFixed(2);let active='consulting';
  // Use the existing service-comparison content as the source of truth for each tier.
  function selectedPlanRows(area,index){
    if(area==='settlement'){
@@ -2498,7 +2498,7 @@ window.IEUMPromo={
  const getItems=()=>Object.entries(saved()).flatMap(([area,q])=>(q.services||[]).map(x=>({...x,area})));
  function saveItem(area,item){const q=saved()[area]||{title:catalog[area].title,services:[],currency:'USD'};q.services=q.services.filter(x=>x.key!==item.key);if(item.quantity>0)q.services.push(item);q.subtotal=q.services.reduce((v,x)=>v+Number(x.amount||0)*Number(x.quantity||1),0);if(q.services.length)saved()[area]=q;else delete saved()[area];window.IEUMProposal?.refresh?.();render();}
  function render(){const plan=catalog[active],tabs=document.getElementById('ieum-quote-tabs'),plans=document.getElementById('ieum-quote-plan-grid'),extras=document.getElementById('ieum-quote-option-grid');if(!tabs)return;
- tabs.replaceChildren();Object.entries(catalog).forEach(([key,v])=>{const b=document.createElement('button');b.type='button';b.textContent=v.title;b.className=key===active?'active':'';b.setAttribute('aria-pressed',String(key===active));b.onclick=()=>{active=key;render()};tabs.append(b)});
+ tabs.replaceChildren();['consulting','settlement','concierge','education'].map(key=>[key,catalog[key]]).forEach(([key,v])=>{const b=document.createElement('button');b.type='button';b.textContent=v.title;b.className=key===active?'active':'';b.setAttribute('aria-pressed',String(key===active));b.onclick=()=>{active=key;render()};tabs.append(b)});
  const items=getItems();renderSelectedPlanDetails(active,items);plans.replaceChildren();(active==='education'?['Language','Translation']:['Basic','Standard','Premium']).forEach((name,i)=>{
  const isCustom=active==='education',price=plan.prices[i],key='proposal_'+name.toLowerCase();
  const selected=items.some(x=>x.area===active&&x.key===key);
