@@ -1236,7 +1236,7 @@ table.ieum-price-clarity tbody tr:not(:first-child) > * { border-bottom:1px soli
 </div>
 <div class="mt-3 flex flex-col gap-3 rounded-2xl border border-[#dfd4bf] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
 <div><p class="text-[10px] font-bold uppercase tracking-[.16em] text-[#a77d3e]">Optional Add-on</p><p class="mt-1 text-sm font-semibold text-neutral-800">Move-in Cleaning Service</p><p class="mt-1 text-xs leading-relaxed text-neutral-500">Move-in cleaning assistance for your new home. Service scope and scheduling are confirmed before booking.</p></div>
-<strong class="whitespace-nowrap text-xl text-neutral-900">$189.90</strong>
+<strong class="whitespace-nowrap text-xl text-neutral-900">$199.90</strong>
 </div>
 </div>
 <div class="ieum-quote-bridge"><div><span class="ieum-kicker">YOUR SERVICES, YOUR CHOICE</span><h3>Ready to build your quote?</h3><p>Choose the services you need, review pricing, and keep everything in one place.</p></div><button onclick="navigateTo('quote')" type="button">Make My Quote <i class="fa-solid fa-arrow-right"></i></button></div></section>
@@ -1339,14 +1339,14 @@ We help international students and global professionals find suitable housing th
 <div class="mt-5 rounded-2xl border border-amber-200 bg-[#fcfaf6] p-4">
 <p class="mb-3 text-xs font-bold uppercase tracking-widest text-[#99743d]">Optional Add-on</p>
 <label class="settlement-price-option">
-<input data-price="14.9" data-price-item="extra_accompaniment" type="checkbox"/>
+<input data-price="19.9" data-price-item="extra_accompaniment" type="checkbox"/>
 <span class="settlement-option-copy"><strong>Additional Accompaniment · 1 Hour</strong><small>Add one extra hour of in-person assistance to your housing support plan.</small></span>
-<b>$14.90 <small>/ hour</small></b>
+<b>$19.90 <small>/ hour</small></b>
 </label>
 <label class="settlement-price-option">
-<input data-price="189.9" data-price-item="move_in_cleaning" type="checkbox"/>
+<input data-price="199.9" data-price-item="move_in_cleaning" type="checkbox"/>
 <span class="settlement-option-copy"><strong>Move-in Cleaning Service</strong><small>Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.</small></span>
-<b>$189.90</b>
+<b>$199.90</b>
 </label>
 </div>
 <p class="mt-3 text-[11px] leading-relaxed text-neutral-500">Property visits depend on location, landlord, and agent availability. Brokerage, legal representation, contract execution, deposits, and rent are excluded.</p>
@@ -1902,7 +1902,7 @@ We help international students and global professionals find suitable housing th
     ],
     concierge:[
       ['concierge_basic','Basic Concierge','1-hour bank accompaniment and one appointment coordination',39.9,'/ package'],
-      ['concierge_standard','Standard Concierge','Bank assistance, airport arrival coordination, two appointments and a welcome gift',119.9,'/ package'],
+      ['concierge_standard','Standard Concierge','Bank assistance, airport arrival coordination, two appointments and a welcome gift',149.9,'/ package'],
       ['concierge_premium','Premium Concierge','Standard assistance plus 6 accompaniment hours, 30-day coordination, a welcome gift and eSIM support',299.9,'/ package'],
       ['concierge_esim','eSIM Setup · 3 Months','Includes three months of SIM activation and setup; free incoming calls and text messages on 5G service',66.6,'/ 3 months']
     ],
@@ -2131,7 +2131,7 @@ const ieumTierPlans = {
  ['University admissions','Basic admissions consultation','University selection consultation','Undergraduate and other academic pathway consultation'],
  ['Document & timeline review','—','Required documents checklist provided','Dormitory move-in and required documents review'],
  ['Follow-up support','One-time consultation','7 days of chat support','30 days of chat support'] ],note:'Admissions decisions, legal advice, visa processing and third-party fees are not included.'},
- concierge:{title:'Concierge Service',unit:'/ package',prices:[49.9,119.9,299.9],rows:[
+ concierge:{title:'Concierge Service',unit:'/ package',prices:[49.9,149.9,299.9],rows:[
  ['Best for','One essential task','Arrival-day assistance','Ongoing personal assistance'],
  ['Airport pickup & meeting','—','Arrival meeting and pickup','Arrival meeting and pickup'],
  ['Bank assistance','1-hour bank visit accompaniment','1-hour bank visit accompaniment','1-hour bank visit accompaniment'],
@@ -2388,7 +2388,7 @@ window.IEUMPromo={
   const optional=document.createElement('div');optional.className='ieum-settlement-optional-select ieum-optional-picker';
   const optionalTitle=document.createElement('p');optionalTitle.className='ieum-picker-heading';optionalTitle.textContent='02 / OPTIONAL SERVICES';optional.append(optionalTitle);
   const optionalGrid=document.createElement('div');optionalGrid.className='ieum-optional-grid';
-  [['Additional Accompaniment','1 Hour','One extra hour of in-person housing assistance.',14.9,'/ hour','Additional Accompaniment · 1 Hour'],['Move-in Cleaning Service','', 'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',189.9,'','Move-in Cleaning Service']].forEach(([name,detail,description,price,unit,quoteName])=>{
+  [['Additional Accompaniment','1 Hour','One extra hour of in-person housing assistance.',19.9,'/ hour','Additional Accompaniment · 1 Hour'],['Move-in Cleaning Service','', 'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',199.9,'','Move-in Cleaning Service']].forEach(([name,detail,description,price,unit,quoteName])=>{
     const card=document.createElement('article');card.className='ieum-optional-card';
     const top=document.createElement('div');top.className='ieum-optional-top';
     const info=document.createElement('div');info.className='ieum-optional-copy';
@@ -2456,7 +2456,7 @@ window.IEUMPromo={
 })();
 </script><script>
 (function(){
- const catalog={settlement:{title:'Settlement Service',prices:[9.9,99.9,199.9],extras:[{key:'optional_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One extra hour of in-person housing assistance.',price:14.9},{key:'optional_move_in_cleaning',name:'Move-in Cleaning Service',description:'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',price:189.9}]},concierge:{title:'Concierge Service',prices:[49.9,119.9,299.9],extras:[{key:'optional_concierge_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One additional hour of accompaniment.',price:14.9},{key:'optional_esim_3months',name:'eSIM Setup · 3 Months',description:'SIM/eSIM activation and setup assistance. Carrier charges may be separate.',price:66.6}]},consulting:{title:'Consulting Services',prices:[39.9,99.9,199.9],extras:[]},education:{title:'Education & Translation',prices:[],extras:[
+ const catalog={settlement:{title:'Settlement Service',prices:[9.9,99.9,199.9],extras:[{key:'optional_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One extra hour of in-person housing assistance.',price:19.9},{key:'optional_move_in_cleaning',name:'Move-in Cleaning Service',description:'Move-in cleaning assistance for your new home. Scope and scheduling confirmed before booking.',price:199.9}]},concierge:{title:'Concierge Service',prices:[49.9,149.9,299.9],extras:[{key:'optional_concierge_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'One additional hour of accompaniment.',price:14.9},{key:'optional_esim_3months',name:'eSIM Setup · 3 Months',description:'SIM/eSIM activation and setup assistance. Carrier charges may be separate.',price:66.6}]},consulting:{title:'Consulting Services',prices:[39.9,99.9,199.9],extras:[]},education:{title:'Education & Translation',prices:[],extras:[
 {key:'education_language_korean',name:'Korean',description:'Preferred language for education or translation requests.',price:0},
 {key:'education_language_english',name:'English',description:'Preferred language for education or translation requests.',price:0},
 {key:'education_language_japanese',name:'Japanese',description:'Preferred language for education or translation requests.',price:0},
@@ -2471,8 +2471,8 @@ window.IEUMPromo={
  settlement:[
  {key:'individual_room_inspection',name:'Room Inspection & Search',description:'Property listing research, condition checks and information report (3–5 options).',price:49.9,source:'catalog'},
  {key:'individual_contract_support',name:'Real Estate Contract Support · 4 Hours',description:'Agency visit accompaniment, contract interpretation and procedural guidance.',price:149.9,unit:'/ 4 hours',source:'catalog'},
- {key:'optional_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'Extra hour of in-person housing assistance.',price:14.9,unit:'/ hour',source:'website'},
- {key:'optional_move_in_cleaning',name:'Move-in Cleaning Service',description:'Move-in cleaning assistance; scope and availability confirmed before booking.',price:189.9,source:'website'}],
+ {key:'optional_additional_accompaniment_1hour',name:'Additional Accompaniment · 1 Hour',description:'Extra hour of in-person housing assistance.',price:19.9,unit:'/ hour',source:'website'},
+ {key:'optional_move_in_cleaning',name:'Move-in Cleaning Service',description:'Move-in cleaning assistance; scope and availability confirmed before booking.',price:199.9,source:'website'}],
  concierge:[
  {key:'individual_airport_pickup',name:'Airport Pickup',description:'Airport transfer coordination and arrival assistance.',price:100,source:'catalog'},
  {key:'individual_airport_meeting',name:'Airport Meeting',description:'Arrival hall greeting and meeting assistance.',price:29.9,source:'catalog'},
@@ -2530,7 +2530,20 @@ window.IEUMPromo={
 
  function removeEstimateItem(area,key){const q=saved()[area];if(!q)return;q.services=(q.services||[]).filter(item=>item.key!==key);q.subtotal=q.services.reduce((sum,item)=>sum+Number(item.amount||0)*Number(item.quantity||1),0);if(!q.services.length)delete saved()[area];window.IEUMProposal?.refresh?.();render();}
 
- const saved=()=>window.__ieumSavedQuotes||(window.__ieumSavedQuotes={});
+ const saved=()=>{
+   const quotes=window.__ieumSavedQuotes||(window.__ieumSavedQuotes={});
+   Object.entries(quotes).forEach(([area,quote])=>{
+     if(!quote || !Array.isArray(quote.services))return;
+     quote.services.forEach(item=>{
+       if(area==='settlement' && (item.key==='optional_additional_accompaniment_1hour' ||
+           (item.name==='Additional Accompaniment · 1 Hour' && item.key!=='optional_concierge_additional_accompaniment_1hour'))){
+         item.amount=19.9;
+       }
+     });
+     quote.subtotal=quote.services.reduce((sum,item)=>sum+Number(item.amount||0)*Number(item.quantity||1),0);
+   });
+   return quotes;
+ };
  const getItems=()=>Object.entries(saved()).flatMap(([area,q])=>(q.services||[]).map(x=>({...x,area})));
  function saveItem(area,item){const q=saved()[area]||{title:catalog[area].title,services:[],currency:'USD'};q.services=q.services.filter(x=>x.key!==item.key);if(item.quantity>0 && !isIncluded(area,item.key))q.services.push(item);q.subtotal=q.services.reduce((v,x)=>v+Number(x.amount||0)*Number(x.quantity||1),0);if(q.services.length)saved()[area]=q;else delete saved()[area];window.IEUMProposal?.refresh?.();render();}
  function render(){const plan=catalog[active],tabs=document.getElementById('ieum-quote-tabs'),plans=document.getElementById('ieum-quote-plan-grid'),extras=document.getElementById('ieum-quote-option-grid');if(!tabs)return;
